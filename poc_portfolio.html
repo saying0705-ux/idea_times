@@ -1,0 +1,2265 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NE TIMES — 신규 서비스 제안 통합본 (소개 2종 + 프로토타입)</title>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<style>
+:root{--black:#0B0D12;--blue:#3B5BFF;--green:#0E9A62;--hair:rgba(255,255,255,.12)}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:'Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;background:var(--black);display:flex;flex-direction:column;overflow:hidden}
+.switch{
+  height:54px;flex-shrink:0;background:var(--black);border-bottom:1px solid var(--hair);
+  display:flex;align-items:center;gap:8px;padding:0 20px;color:#fff;
+}
+.sw-logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:15px;margin-right:14px;letter-spacing:-.01em}
+.sw-logo em{font-style:normal;color:var(--blue);filter:brightness(1.4)}
+.sw-tab{
+  display:flex;align-items:center;gap:8px;font-size:13px;font-weight:700;color:rgba(255,255,255,.55);
+  border:1px solid transparent;border-radius:999px;padding:8px 18px;cursor:pointer;
+  font-family:inherit;background:none;transition:all .16s;letter-spacing:-.01em;
+}
+.sw-tab .no{
+  font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:700;
+  width:18px;height:18px;border-radius:6px;background:rgba(255,255,255,.1);
+  display:flex;align-items:center;justify-content:center;
+}
+.sw-tab:hover{color:#fff}
+.sw-tab.on{color:#fff;background:rgba(255,255,255,.08);border-color:var(--hair)}
+.sw-tab.on:nth-of-type(1) .no{background:var(--blue)}
+.sw-tab.on:nth-of-type(2) .no{background:var(--green)}
+.sw-tab.on:nth-of-type(3) .no{background:#F0B429;color:var(--black)}
+.sw-note{margin-left:auto;font-size:11px;color:rgba(255,255,255,.35)}
+.stage{flex:1;position:relative;background:#fff}
+.stage iframe{position:absolute;inset:0;width:100%;height:100%;border:none;display:none;background:#fff}
+.stage iframe.on{display:block}
+.loading{
+  position:absolute;inset:0;display:flex;align-items:center;justify-content:center;
+  color:#98A2B3;font-size:13px;background:#fff;z-index:1;pointer-events:none;
+  opacity:1;transition:opacity .3s;
+}
+.loading.off{opacity:0}
+@media (max-width:720px){
+  .sw-tab span.lbl{display:none}
+  .sw-note{display:none}
+  .sw-tab{padding:8px 12px}
+}
+</style>
+</head>
+<body>
+
+<nav class="switch">
+  <span class="sw-logo">NE TIMES<em>.</em></span>
+  <button class="sw-tab on" onclick="goPage(0)"><span class="no">1</span><span class="lbl">라이브러리 소개</span></button>
+  <button class="sw-tab" onclick="goPage(1)"><span class="no">2</span><span class="lbl">포트폴리오 소개</span></button>
+  <button class="sw-tab" onclick="goPage(2)"><span class="no">3</span><span class="lbl">서비스 프로토타입</span></button>
+  <span class="sw-note">신규 서비스 제안 통합본 · 기사 데이터는 실제 발행분(2026.07) 기준</span>
+</nav>
+
+<div class="stage">
+  <div class="loading" id="loading">페이지 불러오는 중…</div>
+  <iframe id="fr0" class="on" title="라이브러리 소개"></iframe>
+  <iframe id="fr1" title="포트폴리오 소개"></iframe>
+  <iframe id="fr2" title="서비스 프로토타입"></iframe>
+</div>
+
+<script type="text/plain" id="doc0">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NE TIMES LIBRARY</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0D12;
+  --ink:#14171F;
+  --gray:#7A8090;
+  --gray-2:#AFB4C0;
+  --bg:#FFFFFF;
+  --bg-soft:#F6F7F9;
+  --hair:#E9EBEF;
+  --hair-dark:rgba(255,255,255,.12);
+  --blue:#3B5BFF;
+  --blue-soft:#EEF1FF;
+  --red:#E5477A;--red-soft:#FDEEF4;
+  --orange:#E8862A;--orange-soft:#FDF2E7;
+  --green:#12A66F;--green-soft:#E9F7F1;
+  --sh:0 1px 2px rgba(11,13,18,.04),0 12px 40px rgba(11,13,18,.08);
+  --sh-lg:0 2px 6px rgba(11,13,18,.06),0 32px 80px rgba(11,13,18,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;font-size:15.5px;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden;
+}
+.en{font-family:'Space Grotesk','Pretendard Variable',sans-serif;letter-spacing:-.02em}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+
+/* 공통 타이포 */
+.kicker{
+  font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;
+  color:var(--gray);text-transform:uppercase;display:block;margin-bottom:16px;
+}
+h2.title{
+  font-weight:800;letter-spacing:-.035em;line-height:1.22;
+  font-size:clamp(28px,3.6vw,42px);margin-bottom:16px;
+}
+p.desc{color:var(--gray);font-size:16px;max-width:560px;font-weight:450}
+p.desc b{color:var(--ink);font-weight:700}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:14.5px;font-weight:700;border-radius:999px;padding:14px 28px;transition:all .18s;letter-spacing:-.01em;
+}
+.btn-blue{background:var(--blue);color:#fff}
+.btn-blue:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(59,91,255,.35)}
+.btn-white{background:#fff;color:var(--black)}
+.btn-white:hover{transform:translateY(-1px)}
+.btn-ghost{border:1px solid var(--hair-dark);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.06)}
+.btn-black{background:var(--black);color:#fff}
+.btn-black:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(11,13,18,.25)}
+.lv{font-size:10px;font-weight:800;border-radius:5px;padding:3px 8px;letter-spacing:.06em;font-family:'Space Grotesk',sans-serif}
+.lv.kinder{background:var(--red-soft);color:var(--red)}
+.lv.kids{background:var(--orange-soft);color:var(--orange)}
+.lv.junior{background:var(--green-soft);color:var(--green)}
+.lv.times{background:var(--blue-soft);color:var(--blue)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* ══ GNB ══ */
+.gnb{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(11,13,18,.7);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--hair-dark);
+}
+.gnb .wrap{display:flex;align-items:center;height:64px;gap:40px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#fff;letter-spacing:.01em}
+.logo em{font-style:normal;color:var(--blue);margin-left:2px}
+.gnb nav{display:flex;gap:28px;flex:1;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.6)}
+.gnb nav a:hover{color:#fff}
+.gnb .cta{font-size:13px;font-weight:700;background:#fff;color:var(--black);border-radius:999px;padding:9px 18px}
+
+/* ══ HERO ══ */
+.hero{
+  background:var(--black);color:#fff;padding:170px 0 0;position:relative;overflow:hidden;
+}
+.hero::after{
+  content:"";position:absolute;bottom:-1px;left:0;right:0;height:120px;
+  background:linear-gradient(transparent,var(--black));pointer-events:none;
+}
+.hero-glow{
+  position:absolute;top:-220px;left:50%;transform:translateX(-50%);
+  width:900px;height:560px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(59,91,255,.28),transparent);
+  filter:blur(10px);pointer-events:none;
+}
+.hero .center{text-align:center;position:relative;z-index:2}
+.hero .over{
+  display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;
+  color:rgba(255,255,255,.65);border:1px solid var(--hair-dark);border-radius:999px;
+  padding:7px 16px;margin-bottom:34px;background:rgba(255,255,255,.04);
+}
+.hero .over i{width:6px;height:6px;border-radius:50%;background:var(--blue);display:block}
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(52px,9.5vw,118px);line-height:.98;letter-spacing:-.045em;
+  margin-bottom:26px;
+}
+.hero h1 .row2{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.5)}
+.hero .sub{
+  font-size:clamp(17px,2vw,21px);font-weight:600;letter-spacing:-.02em;margin-bottom:14px;
+}
+.hero .sub-desc{
+  font-size:15px;color:rgba(255,255,255,.55);max-width:480px;margin:0 auto 40px;font-weight:450;
+}
+.hero .btn-row{display:flex;gap:12px;justify-content:center;margin-bottom:74px;flex-wrap:wrap}
+
+/* 히어로 하단 — 서가 스트립 */
+.strip{
+  position:relative;z-index:1;display:flex;gap:18px;justify-content:center;
+  padding-bottom:90px;transform:translateY(6px);
+}
+.s-card{cursor:pointer;transition:transform .18s;}
+.s-card:hover{transform:translateY(-6px)!important}
+.s-card-base{
+  width:230px;background:#fff;border-radius:14px;color:var(--ink);overflow:hidden;
+  box-shadow:var(--sh-lg);flex-shrink:0;
+}
+.s-card .band{height:76px;display:flex;align-items:flex-end;padding:10px 14px;font-size:22px}
+.s-card .body{padding:13px 16px 15px}
+.s-card h4{font-size:13.5px;font-weight:700;line-height:1.45;margin:7px 0 4px;letter-spacing:-.015em}
+.s-card .d{font-size:10.5px;color:var(--gray-2);font-family:'Space Grotesk',sans-serif}
+.s-card.tilt-l{transform:rotate(-2.5deg) translateY(14px)}
+.s-card.tilt-r{transform:rotate(2.5deg) translateY(14px)}
+.s-card.lock{position:relative}
+.s-card.lock .band::after{
+  content:"12개월 전용";position:absolute;top:12px;right:12px;font-size:9.5px;font-weight:800;
+  background:var(--black);color:#fff;border-radius:999px;padding:4px 10px;letter-spacing:.02em;
+}
+
+/* ══ 지표 스트립 ══ */
+.metrics{border-bottom:1px solid var(--hair);background:var(--bg)}
+.metrics .wrap{
+  display:grid;grid-template-columns:repeat(4,1fr);
+}
+.metric{padding:34px 10px;text-align:center;border-right:1px solid var(--hair)}
+.metric:last-child{border-right:none}
+.metric .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:30px;letter-spacing:-.03em}
+.metric .n small{font-family:Pretendard,sans-serif;font-size:14px;color:var(--gray);font-weight:600;margin-left:2px}
+.metric .l{font-size:12.5px;color:var(--gray);margin-top:2px}
+
+/* ══ 콘셉트 (AS-IS/TO-BE) ══ */
+.concept{padding:120px 0}
+.concept .head{margin-bottom:56px}
+.shift{
+  display:grid;grid-template-columns:1fr auto 1.3fr;gap:26px;align-items:stretch;max-width:920px;
+}
+.shift-box{border:1px solid var(--hair);border-radius:20px;padding:34px 32px}
+.shift-box .cap{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;letter-spacing:.2em;color:var(--gray-2);margin-bottom:16px}
+.shift-box h3{font-size:22px;font-weight:800;letter-spacing:-.025em;line-height:1.4;margin-bottom:8px}
+.shift-box p{font-size:13.5px;color:var(--gray)}
+.shift-box.to{
+  background:var(--black);color:#fff;border-color:var(--black);box-shadow:var(--sh-lg);
+}
+.shift-box.to .cap{color:var(--blue)}
+.shift-box.to h3 em{font-style:normal;color:var(--blue);filter:brightness(1.35)}
+.shift-box.to p{color:rgba(255,255,255,.55)}
+.shift-arrow{display:flex;align-items:center;color:var(--gray-2);font-size:22px;font-weight:300}
+.concept-foot{margin-top:24px;font-size:13px;color:var(--gray)}
+
+/* ══ 피처 공통 ══ */
+.feature{padding:110px 0;border-top:1px solid var(--hair)}
+.feature.soft{background:var(--bg-soft)}
+.f-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.f-grid.flip > .f-visual{order:-1}
+.f-list{margin-top:30px;display:flex;flex-direction:column}
+.f-item{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--hair);align-items:baseline}
+.f-item .no{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--gray-2);width:26px;flex-shrink:0}
+.f-item .b b{display:block;font-size:15px;font-weight:700;letter-spacing:-.015em;margin-bottom:2px}
+.f-item .b span{font-size:13.5px;color:var(--gray)}
+
+/* UI 프레임 */
+.frame{
+  background:#fff;border-radius:18px;border:1px solid var(--hair);box-shadow:var(--sh);overflow:hidden;
+}
+.frame .bar{
+  height:42px;border-bottom:1px solid var(--hair);display:flex;align-items:center;gap:6px;padding:0 16px;
+}
+.frame .bar i{width:9px;height:9px;border-radius:50%;background:var(--hair);display:block}
+.frame .bar .url{
+  margin-left:10px;font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--gray-2);
+  background:var(--bg-soft);border-radius:7px;padding:5px 14px;letter-spacing:0;
+}
+.frame .scr{padding:22px}
+
+/* 레벨 */
+.rung{
+  display:flex;align-items:center;gap:14px;border:1px solid var(--hair);
+  border-radius:12px;padding:14px 16px;margin-bottom:10px;transition:all .16s;background:#fff;
+}
+.rung:hover{border-color:var(--gray-2)}
+.rung .nm{font-weight:700;font-size:13.5px;width:64px;letter-spacing:-.01em}
+.rung .tg{font-size:12px;color:var(--gray);flex:1}
+.rung .ct{font-family:'Space Grotesk',sans-serif;font-size:11.5px;color:var(--gray-2);font-weight:600}
+.rung.now{border-color:var(--blue);background:var(--blue-soft)}
+.rung.now .st{font-size:11px;font-weight:800;color:var(--blue)}
+.rung-note{
+  margin-top:6px;font-size:12.5px;color:var(--gray);background:var(--bg-soft);
+  border-radius:10px;padding:12px 15px;
+}
+.rung-note b{color:var(--ink)}
+
+/* 큐레이션 */
+.cv-now{cursor:pointer}
+.cv-now-base{
+  background:var(--black);color:#fff;border-radius:14px;padding:18px 20px;margin-bottom:16px;position:relative;
+}
+.cv-now .cap{font-family:'Space Grotesk',sans-serif;font-size:9.5px;letter-spacing:.2em;color:rgba(255,255,255,.4);margin-bottom:7px}
+.cv-now .t{font-weight:700;font-size:15.5px;line-height:1.45;letter-spacing:-.015em}
+.cv-now .tag{
+  position:absolute;top:-11px;right:16px;background:var(--blue);color:#fff;
+  font-size:10px;font-weight:800;border-radius:999px;padding:4px 12px;
+}
+.cv-sep{
+  text-align:center;font-family:'Space Grotesk',sans-serif;font-size:10px;letter-spacing:.24em;
+  color:var(--gray-2);padding:4px 0 14px;
+}
+.cv-item{cursor:pointer;transition:border-color .15s}
+.cv-item:hover{border-color:var(--blue)}
+.cv-item-base{
+  display:flex;align-items:center;gap:13px;border:1px solid var(--hair);
+  border-radius:12px;padding:12px 15px;margin-bottom:9px;font-size:13px;background:#fff;
+}
+.cv-item .yr{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;color:var(--blue);
+  background:var(--blue-soft);border-radius:7px;padding:4px 10px;flex-shrink:0;
+}
+.cv-item .t{font-weight:600;flex:1;line-height:1.45;letter-spacing:-.01em}
+.cv-item .tc{font-size:9.5px;font-weight:800;color:var(--gray);border:1px solid var(--hair);border-radius:999px;padding:3px 9px;flex-shrink:0}
+
+/* ══ 컬렉션 ══ */
+.packs{padding:120px 0;border-top:1px solid var(--hair)}
+.packs .head{display:flex;justify-content:space-between;align-items:flex-end;margin-bottom:50px;gap:24px;flex-wrap:wrap}
+.pk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.pk{
+  border-radius:20px;padding:30px 28px;min-height:300px;color:#fff;position:relative;overflow:hidden;
+  display:flex;flex-direction:column;justify-content:flex-end;transition:transform .2s;
+}
+.pk:hover{transform:translateY(-6px)}
+.pk{cursor:pointer}
+.pk .cat{font-family:'Space Grotesk',sans-serif;font-size:10.5px;font-weight:600;letter-spacing:.22em;opacity:.65;margin-bottom:10px;text-transform:uppercase}
+.pk h3{font-size:21px;font-weight:800;letter-spacing:-.025em;line-height:1.4;margin-bottom:6px}
+.pk .m{font-size:12.5px;opacity:.7;margin-bottom:18px}
+.pk .go{font-size:13px;font-weight:700;display:inline-flex;gap:6px;align-items:center;opacity:.9}
+.pk-a{background:linear-gradient(155deg,#2F49D8,#1B2D9B)}
+.pk-b{background:linear-gradient(155deg,#0FA36B,#0A6844)}
+.pk-c{background:linear-gradient(155deg,#3A3F52,#14171F)}
+.pk .lock{
+  position:absolute;top:20px;right:22px;font-size:10px;font-weight:800;
+  background:rgba(255,255,255,.14);backdrop-filter:blur(4px);border-radius:999px;padding:5px 12px;
+}
+.pk .idx{
+  position:absolute;top:18px;left:24px;font-family:'Space Grotesk',sans-serif;
+  font-size:64px;font-weight:700;opacity:.14;letter-spacing:-.05em;
+}
+.packs-foot{margin-top:26px;font-size:13px;color:var(--gray)}
+
+/* 리포트 */
+.rp-head{display:flex;justify-content:space-between;align-items:baseline;margin-bottom:16px}
+.rp-head .t{font-weight:700;font-size:14.5px;letter-spacing:-.015em}
+.rp-head .m{font-family:'Space Grotesk',sans-serif;font-size:11px;color:var(--green);font-weight:600}
+.rp-metrics{display:flex;gap:10px;margin-bottom:18px}
+.rp-metric{flex:1;background:var(--bg-soft);border-radius:12px;padding:14px 15px}
+.rp-metric .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:20px;letter-spacing:-.02em}
+.rp-metric .l{font-size:11px;color:var(--gray)}
+.rp-bar{display:flex;align-items:center;gap:10px;font-size:11px;margin-bottom:8px}
+.rp-bar .lb{width:30px;color:var(--gray-2);font-family:'Space Grotesk',sans-serif;font-weight:600}
+.rp-tr{flex:1;height:14px;background:var(--bg-soft);border-radius:5px;overflow:hidden}
+.rp-fl{height:100%;background:var(--blue);border-radius:5px}
+.rp-ins{margin-top:14px;font-size:12px;background:var(--blue-soft);border-radius:10px;padding:11px 14px;color:var(--ink)}
+.rp-ins b{color:var(--blue)}
+
+/* ══ 플랜 ══ */
+.plans{padding:120px 0;background:var(--black);color:#fff}
+.plans .head{text-align:center;margin-bottom:60px}
+.plans .head .desc{margin:0 auto;color:rgba(255,255,255,.5)}
+.pl-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:840px;margin:0 auto}
+.pl{
+  border:1px solid var(--hair-dark);border-radius:22px;padding:38px 36px;background:rgba(255,255,255,.03);
+}
+.pl.hi{background:#fff;color:var(--ink);border-color:#fff;position:relative}
+.pl.hi .flag{
+  position:absolute;top:-13px;left:36px;background:var(--blue);color:#fff;
+  font-size:11px;font-weight:800;border-radius:999px;padding:5px 14px;letter-spacing:.01em;
+}
+.pl .nm{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-bottom:14px}
+.pl .pr{font-size:36px;font-weight:800;letter-spacing:-.03em}
+.pl .pr small{font-size:14px;font-weight:600;opacity:.5;letter-spacing:0}
+.pl .per{font-size:12.5px;opacity:.5;margin-bottom:26px}
+.pl ul{list-style:none;display:flex;flex-direction:column;margin-bottom:30px}
+.pl li{display:flex;gap:11px;font-size:14px;padding:10px 0;border-top:1px solid var(--hair-dark);align-items:baseline}
+.pl.hi li{border-color:var(--hair)}
+.pl li .ck{color:var(--blue);font-weight:800;flex-shrink:0;font-size:12px}
+.pl.hi li .ck{color:var(--green)}
+.pl li.mut{opacity:.35}
+.pl li.mut .ck{visibility:hidden}
+.pl .btn{width:100%}
+.pl-note{max-width:840px;margin:20px auto 0;font-size:12px;color:rgba(255,255,255,.35);text-align:center}
+
+/* ══ FAQ ══ */
+.faq{padding:110px 0}
+.faq .inner{max-width:720px;margin:0 auto}
+.faq .head{margin-bottom:40px}
+details{border-top:1px solid var(--hair)}
+details:last-of-type{border-bottom:1px solid var(--hair)}
+summary{
+  list-style:none;cursor:pointer;font-size:15.5px;font-weight:700;padding:22px 34px 22px 0;
+  position:relative;letter-spacing:-.015em;
+}
+summary::-webkit-details-marker{display:none}
+summary::after{
+  content:"+";position:absolute;right:2px;top:50%;transform:translateY(-50%);
+  font-size:20px;font-weight:300;color:var(--gray-2);transition:transform .2s;
+}
+details[open] summary::after{transform:translateY(-50%) rotate(45deg)}
+details .a{padding:0 0 24px;font-size:14px;color:var(--gray);max-width:620px}
+
+/* ══ CTA ══ */
+.final{padding:130px 0;background:var(--black);color:#fff;text-align:center;position:relative;overflow:hidden}
+.final .glow{
+  position:absolute;bottom:-260px;left:50%;transform:translateX(-50%);
+  width:800px;height:480px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(59,91,255,.3),transparent);pointer-events:none;
+}
+.final h2{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(34px,5.4vw,64px);
+  letter-spacing:-.04em;line-height:1.08;margin-bottom:18px;position:relative;
+}
+.final h2 em{font-style:normal;color:var(--blue);filter:brightness(1.4)}
+.final p{color:rgba(255,255,255,.5);margin-bottom:38px;position:relative;font-size:15px}
+footer{background:var(--black);border-top:1px solid var(--hair-dark);color:rgba(255,255,255,.35);padding:28px 0;font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media (max-width:960px){
+  .strip{flex-wrap:wrap;padding-left:28px;padding-right:28px}
+  .s-card{cursor:pointer;transition:transform .18s;}
+.s-card:hover{transform:translateY(-6px)!important}
+.s-card-base{width:calc(50% - 9px)}
+  .metrics .wrap{grid-template-columns:1fr 1fr}
+  .metric:nth-child(2){border-right:none}
+  .metric{border-bottom:1px solid var(--hair)}
+  .metric:nth-child(3),.metric:nth-child(4){border-bottom:none}
+  .f-grid{grid-template-columns:1fr;gap:44px}
+  .f-grid.flip > .f-visual{order:0}
+  .pk-grid{grid-template-columns:1fr;max-width:460px}
+  .shift{grid-template-columns:1fr}
+  .shift-arrow{transform:rotate(90deg);justify-content:center;padding:2px 0}
+  .pl-grid{grid-template-columns:1fr;max-width:460px}
+  .gnb nav{display:none}
+}
+</style>
+</head>
+<body>
+
+<header class="gnb">
+  <div class="wrap">
+    <a class="logo" href="#">NE TIMES<em>&nbsp;Library</em></a>
+    <nav>
+      <a href="#concept">Concept</a>
+      <a href="#curation">Curation</a>
+      <a href="#packs">Packs</a>
+      <a href="#plans">Plans</a>
+      <a href="javascript:parent.goPage(1)" style="color:rgba(255,255,255,.85)">Portfolio ↗</a>
+    </nav>
+    <a class="cta" href="#plans">시작하기</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-glow"></div>
+  <div class="wrap center">
+    <div class="over"><i></i>신문 구독자를 위한 아카이브 서비스</div>
+    <h1 class="en">NE TIMES<br><span class="row2">LIBRARY</span></h1>
+    <div class="sub">구독하는 동안 열리는, 21년의 아카이브</div>
+    <p class="sub-desc">매주 도착하는 신문은 그대로. 2005년 창간호부터 최신 1081호까지, 모든 지난 호가 레벨별 서재로 더해집니다.</p>
+    <div class="btn-row">
+      <a class="btn btn-blue" href="#plans">라이브러리 열기</a>
+      <a class="btn btn-ghost" href="#concept">서비스 소개</a>
+    </div>
+  </div>
+  <div class="strip" aria-hidden="true">
+    <div class="s-card tilt-l">
+      <div class="band" style="background:linear-gradient(135deg,#F1EAFC,#DFD0F6)">⛪</div>
+      <div class="body"><span class="lv times">LEVEL 3</span><h4>Sagrada Familia Reaches Historic Milestone</h4><div class="d en">2026.07.06 — NO.1081</div></div>
+    </div>
+    <div class="s-card">
+      <div class="band" style="background:linear-gradient(135deg,#FFF0DB,#FFDFB4)">☕</div>
+      <div class="body"><span class="lv junior">LEVEL 2</span><h4>Fika Shows Balance in Swedish Life</h4><div class="d en">2026.06.15 — NO.1078</div></div>
+    </div>
+    <div class="s-card">
+      <div class="band" style="background:linear-gradient(135deg,#FFE4EC,#FFC9DB)">🎤</div>
+      <div class="body"><span class="lv junior">LEVEL 2</span><h4>BTS Reunites for Historic Comeback Concert</h4><div class="d en">2026.04.13 — NO.1069</div></div>
+    </div>
+    <div class="s-card tilt-r lock">
+      <div class="band" style="background:linear-gradient(135deg,#E4EDFF,#C9DAFF)">🔭</div>
+      <div class="body"><span class="lv times">LEVEL 3</span><h4>Advanced Camera Captures New Details of Our Universe</h4><div class="d en">2025.08.04 — NO.1036</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 지표 -->
+<div class="metrics">
+  <div class="wrap">
+    <div class="metric"><div class="n en">1,081<small>호</small></div><div class="l">본지 누적 발행 (2026.07 기준)</div></div>
+    <div class="metric"><div class="n en">2005<small>년~</small></div><div class="l">창간 21년차 아카이브</div></div>
+    <div class="metric"><div class="n en">4<small>개 지면</small></div><div class="l">KINDER – Times 레벨 체계</div></div>
+    <div class="metric"><div class="n en">LV 1–3</div><div class="l">기사별 난이도 표기</div></div>
+  </div>
+</div>
+
+<!-- 콘셉트 -->
+<section class="concept" id="concept">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker en">Concept</span>
+      <h2 class="title">신문 1부 → 서재 하나</h2>
+      <p class="desc">구독의 단위를 '이번 주 한 부'에서 '열람 가능한 전체'로 바꿉니다. 신규 콘텐츠가 아니라, 이미 쌓여 있던 자산이 열리는 것입니다.</p>
+    </div>
+    <div class="shift reveal">
+      <div class="shift-box">
+        <div class="cap en">AS-IS</div>
+        <h3>이번 주 신문 1부</h3>
+        <p>읽고 나면 끝. 지난 호는 다시 찾기 어렵고, 구독이 끝나면 남는 것이 없었습니다.</p>
+      </div>
+      <div class="shift-arrow">→</div>
+      <div class="shift-box to">
+        <div class="cap en">TO-BE</div>
+        <h3>이번 주 신문 <em>+ 지난 호 1,081개 무제한</em></h3>
+        <p>2005년 창간호부터 최신호까지, 전 지면 아카이브가 구독 기간 내내 열려 있는 나만의 서재.</p>
+      </div>
+    </div>
+    <div class="concept-foot reveal">구독 중에만 열리는 서재 — 구독이 계속되는 이유가 됩니다.</div>
+  </div>
+</section>
+
+<!-- 레벨 -->
+<section class="feature soft">
+  <div class="wrap f-grid">
+    <div class="reveal">
+      <span class="kicker en">Level System</span>
+      <h2 class="title">4개 레벨,<br>하나의 서재</h2>
+      <p class="desc">30년 가까이 다듬어온 지면 등급이 그대로 라이브러리의 난이도 체계가 됩니다.</p>
+      <div class="f-list">
+        <div class="f-item"><span class="no en">01</span><div class="b"><b>내 레벨 서가</b><span>구독 지면의 전체 아카이브를 기본 서가로 제공</span></div></div>
+        <div class="f-item"><span class="no en">02</span><div class="b"><b>한 칸 위 미리 읽기</b><span>다음 레벨 기사로 자연스러운 레벨업 준비</span></div></div>
+        <div class="f-item"><span class="no en">03</span><div class="b"><b>전 레벨 개방</b><span>형제·자매가 하나의 구독으로 함께 이용</span></div></div>
+      </div>
+    </div>
+    <div class="f-visual reveal">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span class="url">library.netimes.co.kr/shelf</span></div>
+        <div class="scr">
+          <div class="rung"><span class="lv kinder">KINDER</span><span class="nm">킨더</span><span class="tg">유치 – 초2</span><span class="ct en">WEEKLY</span></div>
+          <div class="rung"><span class="lv kids">KIDS</span><span class="nm">키즈</span><span class="tg">초3 – 초6</span><span class="ct en">WEEKLY</span></div>
+          <div class="rung"><span class="lv junior">JUNIOR</span><span class="nm">주니어</span><span class="tg">초등 고학년 – 중등</span><span class="ct en">WEEKLY</span></div>
+          <div class="rung now"><span class="lv times">TIMES</span><span class="nm">타임즈</span><span class="tg">중3 – 고등 · 성인</span><span class="st">NOW READING</span></div>
+          <div class="rung-note">지면 안에서도 기사마다 <b>LEVEL 1–3 난이도</b>가 표기되어, 내 수준에 맞는 기사부터 골라 읽을 수 있습니다</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 큐레이션 -->
+<section class="feature" id="curation">
+  <div class="wrap f-grid flip">
+    <div class="f-visual reveal">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span class="url">library.netimes.co.kr/weekly</span></div>
+        <div class="scr">
+          <div class="cv-now">
+            <span class="tag">이번 주 신문</span>
+            <div class="cap en">THIS WEEK — TIMES NO.1081 · LV3</div>
+            <div class="t">Sagrada Familia Reaches Historic Milestone</div>
+          </div>
+          <div class="cv-sep en">EDITOR'S PICK — READ TOGETHER</div>
+          <div class="cv-item"><span class="yr">1078</span><span class="t">Fika Shows Balance in Swedish Life</span><span class="tc en">LIFESTYLE</span></div>
+          <div class="cv-item"><span class="yr">1069</span><span class="t">BTS Reunites for Historic Comeback Concert</span><span class="tc en">ENT.</span></div>
+          <div class="cv-item"><span class="yr">1036</span><span class="t">Advanced Camera Captures New Details of Our Universe</span><span class="tc en">SCIENCE</span></div>
+        </div>
+      </div>
+    </div>
+    <div class="reveal">
+      <span class="kicker en">Weekly Curation</span>
+      <h2 class="title">매주 금요일,<br>이어 읽기 3편</h2>
+      <p class="desc">4만 편을 열어두기만 하지 않습니다. 이번 주 신문과 이어 읽으면 좋은 과거 기사를 에디터가 골라 서재 맨 앞에 둡니다.</p>
+      <div class="f-list">
+        <div class="f-item"><span class="no en">01</span><div class="b"><b>신문 × 아카이브</b><span>같은 주제가 시대에 따라 어떻게 다뤄졌는지 비교 읽기</span></div></div>
+        <div class="f-item"><span class="no en">02</span><div class="b"><b>주간 큐레이션 레터</b><span>매주 금요일, 이번 주의 이어 읽기 안내</span></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 컬렉션 -->
+<section class="packs" id="packs">
+  <div class="wrap">
+    <div class="head reveal">
+      <div>
+        <span class="kicker en">Collection Packs</span>
+        <h2 class="title">테마로 엮인<br>기사 패키지</h2>
+      </div>
+      <p class="desc" style="max-width:340px">시즌 이슈부터 수행평가 대비까지. 매달 새 컬렉션이 추가됩니다.</p>
+    </div>
+    <div class="pk-grid">
+      <div class="pk pk-a reveal">
+        <span class="idx en">01</span>
+        <div class="cat en">Seasonal</div>
+        <h3>Science 팩 — 우주를 읽는 영어</h3>
+        <div class="m">Vera Rubin 천문대 기사(1036호) 등 LEVEL 3 과학 기사 큐레이션</div>
+        <span class="go">팩 열기 →</span>
+      </div>
+      <div class="pk pk-b reveal">
+        <span class="idx en">02</span>
+        <div class="cat en">For School</div>
+        <h3>수행평가 대비 — 주제별 기사 10선</h3>
+        <div class="m">기사마다 실린 주요 어휘 단어장 · Discussion Question 포함</div>
+        <span class="go">팩 열기 →</span>
+      </div>
+      <div class="pk pk-c reveal">
+        <span class="idx en">03</span>
+        <span class="lock">12개월 전용</span>
+        <div class="cat en">Time Capsule</div>
+        <h3>10년 전 오늘, 우리는 이렇게 읽었다</h3>
+        <div class="m">2005년 창간호부터 — 아카이브 보유사만 가능한 컬렉션</div>
+        <span class="go">팩 열기 →</span>
+      </div>
+    </div>
+    <div class="packs-foot reveal">방학 리딩 챌린지 · 인물 열전 · 우주 특집 등 12종 운영 중</div>
+  </div>
+</section>
+
+<!-- 리포트 -->
+<section class="feature soft">
+  <div class="wrap f-grid">
+    <div class="reveal">
+      <span class="kicker en">Reading Report</span>
+      <h2 class="title">읽은 만큼,<br>매달 보이게</h2>
+      <p class="desc">몇 편을, 어떤 주제로, 어떤 레벨에서 읽었는지 — 아이의 읽기 여정을 매달 리포트로 정리해 보내드립니다.</p>
+      <div class="f-list">
+        <div class="f-item"><span class="no en">01</span><div class="b"><b>월간 학부모 리포트</b><span>읽은 기사 수 · 주제 분포 · 어휘 성장 그래프</span></div></div>
+        <div class="f-item"><span class="no en">02</span><div class="b"><b>레벨업 진단</b><span>읽기 데이터 기반의 다음 단계 제안</span></div></div>
+      </div>
+    </div>
+    <div class="f-visual reveal">
+      <div class="frame">
+        <div class="bar"><i></i><i></i><i></i><span class="url">library.netimes.co.kr/report</span></div>
+        <div class="scr">
+          <div class="rp-head"><span class="t">6월 읽기 리포트</span><span class="m en">+8 vs MAY</span></div>
+          <div class="rp-metrics">
+            <div class="rp-metric"><div class="n en">27</div><div class="l">읽은 기사</div></div>
+            <div class="rp-metric"><div class="n en">312</div><div class="l">저장 단어</div></div>
+            <div class="rp-metric"><div class="n en">LV2</div><div class="l">주 난이도</div></div>
+          </div>
+          <div class="rp-bar"><span class="lb">W1</span><div class="rp-tr"><div class="rp-fl" style="width:42%"></div></div></div>
+          <div class="rp-bar"><span class="lb">W2</span><div class="rp-tr"><div class="rp-fl" style="width:58%"></div></div></div>
+          <div class="rp-bar"><span class="lb">W3</span><div class="rp-tr"><div class="rp-fl" style="width:50%"></div></div></div>
+          <div class="rp-bar"><span class="lb">W4</span><div class="rp-tr"><div class="rp-fl" style="width:76%"></div></div></div>
+          <div class="rp-ins">Science 섹션 독서 비중 38% — <b>LEVEL 3 과학 기사</b> 도전 시점</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 플랜 -->
+<section class="plans" id="plans">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker en" style="color:rgba(255,255,255,.4)">Plans</span>
+      <h2 class="title" style="color:#fff">구독 기간이 곧<br>서재의 깊이</h2>
+      <p class="desc">모든 구독에 신문 배송과 온라인 학습 프로그램이 포함됩니다.</p>
+    </div>
+    <div class="pl-grid">
+      <div class="pl reveal">
+        <div class="nm en">6 Months</div>
+        <div class="pr">120,000<small>원</small></div>
+        <div class="per">월 20,000원 · 신문 배송 포함</div>
+        <ul>
+          <li><span class="ck">●</span>주간 신문 + 워크북 배송</li>
+          <li><span class="ck">●</span>라이브러리 최근 1년치 열람</li>
+          <li><span class="ck">●</span>주간 큐레이션 레터</li>
+          <li><span class="ck">●</span>월간 읽기 리포트</li>
+          <li class="mut"><span class="ck">●</span>2005년~ 전체 아카이브</li>
+          <li class="mut"><span class="ck">●</span>컬렉션 팩 12종 · 타임캡슐</li>
+        </ul>
+        <a class="btn btn-ghost" href="#">6개월로 시작</a>
+      </div>
+      <div class="pl hi reveal">
+        <span class="flag">전체 아카이브 개방</span>
+        <div class="nm en">12 Months</div>
+        <div class="pr">198,000<small>원</small></div>
+        <div class="per">월 16,500원 · 6개월 대비 17% 절약</div>
+        <ul>
+          <li><span class="ck">●</span>주간 신문 + 워크북 배송</li>
+          <li><span class="ck">●</span><b>2005년 창간호~ 전체 아카이브 무제한</b></li>
+          <li><span class="ck">●</span><b>컬렉션 팩 12종 + 타임캡슐</b></li>
+          <li><span class="ck">●</span>주간 큐레이션 레터</li>
+          <li><span class="ck">●</span>월간 리포트 + 레벨업 진단</li>
+          <li><span class="ck">●</span>재구독 시 기록 전체 복원</li>
+        </ul>
+        <a class="btn btn-black" href="#">전체 서재 열기</a>
+      </div>
+    </div>
+    <div class="pl-note reveal">구독 종료 시 열람은 종료되며, 스크랩·단어장은 계정에 보존됩니다. 재구독 시 열람권과 기록이 복원됩니다.</div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section class="faq">
+  <div class="wrap inner">
+    <div class="head reveal">
+      <span class="kicker en">FAQ</span>
+      <h2 class="title">자주 묻는 질문</h2>
+    </div>
+    <div class="reveal">
+      <details open>
+        <summary>구독 중인 레벨이 아닌 다른 레벨도 볼 수 있나요?</summary>
+        <div class="a">네. 라이브러리에서는 구독 지면과 무관하게 KINDER부터 Times까지 전 레벨을 열람할 수 있습니다. 형제·자매가 함께 쓰거나, 다음 레벨을 미리 읽는 용도로 활용됩니다.</div>
+      </details>
+      <details>
+        <summary>구독이 끝나면 스크랩한 기사도 사라지나요?</summary>
+        <div class="a">직접 스크랩한 기사와 단어장은 구독 종료 후에도 계정에 보존됩니다. 라이브러리 열람은 구독 중에만 가능하며, 재구독 시 모든 기록과 열람권이 복원됩니다.</div>
+      </details>
+      <details>
+        <summary>종이 신문 없이 라이브러리만 구독할 수 있나요?</summary>
+        <div class="a">라이브러리는 신문 구독자를 위한 서비스로 별도 판매하지 않습니다. 신문 구독에 기본 포함되어 있습니다.</div>
+      </details>
+      <details>
+        <summary>오래된 기사도 학습에 유효한가요?</summary>
+        <div class="a">잘 쓰인 기사의 언어적 가치는 시간이 지나도 유지됩니다. 시사성이 중요한 주제는 주간 큐레이션에서 최신 기사와 함께 맥락을 안내하며, 타임캡슐 팩처럼 시대 비교 자체가 학습 포인트가 되는 컬렉션도 있습니다.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="final">
+  <div class="glow"></div>
+  <div class="wrap reveal">
+    <h2 class="en">Subscribe the <em>Library</em>,<br>not a paper.</h2>
+    <p>다음 갱신부터는 신문이 아니라 서재를 구독하세요. 12개월 구독 시 전체 아카이브 즉시 개방.</p>
+    <a class="btn btn-blue" href="#plans">라이브러리 열기</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="en">NE TIMES LIBRARY — Service Proposal</div>
+    <div>기사·호수·가격은 실제 발행 데이터 기준(2026.07) · 컬렉션 등 일부는 기획안</div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+<\/script>
+
+<!-- ═══ Interactive layer: article modal / pack modal / toast ═══ -->
+<style>
+.modal-bg{position:fixed;inset:0;background:rgba(11,13,18,.6);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-bg.on{display:flex;animation:mfade .22s ease}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:86vh;overflow-y:auto;box-shadow:0 40px 100px rgba(11,13,18,.4);animation:mup .26s cubic-bezier(.2,.7,.3,1)}
+@keyframes mup{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+.modal .m-band{padding:26px 30px 20px;border-bottom:1px solid var(--hair);position:relative}
+.modal .m-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:10px;background:var(--bg-soft);font-size:16px;color:var(--gray);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.modal .m-close:hover{background:var(--hair)}
+.modal .m-meta{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.modal .m-title{font-weight:800;font-size:21px;letter-spacing:-.025em;line-height:1.4;padding-right:36px}
+.modal .m-issue{font-family:'Space Grotesk',sans-serif;font-size:11.5px;color:var(--gray-2);margin-top:6px}
+.modal .m-body{padding:22px 30px 28px}
+.modal .m-sec{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--gray-2);margin:18px 0 8px;text-transform:uppercase}
+.modal .m-sec:first-child{margin-top:0}
+.modal .m-ex{font-size:13.5px;color:#3A4150;line-height:1.75;font-style:italic;border-left:3px solid var(--blue);padding-left:14px}
+.modal .m-vocab{display:flex;gap:7px;flex-wrap:wrap}
+.modal .m-vocab span{font-size:12px;font-weight:600;background:var(--bg-soft);border:1px solid var(--hair);border-radius:999px;padding:5px 13px}
+.modal .m-vocab span b{color:var(--blue);font-weight:700}
+.modal .m-dq{font-size:13.5px;background:var(--blue-soft);border-radius:12px;padding:14px 16px;font-weight:600}
+.modal .m-actions{display:flex;gap:10px;margin-top:24px}
+.modal .m-actions .btn{flex:1;padding:13px 18px;font-size:13.5px}
+.modal .pk-item{display:flex;align-items:center;gap:12px;border:1px solid var(--hair);border-radius:12px;padding:13px 16px;margin-bottom:9px;font-size:13.5px;cursor:pointer;transition:border-color .15s}
+.modal .pk-item:hover{border-color:var(--blue)}
+.modal .pk-item .no{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:700;color:var(--blue);background:var(--blue-soft);border-radius:6px;padding:3px 9px;flex-shrink:0}
+.modal .pk-item .t{font-weight:600;flex:1;line-height:1.45}
+.modal .pk-item.soon{opacity:.5;cursor:default}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,16px);background:var(--black);color:#fff;font-size:13.5px;font-weight:600;border-radius:999px;padding:13px 24px;z-index:300;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.2,.7,.3,1);box-shadow:0 12px 40px rgba(11,13,18,.35);max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+<div class="modal-bg" id="modalBg"><div class="modal" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const ARTICLES={
+ "1081":{title:"Sagrada Familia Reaches Historic Milestone",lv:"LEVEL 3",lvc:"times",sec:"READ AND LEARN",issue:"1081호 · 2026.07.06",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=37090",
+  ex:"After 144 years of construction, the main structure of the Sagrada Família basilica in Barcelona, Spain, has finally been completed. Despite many setbacks, including wars, politics, and financial difficulties, work on the famous church has endured for generations.",
+  vocab:[["milestone","중요한 단계"],["construction","건설"],["setback","차질"],["endure","지속되다"],["influential","영향력 있는"]],
+  dq:"What famous structure do you want to see in person? Why?"},
+ "1078":{title:"Fika Shows Balance in Swedish Life",lv:"LEVEL 2",lvc:"junior",sec:"LIFESTYLE",issue:"1078호 · 2026.06.15",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36889",
+  ex:"Do you take a snack break each day? What if everyone in your country took the same break? In Sweden, this tradition exists, and it is called \"fika.\" It is a daily ritual that encourages pausing in order to be more present in the moment.",
+  vocab:[["ritual","의식"],["emphasize","강조하다"],["interaction","상호작용"],["hospitality","환대"],["identity","정체성"]],
+  dq:"What snack would you choose if you could participate in fika?"},
+ "1069":{title:"BTS Reunites for Historic Comeback Concert",lv:"LEVEL 2",lvc:"junior",sec:"SPORTS & ENTERTAINMENT",issue:"1069호 · 2026.04.13",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36502",
+  ex:"BTS held their long-awaited comeback concert at Gwanghwamun Square in Seoul on March 22nd, marking the group's first performance together after completing their military service. The event drew over 100,000 fans in person and was streamed to 18.4 million viewers worldwide.",
+  vocab:[["reunite","재결합하다"],["mandatory","의무적인"],["atmosphere","분위기"],["heritage","유산"],["recognition","인정"]],
+  dq:"Why do you think BTS has such a strong global influence?"},
+ "1036":{title:"Advanced Camera Captures New Details of Our Universe",lv:"LEVEL 3",lvc:"times",sec:"SCIENCE",issue:"1036호 · 2025.08.04",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=34934",
+  ex:"People around the world can now view stunningly detailed images of our universe, thanks to a new state-of-the-art digital camera. This technology gives scientists and the public an unprecedented look at distant galaxies and cosmic structures.",
+  vocab:[["unprecedented","전례없는"],["observatory","천문대"],["investigate","조사하다"],["resolution","해상도"],["collaboration","협력"]],
+  dq:"What celestial objects do you want to see in space? Why?"}
+};
+const PACKS={
+ "science":{name:"Science 팩 — 우주를 읽는 영어",desc:"LEVEL 3 과학 기사 큐레이션 · 어휘 카드 포함",items:[["1036","Advanced Camera Captures New Details of Our Universe"],[null,"NASA's New Moon Mission Explained (수록 예정)"],[null,"How Black Holes Bend Light (수록 예정)"]]},
+ "school":{name:"수행평가 대비 — 주제별 기사 10선",desc:"기사마다 주요 어휘 단어장 · Discussion Question 포함",items:[["1078","Fika Shows Balance in Swedish Life"],["1081","Sagrada Familia Reaches Historic Milestone"],[null,"주제별 기사 8편 추가 수록 (기획안)"]]},
+ "capsule":{name:"타임캡슐 — 10년 전 오늘",desc:"2005년 창간호부터, 아카이브 보유사만 가능한 컬렉션",items:[[null,"🗝️ 12개월 구독 시 열리는 컬렉션입니다"]]}
+};
+const bg=document.getElementById('modalBg'),box=document.getElementById('modalBox'),toastEl=document.getElementById('toast');
+let toastT;
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>toastEl.classList.remove('on'),2600)}
+function openModal(html){box.innerHTML=html;bg.classList.add('on');document.body.style.overflow='hidden'}
+function closeModal(){bg.classList.remove('on');document.body.style.overflow=''}
+bg.addEventListener('click',e=>{if(e.target===bg)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function articleModal(no){
+ const a=ARTICLES[no];if(!a){toast('데모 범위 밖의 기사입니다 — 실제 서비스에서는 전체 아카이브가 열립니다');return}
+ openModal(`<div class="m-band"><div class="m-close" onclick="closeModal()">✕</div>
+  <div class="m-meta"><span class="lv ${a.lvc}">${a.lv}</span><span class="lv" style="background:var(--bg-soft);color:var(--gray)">${a.sec}</span></div>
+  <div class="m-title">${a.title}</div><div class="m-issue en">NE TIMES ${a.issue}</div></div>
+ <div class="m-body">
+  <div class="m-sec">Preview</div><div class="m-ex">${a.ex}</div>
+  <div class="m-sec">Key Vocabulary</div><div class="m-vocab">${a.vocab.map(v=>`<span><b>${v[0]}</b> ${v[1]}</span>`).join('')}</div>
+  <div class="m-sec">Discussion Question</div><div class="m-dq">💬 ${a.dq}</div>
+  <div class="m-actions">
+   <a class="btn btn-blue" href="${a.url}" target="_blank" rel="noopener">원문 기사 보기 ↗</a>
+   <button class="btn btn-ghost2" style="border:1px solid var(--hair);color:var(--ink)" onclick="toast('내 서재에 스크랩되었습니다 (데모)');closeModal()">스크랩</button>
+  </div></div>`)}
+function packModal(key){
+ const pk=PACKS[key];if(!pk)return;
+ openModal(`<div class="m-band"><div class="m-close" onclick="closeModal()">✕</div>
+  <div class="m-title">${pk.name}</div><div class="m-issue">${pk.desc}</div></div>
+ <div class="m-body">
+  <div class="m-sec">수록 기사</div>
+  ${pk.items.map(it=>it[0]
+   ?`<div class="pk-item" onclick="articleModal('${it[0]}')"><span class="no en">${it[0]}</span><span class="t">${it[1]}</span><span style="color:var(--blue);font-weight:700">→</span></div>`
+   :`<div class="pk-item soon"><span class="t">${it[1]}</span></div>`).join('')}
+ </div>`)}
+// 이벤트 위임: 기사 카드 / 큐레이션 / 팩 / 플랜
+document.addEventListener('click',e=>{
+ const card=e.target.closest('.s-card');
+ if(card){const m=card.querySelector('.d')?.textContent.match(/NO\.(\d+)/);if(m){articleModal(m[1]);return}}
+ const cv=e.target.closest('.cv-item');
+ if(cv){const no=cv.querySelector('.yr')?.textContent.trim();articleModal(no);return}
+ const now=e.target.closest('.cv-now');
+ if(now){articleModal('1081');return}
+ const pk=e.target.closest('.pk');
+ if(pk){const h=pk.querySelector('h3')?.textContent||'';
+  if(h.includes('Science'))packModal('science');
+  else if(h.includes('수행평가'))packModal('school');
+  else packModal('capsule');return}
+});
+// 플랜 버튼 → 데모 토스트
+document.querySelectorAll('.pl .btn').forEach(b=>{b.addEventListener('click',ev=>{ev.preventDefault();
+ toast(b.textContent.includes('전체')?'12개월 구독 신청 페이지로 이동합니다 (데모)':'6개월 구독 신청 페이지로 이동합니다 (데모)')})});
+// 파이널 CTA
+document.querySelectorAll('.final .btn').forEach(b=>{b.addEventListener('click',()=>{}) });
+<\/script>
+
+</body>
+</html>
+
+</script>
+<script type="text/plain" id="doc1">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NE TIMES PORTFOLIO</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#121714;
+  --gray:#78817B;
+  --gray-2:#AEB6B0;
+  --bg:#FFFFFF;
+  --bg-soft:#F5F7F5;
+  --hair:#E7EAE7;
+  --hair-dark:rgba(255,255,255,.12);
+  --green:#0E9A62;
+  --green-deep:#0B7A4E;
+  --green-soft:#E8F6EF;
+  --dark:#0F1512;
+  --amber:#F0B429;--amber-soft:#FCF4DE;
+  --red:#E5477A;--red-soft:#FDEEF4;
+  --blue:#3B5BFF;--blue-soft:#EEF1FF;
+  --sh:0 1px 2px rgba(18,23,20,.04),0 12px 40px rgba(18,23,20,.08);
+  --sh-lg:0 2px 6px rgba(18,23,20,.06),0 32px 80px rgba(18,23,20,.14);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:'Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;
+  background:var(--bg);color:var(--ink);line-height:1.65;font-size:15.5px;
+  -webkit-font-smoothing:antialiased;letter-spacing:-.01em;overflow-x:hidden;
+}
+.en{font-family:'Space Grotesk','Pretendard Variable',sans-serif;letter-spacing:-.02em}
+a{text-decoration:none;color:inherit}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+.wrap{max-width:1120px;margin:0 auto;padding:0 28px}
+.kicker{
+  font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;letter-spacing:.22em;
+  color:var(--gray);text-transform:uppercase;display:block;margin-bottom:16px;
+}
+h2.title{
+  font-weight:800;letter-spacing:-.035em;line-height:1.22;
+  font-size:clamp(28px,3.6vw,42px);margin-bottom:16px;
+}
+p.desc{color:var(--gray);font-size:16px;max-width:560px;font-weight:450}
+p.desc b{color:var(--ink);font-weight:700}
+.btn{
+  display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  font-size:14.5px;font-weight:700;border-radius:999px;padding:14px 28px;transition:all .18s;letter-spacing:-.01em;
+}
+.btn-green{background:var(--green);color:#fff}
+.btn-green:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(14,154,98,.35)}
+.btn-ghost{border:1px solid var(--hair-dark);color:#fff}
+.btn-ghost:hover{background:rgba(255,255,255,.06)}
+.btn-ghost2{border:1px solid var(--hair);color:var(--ink)}
+.btn-dark{background:var(--dark);color:#fff}
+.btn-dark:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(15,21,18,.25)}
+.reveal{opacity:0;transform:translateY(18px);transition:opacity .6s cubic-bezier(.2,.7,.3,1),transform .6s cubic-bezier(.2,.7,.3,1)}
+.reveal.in{opacity:1;transform:none}
+@media (prefers-reduced-motion:reduce){.reveal{opacity:1;transform:none;transition:none}html{scroll-behavior:auto}}
+
+/* ══ GNB ══ */
+.gnb{
+  position:fixed;top:0;left:0;right:0;z-index:100;
+  background:rgba(15,21,18,.72);backdrop-filter:blur(16px);
+  border-bottom:1px solid var(--hair-dark);
+}
+.gnb .wrap{display:flex;align-items:center;height:64px;gap:40px}
+.logo{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:16px;color:#fff}
+.logo em{font-style:normal;color:var(--green);filter:brightness(1.3);margin-left:2px}
+.gnb nav{display:flex;gap:28px;flex:1;font-size:13.5px;font-weight:500;color:rgba(255,255,255,.6)}
+.gnb nav a:hover{color:#fff}
+.gnb .cta{font-size:13px;font-weight:700;background:#fff;color:var(--dark);border-radius:999px;padding:9px 18px}
+
+/* ══ HERO ══ */
+.hero{background:var(--dark);color:#fff;padding:168px 0 100px;position:relative;overflow:hidden}
+.hero .glow{
+  position:absolute;top:-200px;right:-120px;width:760px;height:560px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(14,154,98,.3),transparent);pointer-events:none;
+}
+.hero .wrap{display:grid;grid-template-columns:1.05fr .95fr;gap:64px;align-items:center;position:relative}
+.hero .over{
+  display:inline-flex;align-items:center;gap:10px;font-size:12.5px;font-weight:600;
+  color:rgba(255,255,255,.65);border:1px solid var(--hair-dark);border-radius:999px;
+  padding:7px 16px;margin-bottom:30px;background:rgba(255,255,255,.04);
+}
+.hero .over i{width:6px;height:6px;border-radius:50%;background:var(--green);display:block;filter:brightness(1.4)}
+.hero h1{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;
+  font-size:clamp(46px,6.5vw,84px);line-height:1.0;letter-spacing:-.045em;margin-bottom:24px;
+}
+.hero h1 .row2{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.45)}
+.hero .sub{font-size:clamp(17px,1.9vw,20px);font-weight:600;letter-spacing:-.02em;margin-bottom:12px}
+.hero .sub-desc{font-size:14.5px;color:rgba(255,255,255,.52);max-width:440px;margin-bottom:38px;font-weight:450}
+.hero .btn-row{display:flex;gap:12px;flex-wrap:wrap;margin-bottom:52px}
+.hero-proof{display:flex;border-top:1px solid var(--hair-dark);padding-top:24px}
+.hero-proof .pf{padding-right:32px;margin-right:32px;border-right:1px solid var(--hair-dark)}
+.hero-proof .pf:last-child{border:none;margin:0;padding-right:0}
+.hero-proof .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:24px;letter-spacing:-.03em}
+.hero-proof .n small{font-family:Pretendard,sans-serif;font-size:13px;font-weight:600;color:rgba(255,255,255,.6);margin-left:2px}
+.hero-proof .l{font-size:12px;color:rgba(255,255,255,.45)}
+
+/* 히어로 문서 비주얼 */
+.folio{position:relative;height:460px;display:flex;align-items:center;justify-content:center}
+.doc{
+  position:absolute;width:290px;background:#fff;border-radius:12px;box-shadow:var(--sh-lg);
+  padding:26px 25px;color:var(--ink);
+}
+.doc-b{transform:rotate(5deg) translate(36px,8px);opacity:.4}
+.doc-m{transform:rotate(-4deg) translate(-38px,2px);opacity:.65}
+.doc-f{transform:rotate(-.5deg);z-index:3;animation:df 7s ease-in-out infinite}
+@keyframes df{0%,100%{transform:rotate(-.5deg) translateY(0)}50%{transform:rotate(-.5deg) translateY(-10px)}}
+@media (prefers-reduced-motion:reduce){.doc-f{animation:none}}
+.doc .cap{font-family:'Space Grotesk',sans-serif;font-size:8.5px;font-weight:600;letter-spacing:.24em;color:var(--green);margin-bottom:6px}
+.doc .ti{font-weight:800;font-size:17px;letter-spacing:-.025em;line-height:1.35;border-bottom:2px solid var(--ink);padding-bottom:11px;margin-bottom:4px}
+.doc .su{font-size:9.5px;color:var(--gray);margin-bottom:12px}
+.doc .rw{display:flex;justify-content:space-between;font-size:10.5px;padding:7px 0;border-bottom:1px solid var(--hair)}
+.doc .rw b{color:var(--green);font-family:'Space Grotesk',sans-serif}
+.doc .bars{display:flex;gap:4px;align-items:flex-end;height:46px;margin:13px 0 4px}
+.doc .b1{flex:1;background:var(--green-soft);border-radius:3px 3px 0 0}
+.doc .b1.hi{background:var(--green)}
+.doc .qt{font-size:9px;color:var(--gray);border-left:2px solid var(--amber);padding-left:8px;margin-top:11px;line-height:1.6}
+.f-badge{
+  position:absolute;z-index:5;background:#fff;border-radius:12px;box-shadow:var(--sh-lg);
+  padding:11px 15px;font-size:11.5px;font-weight:700;color:var(--ink);display:flex;gap:8px;align-items:center;
+}
+.f-badge b{color:var(--green)}
+.fb1{top:18px;left:-6px}
+.fb2{bottom:24px;right:-10px}
+
+/* ══ WHY ══ */
+.why{padding:120px 0;border-bottom:1px solid var(--hair)}
+.why .head{margin-bottom:56px}
+.why-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:0;border:1px solid var(--hair);border-radius:20px;overflow:hidden}
+.why-card{padding:36px 32px;border-right:1px solid var(--hair);background:#fff}
+.why-card:last-child{border-right:none}
+.why-card .no{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--green);margin-bottom:18px;letter-spacing:.1em}
+.why-card h3{font-size:17.5px;font-weight:800;letter-spacing:-.02em;line-height:1.45;margin-bottom:10px}
+.why-card p{font-size:13.5px;color:var(--gray)}
+.why-card p b{color:var(--ink);font-weight:700}
+.why-line{
+  margin-top:46px;font-size:clamp(18px,2.4vw,25px);font-weight:800;letter-spacing:-.03em;text-align:center;line-height:1.55;
+}
+.why-line em{font-style:normal;color:var(--green)}
+
+/* ══ HOW ══ */
+.how{padding:120px 0}
+.how .head{margin-bottom:56px}
+.how-grid{display:grid;grid-template-columns:repeat(4,1fr);gap:18px}
+.how-step{border:1px solid var(--hair);border-radius:18px;padding:28px 26px;background:#fff;position:relative}
+.how-step .no{
+  font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;color:var(--gray-2);
+  display:flex;justify-content:space-between;align-items:center;margin-bottom:44px;
+}
+.how-step .no .tm{
+  font-size:10.5px;font-weight:800;color:var(--green);background:var(--green-soft);
+  border-radius:999px;padding:4px 11px;font-family:Pretendard,sans-serif;letter-spacing:-.01em;
+}
+.how-step h3{font-size:16.5px;font-weight:800;letter-spacing:-.02em;margin-bottom:7px}
+.how-step p{font-size:13px;color:var(--gray)}
+
+/* ══ 기록 에디터 ══ */
+.record{padding:120px 0;background:var(--dark);color:#fff;position:relative;overflow:hidden}
+.record .glow{
+  position:absolute;bottom:-260px;left:-140px;width:720px;height:520px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(14,154,98,.22),transparent);pointer-events:none;
+}
+.record .head{text-align:center;margin-bottom:54px;position:relative}
+.record .kicker{color:rgba(255,255,255,.4)}
+.record .desc{margin:0 auto;color:rgba(255,255,255,.5)}
+.editor{
+  max-width:900px;margin:0 auto;background:#fff;border-radius:18px;overflow:hidden;color:var(--ink);
+  box-shadow:var(--sh-lg);position:relative;
+}
+.ed-top{
+  border-bottom:1px solid var(--hair);padding:16px 24px;background:var(--bg-soft);
+  display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap;
+}
+.ed-top .t{font-weight:700;font-size:14px;letter-spacing:-.015em}
+.ed-top .t small{font-weight:500;color:var(--gray);margin-left:8px;font-size:11.5px}
+.ed-top .tm{font-size:11px;font-weight:800;color:var(--green);background:var(--green-soft);border-radius:999px;padding:5px 13px}
+.ed-body{display:grid;grid-template-columns:1fr 1fr 1fr}
+.ed-col{padding:24px;border-right:1px solid var(--hair)}
+.ed-col:last-child{border-right:none}
+.ed-col .ch{display:flex;align-items:center;gap:8px;margin-bottom:4px}
+.ed-col .cn{font-family:'Space Grotesk',sans-serif;font-size:11px;font-weight:600;color:var(--gray-2)}
+.ed-col .ct{font-weight:800;font-size:13.5px;letter-spacing:-.015em}
+.ed-col .cs{font-size:11px;color:var(--gray);margin-bottom:12px}
+.ed-tx{font-size:12.5px;line-height:1.72;color:#333B36}
+.ed-tx.it{font-style:italic}
+.ed-col.wait .ed-tx{color:var(--gray-2)}
+.ed-col.wait{cursor:pointer}
+.ed-col.wait:hover{background:var(--bg-soft)}
+.ed-ta{width:100%;min-height:96px;border:1.5px solid var(--green);border-radius:10px;padding:11px 13px;font-family:inherit;font-size:12.5px;line-height:1.7;resize:vertical;outline:none}
+.ed-st{margin-top:12px;font-size:10px;font-weight:800;letter-spacing:.04em}
+.ed-st.ok{color:var(--green)}
+.ed-st.no{color:var(--gray-2)}
+.ed-foot{
+  border-top:1px solid var(--hair);padding:14px 24px;background:var(--bg-soft);
+  display:flex;justify-content:space-between;font-size:12px;color:var(--gray);flex-wrap:wrap;gap:8px;
+}
+.ed-foot b{color:var(--green)}
+.record .cap-line{position:relative;text-align:center;margin-top:24px;font-size:13px;color:rgba(255,255,255,.45)}
+
+/* ══ 리포트 ══ */
+.report{padding:120px 0;border-bottom:1px solid var(--hair)}
+.rp-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:center}
+.f-list{margin-top:30px;display:flex;flex-direction:column}
+.f-item{display:flex;gap:16px;padding:16px 0;border-top:1px solid var(--hair);align-items:baseline}
+.f-item .no{font-family:'Space Grotesk',sans-serif;font-size:12px;font-weight:600;color:var(--gray-2);width:26px;flex-shrink:0}
+.f-item .b b{display:block;font-size:15px;font-weight:700;letter-spacing:-.015em;margin-bottom:2px}
+.f-item .b span{font-size:13.5px;color:var(--gray)}
+.spread{position:relative;display:flex;justify-content:center}
+.page{
+  background:#fff;border:1px solid var(--hair);border-radius:10px;box-shadow:var(--sh-lg);
+  width:262px;padding:24px 22px;
+}
+.pg-l{transform:rotate(-2deg) translateX(14px);z-index:1}
+.pg-r{transform:rotate(1.6deg) translateX(-14px) translateY(16px);z-index:2}
+.page .cap{font-family:'Space Grotesk',sans-serif;font-size:8px;font-weight:600;letter-spacing:.24em;color:var(--green);margin-bottom:6px}
+.page .ti{font-weight:800;font-size:14.5px;letter-spacing:-.02em;line-height:1.4;border-bottom:2px solid var(--ink);padding-bottom:9px;margin-bottom:4px}
+.page .su{font-size:9px;color:var(--gray);margin-bottom:11px}
+.page .sl{display:flex;justify-content:space-between;font-size:9.5px;padding:6px 0;border-bottom:1px solid var(--hair)}
+.page .sl b{color:var(--green);font-family:'Space Grotesk',sans-serif}
+.page .ai{font-size:9px;padding:6px 0;border-bottom:1px solid var(--hair);line-height:1.5}
+.page .ai .wk{font-family:'Space Grotesk',sans-serif;font-weight:600;color:var(--green);margin-right:5px;font-size:8.5px}
+.page .nt{font-size:8.5px;color:var(--gray);margin-top:11px;line-height:1.65;border-left:2px solid var(--amber);padding-left:8px}
+
+/* ══ 트랙 ══ */
+.tracks{padding:120px 0;background:var(--bg-soft)}
+.tracks .head{margin-bottom:50px}
+.tk-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
+.tk{
+  background:#fff;border:1px solid var(--hair);border-radius:16px;padding:22px 24px;transition:all .16s;
+}
+.tk:hover{border-color:var(--green);transform:translateY(-3px)}
+.tk{cursor:pointer}
+.tk .h{display:flex;justify-content:space-between;align-items:center;margin-bottom:10px}
+.tk .nm{font-weight:800;font-size:15px;letter-spacing:-.02em}
+.tk .en-nm{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.14em;color:var(--gray-2);text-transform:uppercase}
+.tk .sm{font-size:12px;color:var(--gray);line-height:1.6}
+.tk .sm b{color:var(--ink);font-weight:700}
+
+/* ══ 신뢰 ══ */
+.trust{padding:120px 0}
+.trust-grid{display:grid;grid-template-columns:1fr 1fr;gap:80px;align-items:start}
+.trust h2.title em{font-style:normal;color:var(--green)}
+.t-list{display:flex;flex-direction:column;gap:12px}
+.t-item{
+  display:flex;gap:12px;border:1px solid var(--hair);border-radius:14px;padding:16px 18px;
+  font-size:13.5px;align-items:baseline;background:#fff;
+}
+.t-item .mk{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:12px;flex-shrink:0}
+.t-item.ok .mk{color:var(--green)}
+.t-item.no{background:var(--bg-soft);border-color:transparent}
+.t-item.no .mk{color:var(--red)}
+.t-item.no{color:var(--gray)}
+
+/* ══ 플랜 ══ */
+.offer{padding:120px 0;background:var(--dark);color:#fff}
+.offer .head{text-align:center;margin-bottom:60px}
+.offer .kicker{color:rgba(255,255,255,.4)}
+.offer .desc{margin:0 auto;color:rgba(255,255,255,.5)}
+.of-grid{display:grid;grid-template-columns:1fr 1fr;gap:20px;max-width:840px;margin:0 auto}
+.of{border:1px solid var(--hair-dark);border-radius:22px;padding:38px 36px;background:rgba(255,255,255,.03)}
+.of.hi{background:#fff;color:var(--ink);border-color:#fff;position:relative}
+.of.hi .flag{
+  position:absolute;top:-13px;left:36px;background:var(--green);color:#fff;
+  font-size:11px;font-weight:800;border-radius:999px;padding:5px 14px;
+}
+.of .nm{font-family:'Space Grotesk',sans-serif;font-size:13px;font-weight:600;letter-spacing:.14em;text-transform:uppercase;opacity:.6;margin-bottom:14px}
+.of .pr{font-size:32px;font-weight:800;letter-spacing:-.03em}
+.of .pr small{font-size:14px;font-weight:600;opacity:.5}
+.of .per{font-size:12.5px;opacity:.5;margin-bottom:26px}
+.of ul{list-style:none;margin-bottom:30px}
+.of li{display:flex;gap:11px;font-size:14px;padding:10px 0;border-top:1px solid var(--hair-dark);align-items:baseline}
+.of.hi li{border-color:var(--hair)}
+.of li .ck{color:var(--green);font-weight:800;flex-shrink:0;font-size:12px;filter:brightness(1.3)}
+.of.hi li .ck{filter:none}
+.of .btn{width:100%}
+.of .soon{font-size:10.5px;font-weight:800;color:var(--amber);margin-left:8px;letter-spacing:.04em}
+
+/* ══ CTA ══ */
+.final{padding:130px 0;background:var(--dark);border-top:1px solid var(--hair-dark);color:#fff;text-align:center;position:relative;overflow:hidden}
+.final .glow{
+  position:absolute;bottom:-260px;left:50%;transform:translateX(-50%);
+  width:800px;height:480px;border-radius:50%;
+  background:radial-gradient(closest-side,rgba(14,154,98,.28),transparent);pointer-events:none;
+}
+.final h2{
+  font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:clamp(32px,5.2vw,60px);
+  letter-spacing:-.04em;line-height:1.1;margin-bottom:18px;position:relative;
+}
+.final h2 em{font-style:normal;color:var(--green);filter:brightness(1.35)}
+.final p{color:rgba(255,255,255,.5);margin-bottom:38px;position:relative;font-size:15px}
+footer{background:var(--dark);border-top:1px solid var(--hair-dark);color:rgba(255,255,255,.35);padding:28px 0;font-size:12px}
+footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:8px}
+
+@media (max-width:960px){
+  .hero .wrap{grid-template-columns:1fr;gap:44px}
+  .folio{height:430px}
+  .why-grid{grid-template-columns:1fr}
+  .why-card{border-right:none;border-bottom:1px solid var(--hair)}
+  .why-card:last-child{border-bottom:none}
+  .how-grid{grid-template-columns:1fr 1fr}
+  .ed-body{grid-template-columns:1fr}
+  .ed-col{border-right:none;border-bottom:1px solid var(--hair)}
+  .rp-grid,.trust-grid{grid-template-columns:1fr;gap:46px}
+  .tk-grid{grid-template-columns:1fr 1fr}
+  .of-grid{grid-template-columns:1fr;max-width:460px}
+  .gnb nav{display:none}
+  .hero-proof{flex-wrap:wrap;gap:16px}
+  .hero-proof .pf{border:none;margin:0;padding:0}
+}
+@media (max-width:560px){
+  .how-grid,.tk-grid{grid-template-columns:1fr}
+  .spread{transform:scale(.9)}
+}
+</style>
+</head>
+<body>
+
+<header class="gnb">
+  <div class="wrap">
+    <a class="logo" href="#">NE TIMES<em>&nbsp;Portfolio</em></a>
+    <nav>
+      <a href="#why">Why</a>
+      <a href="#how">How it works</a>
+      <a href="#report">Report</a>
+      <a href="#offer">Plans</a>
+      <a href="javascript:parent.goPage(0)" style="color:rgba(255,255,255,.85)">Library ↗</a>
+    </nav>
+    <a class="cta" href="#offer">시작하기</a>
+  </div>
+</header>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div>
+      <div class="over"><i></i>NE Times · JUNIOR 구독자 기본 제공</div>
+      <h1 class="en">ENGLISH<br><span class="row2">PORTFOLIO</span></h1>
+      <div class="sub">주 10분의 기록, 3년의 포트폴리오</div>
+      <p class="sub-desc">진로 계열을 고르면 매주 맞춤 기사가 도착합니다. 세 칸의 기록이 쌓여 학기말, 한 권의 포트폴리오가 됩니다.</p>
+      <div class="btn-row">
+        <a class="btn btn-green" href="#offer">내 진로로 시작</a>
+        <a class="btn btn-ghost" href="#how">이용 방법</a>
+      </div>
+      <div class="hero-proof">
+        <div class="pf"><div class="n en">10<small>분</small></div><div class="l">주간 기록 시간</div></div>
+        <div class="pf"><div class="n en">6<small>계열</small></div><div class="l">진로 맞춤 큐레이션</div></div>
+        <div class="pf"><div class="n en">1<small>권</small></div><div class="l">학기말 리포트</div></div>
+      </div>
+    </div>
+    <div class="folio" aria-hidden="true">
+      <div class="f-badge fb1">🔥 <b>6주</b> 연속 기록</div>
+      <div class="doc doc-b"></div>
+      <div class="doc doc-m"></div>
+      <div class="doc doc-f">
+        <div class="cap en">SEMESTER PORTFOLIO — 2026.1</div>
+        <div class="ti">영어 탐구 포트폴리오</div>
+        <div class="su">자연과학·공학 계열 · 김민준 · NE Times</div>
+        <div class="rw"><span>읽은 진로 기사</span><b>14</b></div>
+        <div class="rw"><span>완성한 기록</span><b>11</b></div>
+        <div class="rw"><span>누적 어휘</span><b>238</b></div>
+        <div class="bars">
+          <div class="b1" style="height:40%"></div><div class="b1" style="height:55%"></div>
+          <div class="b1 hi" style="height:78%"></div><div class="b1" style="height:62%"></div>
+          <div class="b1 hi" style="height:92%"></div><div class="b1" style="height:70%"></div>
+        </div>
+        <div class="qt">"천문학이 망원경의 문제가 아니라 데이터의 문제가 되고 있다는 생각이 들었다…" — Week 14 기록</div>
+      </div>
+      <div class="f-badge fb2">📄 학기말 <b>PDF 자동 생성</b></div>
+    </div>
+  </div>
+</section>
+
+<!-- WHY -->
+<section class="why" id="why">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker en">Why Now</span>
+      <h2 class="title">평가의 기준이<br>바뀌었습니다</h2>
+      <p class="desc">2028 대입 첫 세대부터, 영어는 점수만으로 평가되지 않습니다.</p>
+    </div>
+    <div class="why-grid reveal">
+      <div class="why-card">
+        <div class="no en">01 — 제도</div>
+        <h3>내신 5등급제 전환</h3>
+        <p>2028 대입 개편으로 교과 성적의 변별력이 약화되고, <b>학생부종합·논술전형이 확대</b>되는 추세입니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="no en">02 — 평가</div>
+        <h3>세특·수행평가의 부상</h3>
+        <p>평가의 무게가 시험지에서 <b>활동과 기록</b>으로 이동했습니다. 무엇을 읽고 어떻게 생각했는지가 남아야 합니다.</p>
+      </div>
+      <div class="why-card">
+        <div class="no en">03 — 현실</div>
+        <h3>정작 '소재'가 없다</h3>
+        <p>발표·수행평가·자율탐구의 순간마다 학생이 가장 먼저 막히는 것은 <b>말할 거리, 쓸 거리</b>입니다.</p>
+      </div>
+    </div>
+    <div class="why-line reveal">꾸준히 읽어온 학생에게는, <em>포트폴리오가 이미 준비되어 있습니다.</em></div>
+  </div>
+</section>
+
+<!-- HOW -->
+<section class="how" id="how">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker en">How It Works</span>
+      <h2 class="title">주 10분, 네 단계</h2>
+      <p class="desc">신문 구독에 그대로 얹혀 동작합니다. 새로 배울 것도, 따로 준비할 것도 없습니다.</p>
+    </div>
+    <div class="how-grid">
+      <div class="how-step reveal">
+        <div class="no en">STEP 1 <span class="tm">최초 1분</span></div>
+        <h3>진로 계열 선택</h3>
+        <p>의약 · 공학 · 경제 · 사회 · 환경 · 인문 중 선택. 언제든 변경 가능.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="no en">STEP 2 <span class="tm">매주 자동</span></div>
+        <h3>주간 진로 기사</h3>
+        <p>이번 주 신문에서 내 계열과 닿아 있는 기사가 도착합니다.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="no en">STEP 3 <span class="tm">주 10분</span></div>
+        <h3>세 칸 기록</h3>
+        <p>요약 · 내 생각 · 진로 연결점. 세 칸을 채우면 이번 주 완료.</p>
+      </div>
+      <div class="how-step reveal">
+        <div class="no en">STEP 4 <span class="tm">학기 1회</span></div>
+        <h3>포트폴리오 생성</h3>
+        <p>한 학기의 기록이 포트폴리오 PDF로 자동 정리됩니다.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 기록 에디터 -->
+<section class="record">
+  <div class="glow"></div>
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker en">3-Step Record</span>
+      <h2 class="title" style="color:#fff">부담은 세 칸,<br>남는 건 한 학기의 생각</h2>
+      <p class="desc">잘 쓰는 것보다 꾸준히 쓰는 것. 그래서 딱 세 칸입니다.</p>
+    </div>
+    <div class="editor reveal">
+      <div class="ed-top">
+        <span class="t">Week 14 — Advanced Camera Captures New Details of Our Universe<small>TIMES 1036호 · Science · LV3</small></span>
+        <span class="tm">10분 · 자동 저장</span>
+      </div>
+      <div class="ed-body">
+        <div class="ed-col">
+          <div class="ch"><span class="cn en">01</span><span class="ct">Summary</span></div>
+          <div class="cs">기사를 영어 2~3문장으로</div>
+          <div class="ed-tx it">The LSST Camera at the Vera C. Rubin Observatory captured detailed images of galaxies. Over ten years, it will photograph the sky every night and catalog about 20 billion galaxies.</div>
+          <div class="ed-st ok">✓ DONE</div>
+        </div>
+        <div class="ed-col">
+          <div class="ch"><span class="cn en">02</span><span class="ct">My Opinion</span></div>
+          <div class="cs">나의 생각 — 영어 또는 우리말</div>
+          <div class="ed-tx">사진 한 장이 20테라바이트라는 게 놀라웠다. 천문학이 망원경의 문제가 아니라 데이터의 문제가 되고 있다는 생각이 들었다.</div>
+          <div class="ed-st ok">✓ DONE</div>
+        </div>
+        <div class="ed-col wait" id="step3">
+          <div class="ch"><span class="cn en">03</span><span class="ct">Career Link</span></div>
+          <div class="cs">내 진로(의약)와의 연결점</div>
+          <div class="ed-tx">이 이슈가 의약 계열 진로와 어떻게 연결되는지 적어보세요. 예: 영상의학과에서 AI 활용이 늘어난다면…</div>
+          <div class="ed-st no">WAITING</div>
+        </div>
+      </div>
+      <div class="ed-foot">
+        <span>자동 저장됨 · <b>이번 학기 11번째 기록</b> · 6주 연속</span>
+        <span>이 기사로 화상수업 토론 예약 →</span>
+      </div>
+    </div>
+    <div class="cap-line reveal">기사마다 실려 있는 Discussion Question이 그대로 화상영어 토론 주제가 됩니다 — 읽고, 쓰고, 말하는 하나의 흐름</div>
+  </div>
+</section>
+
+<!-- 리포트 -->
+<section class="report" id="report">
+  <div class="wrap rp-grid">
+    <div class="reveal">
+      <span class="kicker en">Semester Report</span>
+      <h2 class="title">학기의 끝,<br>한 권의 기록</h2>
+      <p class="desc">읽은 기사 목록, 누적 어휘, 직접 쓴 글과 활동 통계를 정리한 포트폴리오 PDF. 수행평가와 발표, 자율탐구의 근거 자료가 됩니다.</p>
+      <div class="f-list">
+        <div class="f-item"><span class="no en">01</span><div class="b"><b>읽기 이력이 곧 증거</b><span>"한 학기간 읽은 의료 기사 14편"이 발표의 근거 자료로</span></div></div>
+        <div class="f-item"><span class="no en">02</span><div class="b"><b>내가 쓴 문장 그대로</b><span>학기 중의 기록이 원문 그대로 수록되어 성장 과정이 보입니다</span></div></div>
+        <div class="f-item"><span class="no en">03</span><div class="b"><b>3년이면 여섯 권</b><span>학기마다 쌓인 포트폴리오가 고3의 자산이 됩니다</span></div></div>
+      </div>
+    </div>
+    <div class="spread reveal" aria-hidden="true">
+      <div class="page pg-l">
+        <div class="cap en">READING LIST</div>
+        <div class="ti">이번 학기 읽은 기사</div>
+        <div class="su">의약 계열 · 14편</div>
+        <div class="ai"><span class="wk en">W02</span>Advanced Camera Captures New Details of Our Universe (1036호)</div>
+        <div class="ai"><span class="wk en">W05</span>BTS Reunites for Historic Comeback Concert (1069호)</div>
+        <div class="ai"><span class="wk en">W09</span>Fika Shows Balance in Swedish Life (1078호)</div>
+        <div class="ai"><span class="wk en">W11</span>Sagrada Familia Reaches Historic Milestone (1081호)</div>
+        <div class="ai"><span class="wk en">W14</span>이번 주 기사 — 기록 작성 중</div>
+        <div class="nt">기사마다 요약 · 의견 · 진로 연결 기록이 함께 수록됩니다.</div>
+      </div>
+      <div class="page pg-r">
+        <div class="cap en">GROWTH SUMMARY</div>
+        <div class="ti">2026-1학기 활동 요약</div>
+        <div class="su">김민준 · NE Times JUNIOR</div>
+        <div class="sl"><span>완성한 기록</span><b>11</b></div>
+        <div class="sl"><span>누적 어휘</span><b>238</b></div>
+        <div class="sl"><span>영어 작문 분량</span><b>1,420 words</b></div>
+        <div class="sl"><span>화상수업 토론 연계</span><b>4회</b></div>
+        <div class="nt">"과학·기술 기사 기록에서 데이터와 기술에 대한 관심이 일관되게 나타납니다." — 학기 총평</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 트랙 -->
+<section class="tracks">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker en">6 Career Tracks</span>
+      <h2 class="title">계열이 다르면,<br>만나는 기사가 다릅니다</h2>
+    </div>
+    <div class="tk-grid">
+      <div class="tk reveal"><div class="h"><span class="nm">의약</span><span class="en-nm">Medical</span></div><div class="sm">이번 주 큐레이션 준비 중 — 매주 업데이트</div></div>
+      <div class="tk reveal"><div class="h"><span class="nm">자연과학·공학</span><span class="en-nm">Science &amp; Eng.</span></div><div class="sm">최근 — <b>Advanced Camera Captures New Details of Our Universe</b> (1036호 · Science · LV3)</div></div>
+      <div class="tk reveal"><div class="h"><span class="nm">경제·경영</span><span class="en-nm">Business</span></div><div class="sm">이번 주 큐레이션 준비 중 — 매주 업데이트</div></div>
+      <div class="tk reveal"><div class="h"><span class="nm">사회·문화</span><span class="en-nm">Society</span></div><div class="sm">최근 — <b>Fika Shows Balance in Swedish Life</b> (1078호 · Lifestyle · LV2)</div></div>
+      <div class="tk reveal"><div class="h"><span class="nm">건축·예술</span><span class="en-nm">Art &amp; Design</span></div><div class="sm">최근 — <b>Sagrada Familia Reaches Historic Milestone</b> (1081호 · LV3)</div></div>
+      <div class="tk reveal"><div class="h"><span class="nm">엔터·미디어</span><span class="en-nm">Media</span></div><div class="sm">최근 — <b>BTS Reunites for Historic Comeback Concert</b> (1069호 · Ent. · LV2)</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- 신뢰 -->
+<section class="trust">
+  <div class="wrap trust-grid">
+    <div class="reveal">
+      <span class="kicker en">Our Principle</span>
+      <h2 class="title">대필이 아니라,<br><em>재료</em>입니다</h2>
+      <p class="desc">학교생활기록부는 선생님이 학생을 관찰해 기록하는 것. 이 서비스는 그 기록의 재료가 되는 <b>학생 본인의 실제 활동 — 읽고, 생각하고, 쓴 흔적</b>을 쌓습니다.</p>
+    </div>
+    <div class="t-list reveal">
+      <div class="t-item ok"><span class="mk en">DO</span>수행평가·발표·자율탐구의 소재와 근거 자료로 활용</div>
+      <div class="t-item ok"><span class="mk en">DO</span>모든 기록은 학생이 직접 작성 — 성장 과정이 그대로 남습니다</div>
+      <div class="t-item no"><span class="mk en">DON'T</span>생기부 문구 작성·대필 서비스가 아닙니다</div>
+      <div class="t-item no"><span class="mk en">DON'T</span>기재를 보장하거나 입시 결과를 약속하지 않습니다</div>
+    </div>
+  </div>
+</section>
+
+<!-- 플랜 -->
+<section class="offer" id="offer">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="kicker en">Plans</span>
+      <h2 class="title" style="color:#fff">신문 구독에,<br>기본으로 포함</h2>
+      <p class="desc">별도 결제 없이, JUNIOR·Times 구독자라면 오늘부터.</p>
+    </div>
+    <div class="of-grid">
+      <div class="of hi reveal">
+        <span class="flag">구독자 기본 포함</span>
+        <div class="nm en">Basic</div>
+        <div class="pr">구독에 포함</div>
+        <div class="per">NE Times JUNIOR · Times 구독자 전원</div>
+        <ul>
+          <li><span class="ck">●</span>진로 계열 맞춤 주간 기사 (기사별 LV1–3 표기)</li>
+          <li><span class="ck">●</span>3단 기록 템플릿 · 자동 저장</li>
+          <li><span class="ck">●</span>학기말 포트폴리오 PDF</li>
+          <li><span class="ck">●</span>연속 기록 리마인드 (학부모 알림)</li>
+        </ul>
+        <a class="btn btn-dark" href="#">진로 계열 선택하기</a>
+      </div>
+      <div class="of reveal">
+        <div class="nm en">Plus <span class="soon">SOON</span></div>
+        <div class="pr">9,900<small>원/월</small></div>
+        <div class="per">더 깊은 피드백이 필요할 때</div>
+        <ul>
+          <li><span class="ck">●</span>Basic의 모든 기능</li>
+          <li><span class="ck">●</span>기록에 대한 AI 첨삭 피드백</li>
+          <li><span class="ck">●</span>화상수업 토론 연계 월 2회</li>
+          <li><span class="ck">●</span>학기말 리포트 심화판 + 어휘 분석</li>
+        </ul>
+        <a class="btn btn-ghost" href="#">출시 알림 받기</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA -->
+<section class="final">
+  <div class="glow"></div>
+  <div class="wrap reveal">
+    <h2 class="en">10 min a week.<br><em>3 years</em> of record.</h2>
+    <p>고3이 되어 찾는 포트폴리오는 늦습니다. 이번 주 기사부터 쌓으세요.</p>
+    <a class="btn btn-green" href="#offer">내 진로로 시작</a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="en">NE TIMES PORTFOLIO — Service Proposal</div>
+    <div>기사·호수는 실제 발행 데이터 기준(2026.07) · 활동 수치 등 일부는 기획안</div>
+  </div>
+</footer>
+
+<script>
+const io=new IntersectionObserver(es=>{es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}})},{threshold:.14});
+document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+<\/script>
+
+<!-- ═══ Interactive layer ═══ -->
+<style>
+.modal-bg{position:fixed;inset:0;background:rgba(15,21,18,.6);backdrop-filter:blur(6px);z-index:200;display:none;align-items:center;justify-content:center;padding:24px}
+.modal-bg.on{display:flex;animation:mfade .22s ease}
+@keyframes mfade{from{opacity:0}to{opacity:1}}
+.modal{background:#fff;border-radius:20px;max-width:560px;width:100%;max-height:86vh;overflow-y:auto;box-shadow:0 40px 100px rgba(15,21,18,.4);animation:mup .26s cubic-bezier(.2,.7,.3,1)}
+@keyframes mup{from{transform:translateY(18px);opacity:0}to{transform:none;opacity:1}}
+.modal .m-band{padding:26px 30px 20px;border-bottom:1px solid var(--hair);position:relative}
+.modal .m-close{position:absolute;top:18px;right:18px;width:34px;height:34px;border-radius:10px;background:var(--bg-soft);font-size:16px;color:var(--gray);display:flex;align-items:center;justify-content:center;cursor:pointer}
+.modal .m-meta{display:flex;gap:7px;margin-bottom:12px;flex-wrap:wrap}
+.modal .m-meta .lv{font-size:10px;font-weight:800;border-radius:5px;padding:3px 8px;letter-spacing:.06em;background:var(--green-soft);color:var(--green-deep)}
+.modal .m-title{font-weight:800;font-size:21px;letter-spacing:-.025em;line-height:1.4;padding-right:36px}
+.modal .m-issue{font-family:'Space Grotesk',sans-serif;font-size:11.5px;color:var(--gray-2);margin-top:6px}
+.modal .m-body{padding:22px 30px 28px}
+.modal .m-sec{font-family:'Space Grotesk',sans-serif;font-size:10px;font-weight:600;letter-spacing:.2em;color:var(--gray-2);margin:18px 0 8px;text-transform:uppercase}
+.modal .m-sec:first-child{margin-top:0}
+.modal .m-ex{font-size:13.5px;color:#333B36;line-height:1.75;font-style:italic;border-left:3px solid var(--green);padding-left:14px}
+.modal .m-dq{font-size:13.5px;background:var(--green-soft);border-radius:12px;padding:14px 16px;font-weight:600}
+.modal .m-actions{display:flex;gap:10px;margin-top:24px}
+.modal .m-actions .btn{flex:1;padding:13px 18px;font-size:13.5px}
+.toast{position:fixed;bottom:28px;left:50%;transform:translate(-50%,16px);background:var(--dark);color:#fff;font-size:13.5px;font-weight:600;border-radius:999px;padding:13px 24px;z-index:300;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.2,.7,.3,1);box-shadow:0 12px 40px rgba(15,21,18,.35);max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+</style>
+<div class="modal-bg" id="modalBg"><div class="modal" id="modalBox"></div></div>
+<div class="toast" id="toast"></div>
+<script>
+const ARTICLES={
+ "1036":{title:"Advanced Camera Captures New Details of Our Universe",lv:"LEVEL 3",sec:"SCIENCE",issue:"1036호 · 2025.08.04",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=34934",
+  ex:"People around the world can now view stunningly detailed images of our universe, thanks to a new state-of-the-art digital camera. This technology gives scientists and the public an unprecedented look at distant galaxies and cosmic structures.",
+  dq:"What celestial objects do you want to see in space? Why?"},
+ "1078":{title:"Fika Shows Balance in Swedish Life",lv:"LEVEL 2",sec:"LIFESTYLE",issue:"1078호 · 2026.06.15",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36889",
+  ex:"Do you take a snack break each day? In Sweden, this tradition exists, and it is called \"fika\" — a daily ritual that encourages pausing in order to be more present in the moment.",
+  dq:"What snack would you choose if you could participate in fika?"},
+ "1081":{title:"Sagrada Familia Reaches Historic Milestone",lv:"LEVEL 3",sec:"READ AND LEARN",issue:"1081호 · 2026.07.06",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=37090",
+  ex:"After 144 years of construction, the main structure of the Sagrada Família basilica in Barcelona, Spain, has finally been completed.",
+  dq:"What famous structure do you want to see in person? Why?"},
+ "1069":{title:"BTS Reunites for Historic Comeback Concert",lv:"LEVEL 2",sec:"SPORTS & ENT.",issue:"1069호 · 2026.04.13",url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36502",
+  ex:"BTS held their long-awaited comeback concert at Gwanghwamun Square in Seoul, marking the group's first performance together after completing their military service.",
+  dq:"Why do you think BTS has such a strong global influence?"}
+};
+const bg=document.getElementById('modalBg'),box=document.getElementById('modalBox'),toastEl=document.getElementById('toast');
+let toastT,recordCount=11;
+function toast(msg){toastEl.textContent=msg;toastEl.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>toastEl.classList.remove('on'),2800)}
+function openModal(html){box.innerHTML=html;bg.classList.add('on');document.body.style.overflow='hidden'}
+function closeModal(){bg.classList.remove('on');document.body.style.overflow=''}
+bg.addEventListener('click',e=>{if(e.target===bg)closeModal()});
+document.addEventListener('keydown',e=>{if(e.key==='Escape')closeModal()});
+function articleModal(no){
+ const a=ARTICLES[no];if(!a){toast('이 계열의 이번 주 기사는 준비 중입니다');return}
+ openModal(`<div class="m-band"><div class="m-close" onclick="closeModal()">✕</div>
+  <div class="m-meta"><span class="lv">${a.lv}</span><span class="lv" style="background:var(--bg-soft);color:var(--gray)">${a.sec}</span></div>
+  <div class="m-title">${a.title}</div><div class="m-issue en">NE TIMES ${a.issue}</div></div>
+ <div class="m-body">
+  <div class="m-sec">Preview</div><div class="m-ex">${a.ex}</div>
+  <div class="m-sec">Discussion Question — 화상수업 토론 주제</div><div class="m-dq">💬 ${a.dq}</div>
+  <div class="m-actions">
+   <a class="btn btn-green" href="${a.url}" target="_blank" rel="noopener">원문 읽고 기록하기 ↗</a>
+   <button class="btn" style="border:1px solid var(--hair);color:var(--ink)" onclick="toast('화상수업 토론 주제로 예약되었습니다 (데모)');closeModal()">토론 예약</button>
+  </div></div>`)}
+// 트랙 카드 클릭 → 매핑된 기사 모달
+document.querySelectorAll('.tk').forEach(tk=>{tk.addEventListener('click',()=>{
+ const b=tk.querySelector('.sm b');
+ if(!b){toast('이 계열의 이번 주 큐레이션은 준비 중입니다');return}
+ const t=b.textContent;
+ const no=Object.keys(ARTICLES).find(k=>ARTICLES[k].title===t);
+ articleModal(no)})});
+// Step 3 클릭 → 실제 입력 가능
+const step3=document.getElementById('step3');
+if(step3){step3.addEventListener('click',function h(e){
+ if(step3.querySelector('textarea'))return;
+ const tx=step3.querySelector('.ed-tx');
+ const ta=document.createElement('textarea');ta.className='ed-ta';
+ ta.placeholder='이 기사가 내 진로와 어떻게 연결되는지 적어보세요…';
+ tx.replaceWith(ta);ta.focus();
+ const done=()=>{
+  if(ta.value.trim().length<10){toast('10자 이상 작성하면 기록이 저장됩니다');ta.focus();return}
+  const div=document.createElement('div');div.className='ed-tx';div.textContent=ta.value;ta.replaceWith(div);
+  step3.classList.remove('wait');
+  const st=step3.querySelector('.ed-st');st.className='ed-st ok';st.textContent='✓ DONE';
+  recordCount++;
+  const foot=document.querySelector('.ed-foot span');
+  if(foot)foot.innerHTML=`✓ 방금 저장됨 · <b>이번 학기 ${recordCount}번째 기록</b> · 🔥 7주 연속!`;
+  toast('Week 14 기록 완료 — 7주 연속 기록 달성 🔥');
+ };
+ ta.addEventListener('keydown',ev=>{if(ev.key==='Enter'&&(ev.metaKey||ev.ctrlKey))done()});
+ ta.addEventListener('blur',()=>{if(ta.value.trim().length>=10)done()});
+})}
+// 화상수업 토론 예약 링크
+document.querySelectorAll('.ed-foot span').forEach((sp,i)=>{if(sp.textContent.includes('토론 예약')){sp.style.cursor='pointer';sp.style.color='var(--green)';sp.style.fontWeight='700';sp.addEventListener('click',()=>articleModal('1036'))}});
+// 플랜 버튼 데모
+document.querySelectorAll('.of .btn').forEach(b=>{b.addEventListener('click',ev=>{ev.preventDefault();
+ toast(b.textContent.includes('알림')?'플러스 출시 알림이 신청되었습니다 (데모)':'진로 계열 선택 화면으로 이동합니다 (데모)')})});
+<\/script>
+
+</body>
+</html>
+
+</script>
+<script type="text/plain" id="doc2">
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NE TIMES — Library & Portfolio (Service Prototype)</title>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --black:#0B0D12;--ink:#14171F;--gray:#7A8090;--gray2:#AFB4C0;
+  --bg:#F4F5F8;--card:#FFFFFF;--hair:#E7E9EE;--hair-d:rgba(255,255,255,.1);
+  --blue:#3B5BFF;--blue-s:#EEF1FF;--green:#0E9A62;--green-s:#E8F6EF;
+  --amber:#F0B429;--amber-s:#FCF4DE;--red:#E5477A;--red-s:#FDEEF4;
+  --orange:#E8862A;--orange-s:#FDF2E7;--purple:#7048C8;--purple-s:#F1ECFB;
+  --sh:0 1px 2px rgba(11,13,18,.05),0 8px 28px rgba(11,13,18,.07);
+  --sh-lg:0 4px 12px rgba(11,13,18,.08),0 32px 72px rgba(11,13,18,.16);
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Pretendard Variable',Pretendard,-apple-system,system-ui,sans-serif;background:var(--bg);color:var(--ink);font-size:14.5px;line-height:1.6;letter-spacing:-.01em;-webkit-font-smoothing:antialiased}
+.en{font-family:'Space Grotesk',sans-serif;letter-spacing:-.02em}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+input,textarea{font-family:inherit;outline:none}
+a{color:inherit;text-decoration:none}
+
+/* ═══ 레이아웃 ═══ */
+.app{display:flex;min-height:100vh}
+.sidebar{
+  width:232px;background:var(--black);color:#fff;flex-shrink:0;
+  display:flex;flex-direction:column;position:sticky;top:0;height:100vh;
+}
+.sb-logo{padding:22px 22px 18px;font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17px;border-bottom:1px solid var(--hair-d)}
+.sb-logo em{font-style:normal;color:var(--blue);filter:brightness(1.4)}
+.sb-nav{padding:14px 12px;flex:1}
+.sb-item{
+  display:flex;align-items:center;gap:11px;width:100%;text-align:left;
+  padding:11px 14px;border-radius:11px;color:rgba(255,255,255,.6);
+  font-size:13.5px;font-weight:600;margin-bottom:3px;transition:all .15s;
+}
+.sb-item .ic{font-size:16px;width:20px;text-align:center}
+.sb-item:hover{color:#fff;background:rgba(255,255,255,.05)}
+.sb-item.on{color:#fff;background:rgba(59,91,255,.22)}
+.sb-item .cnt{margin-left:auto;font-size:10.5px;font-weight:800;background:var(--blue);border-radius:999px;padding:2px 8px;font-family:'Space Grotesk',sans-serif}
+.sb-user{padding:16px 18px;border-top:1px solid var(--hair-d);display:flex;gap:11px;align-items:center}
+.sb-user .avatar{width:36px;height:36px;border-radius:50%;background:var(--amber);color:var(--ink);font-weight:800;font-size:14px;display:flex;align-items:center;justify-content:center}
+.sb-user .nm{font-size:13px;font-weight:700}
+.sb-user .pl{font-size:10.5px;color:rgba(255,255,255,.45)}
+.main{flex:1;min-width:0;display:flex;flex-direction:column}
+
+/* 탑바 */
+.topbar{
+  background:var(--card);border-bottom:1px solid var(--hair);padding:0 28px;height:60px;
+  display:flex;align-items:center;gap:16px;position:sticky;top:0;z-index:50;
+}
+.topbar h1{font-size:16px;font-weight:800;letter-spacing:-.02em}
+.search{
+  flex:1;max-width:420px;display:flex;align-items:center;gap:9px;
+  background:var(--bg);border:1px solid var(--hair);border-radius:11px;padding:9px 14px;
+}
+.search input{flex:1;border:none;background:none;font-size:13.5px}
+.plan-badge{margin-left:auto;font-size:11px;font-weight:800;color:#fff;background:var(--blue);border-radius:999px;padding:5px 13px}
+.content{padding:26px 28px 60px;max-width:1180px;width:100%;margin:0 auto}
+.view{display:none}.view.on{display:block;animation:vf .3s ease}
+@keyframes vf{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+
+/* 공통 */
+.lv{font-size:9.5px;font-weight:800;border-radius:5px;padding:2.5px 8px;letter-spacing:.05em;font-family:'Space Grotesk',sans-serif;white-space:nowrap}
+.lv.l1{background:var(--green-s);color:var(--green)}
+.lv.l2{background:var(--orange-s);color:var(--orange)}
+.lv.l3{background:var(--blue-s);color:var(--blue)}
+.lv.sec{background:var(--bg);color:var(--gray);border:1px solid var(--hair)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:7px;font-size:13px;font-weight:700;border-radius:10px;padding:11px 20px;transition:all .16s}
+.btn-blue{background:var(--blue);color:#fff}.btn-blue:hover{filter:brightness(1.08)}
+.btn-green{background:var(--green);color:#fff}.btn-green:hover{filter:brightness(1.08)}
+.btn-line{border:1px solid var(--hair);color:var(--ink);background:#fff}.btn-line:hover{border-color:var(--gray2)}
+.sec-h{display:flex;align-items:baseline;justify-content:space-between;margin:26px 0 14px;gap:12px;flex-wrap:wrap}
+.sec-h h2{font-size:16px;font-weight:800;letter-spacing:-.02em}
+.sec-h .sub{font-size:12px;color:var(--gray)}
+.empty{padding:44px 20px;text-align:center;color:var(--gray);font-size:13.5px;background:var(--card);border:1px dashed var(--hair);border-radius:16px}
+
+/* ═══ 라이브러리 ═══ */
+.filters{display:flex;gap:8px;flex-wrap:wrap;align-items:center;margin-bottom:6px}
+.fchip{
+  font-size:12.5px;font-weight:700;padding:8px 15px;border-radius:999px;
+  border:1px solid var(--hair);background:#fff;color:var(--gray);transition:all .14s;
+}
+.fchip:hover{border-color:var(--gray2)}
+.fchip.on{background:var(--black);color:#fff;border-color:var(--black)}
+.fchip.on.g{background:var(--blue);border-color:var(--blue)}
+.fsep{width:1px;height:20px;background:var(--hair);margin:0 4px}
+.weekly{
+  background:linear-gradient(120deg,#14203E,#1B2A4A 60%,#24377A);color:#fff;border-radius:18px;
+  padding:22px 26px;display:flex;gap:22px;align-items:center;flex-wrap:wrap;cursor:pointer;
+  transition:transform .18s;box-shadow:var(--sh);
+}
+.weekly:hover{transform:translateY(-2px)}
+.weekly .wk-tag{font-size:10px;font-weight:800;letter-spacing:.18em;color:rgba(255,255,255,.5);font-family:'Space Grotesk',sans-serif;margin-bottom:6px}
+.weekly .wk-title{font-size:18px;font-weight:800;letter-spacing:-.02em;line-height:1.4}
+.weekly .wk-meta{font-size:12px;color:rgba(255,255,255,.55);margin-top:4px}
+.weekly .wk-go{margin-left:auto;font-size:12.5px;font-weight:700;border:1px solid rgba(255,255,255,.35);border-radius:999px;padding:9px 18px;white-space:nowrap}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:15px}
+.acard{
+  background:var(--card);border:1px solid var(--hair);border-radius:15px;overflow:hidden;cursor:pointer;
+  transition:transform .16s,box-shadow .16s;position:relative;
+}
+.acard:hover{transform:translateY(-4px);box-shadow:var(--sh)}
+.acard .band{height:86px;display:flex;align-items:flex-end;padding:11px 15px;font-size:26px;position:relative}
+.acard .read-mark{position:absolute;top:10px;left:12px;font-size:9.5px;font-weight:800;background:rgba(11,13,18,.72);color:#fff;border-radius:999px;padding:3px 9px;backdrop-filter:blur(3px)}
+.acard .scrap-star{
+  position:absolute;top:8px;right:10px;width:30px;height:30px;border-radius:9px;font-size:14px;
+  background:rgba(255,255,255,.85);backdrop-filter:blur(3px);display:flex;align-items:center;justify-content:center;
+}
+.acard .scrap-star.on{color:var(--amber)}
+.acard .bd{padding:13px 16px 15px}
+.acard .meta{display:flex;gap:5px;margin-bottom:8px;flex-wrap:wrap}
+.acard h3{font-size:13.5px;font-weight:700;line-height:1.45;letter-spacing:-.015em;min-height:39px}
+.acard .dt{font-size:10.5px;color:var(--gray2);margin-top:6px;font-family:'Space Grotesk',sans-serif}
+
+/* ═══ 리더 (슬라이드오버) ═══ */
+.reader-bg{position:fixed;inset:0;background:rgba(11,13,18,.5);backdrop-filter:blur(4px);z-index:100;display:none}
+.reader-bg.on{display:block;animation:vf .2s ease}
+.reader{
+  position:fixed;top:0;right:0;bottom:0;width:min(520px,100%);background:#fff;z-index:101;
+  transform:translateX(100%);transition:transform .32s cubic-bezier(.2,.7,.3,1);
+  display:flex;flex-direction:column;box-shadow:-20px 0 60px rgba(11,13,18,.2);
+}
+.reader.on{transform:none}
+.rd-top{padding:20px 26px 18px;border-bottom:1px solid var(--hair);position:relative}
+.rd-close{position:absolute;top:16px;right:18px;width:34px;height:34px;border-radius:10px;background:var(--bg);color:var(--gray);font-size:15px;display:flex;align-items:center;justify-content:center}
+.rd-meta{display:flex;gap:6px;margin-bottom:11px;flex-wrap:wrap}
+.rd-title{font-size:19px;font-weight:800;letter-spacing:-.025em;line-height:1.4;padding-right:36px}
+.rd-issue{font-size:11.5px;color:var(--gray2);margin-top:6px;font-family:'Space Grotesk',sans-serif}
+.rd-body{flex:1;overflow-y:auto;padding:22px 26px 30px}
+.rd-sec{font-family:'Space Grotesk',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.2em;color:var(--gray2);margin:20px 0 9px;text-transform:uppercase}
+.rd-sec:first-child{margin-top:0}
+.rd-sum-ko{font-size:13.5px;color:#3A4150;line-height:1.75;background:var(--bg);border-radius:12px;padding:15px 17px}
+.rd-sum-en{font-size:13px;color:#3A4150;line-height:1.75;font-style:italic;border-left:3px solid var(--blue);padding-left:14px;margin-top:10px}
+.rd-vocab{display:flex;gap:7px;flex-wrap:wrap}
+.vchip{
+  font-size:12px;font-weight:600;background:#fff;border:1px solid var(--hair);border-radius:999px;
+  padding:6px 13px;cursor:pointer;transition:all .14s;
+}
+.vchip:hover{border-color:var(--blue)}
+.vchip.saved{background:var(--blue-s);border-color:var(--blue)}
+.vchip b{color:var(--blue);font-weight:700}
+.rd-dq{font-size:13.5px;background:var(--green-s);border-radius:12px;padding:15px 17px;font-weight:600;line-height:1.6}
+.rd-dq .cap{font-size:10px;font-weight:800;letter-spacing:.14em;color:var(--green);display:block;margin-bottom:6px;font-family:'Space Grotesk',sans-serif}
+.rd-note{font-size:11.5px;color:var(--gray);margin-top:8px}
+.rd-foot{border-top:1px solid var(--hair);padding:15px 26px;display:flex;gap:9px;background:#FBFBFC}
+.rd-foot .btn{flex:1;padding:12px 14px;font-size:12.5px}
+
+/* ═══ 포트폴리오 ═══ */
+.pf-head{
+  background:linear-gradient(120deg,#0C3A27,#0E4A32 65%,#136044);color:#fff;border-radius:18px;
+  padding:24px 28px;margin-bottom:22px;
+}
+.pf-head .cap{font-size:10px;font-weight:800;letter-spacing:.18em;color:rgba(255,255,255,.5);font-family:'Space Grotesk',sans-serif;margin-bottom:8px}
+.pf-head h2{font-size:19px;font-weight:800;letter-spacing:-.02em;margin-bottom:14px}
+.tracks{display:flex;gap:8px;flex-wrap:wrap}
+.tchip{
+  font-size:12.5px;font-weight:700;padding:8px 16px;border-radius:999px;
+  border:1px solid rgba(255,255,255,.3);color:rgba(255,255,255,.75);transition:all .15s;
+}
+.tchip.on{background:#fff;color:#0E4A32;border-color:#fff}
+.pf-cols{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:start}
+.pf-card{background:var(--card);border:1px solid var(--hair);border-radius:16px;padding:20px 22px}
+.pf-card h3{font-size:14.5px;font-weight:800;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.pf-card h3 .n{font-size:10.5px;font-weight:800;background:var(--green-s);color:var(--green);border-radius:999px;padding:2px 10px;font-family:'Space Grotesk',sans-serif}
+.wk-article{
+  border:1px solid var(--hair);border-radius:13px;padding:16px 18px;display:flex;gap:14px;align-items:center;
+  cursor:pointer;transition:border-color .15s;
+}
+.wk-article:hover{border-color:var(--green)}
+.wk-article .em{font-size:28px}
+.wk-article .t{font-weight:700;font-size:13.5px;line-height:1.45;letter-spacing:-.015em}
+.wk-article .m{font-size:11px;color:var(--gray2);margin-top:3px}
+.wk-article .go{margin-left:auto;color:var(--green);font-weight:800}
+.stat-row{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:20px}
+.stat{background:var(--card);border:1px solid var(--hair);border-radius:14px;padding:15px 17px}
+.stat .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:22px;letter-spacing:-.02em}
+.stat .n small{font-size:12px;color:var(--gray);font-family:Pretendard,sans-serif;font-weight:600}
+.stat .l{font-size:11px;color:var(--gray)}
+.stat.hi{border-color:var(--green);background:var(--green-s)}
+.stat.hi .n{color:var(--green)}
+.rec{
+  border:1px solid var(--hair);border-radius:13px;padding:15px 17px;margin-bottom:10px;cursor:pointer;transition:border-color .15s;
+}
+.rec:hover{border-color:var(--gray2)}
+.rec .rc-top{display:flex;gap:8px;align-items:center;margin-bottom:6px}
+.rec .wk{font-size:10px;font-weight:800;color:var(--green);background:var(--green-s);border-radius:6px;padding:2px 8px;font-family:'Space Grotesk',sans-serif}
+.rec .tt{font-weight:700;font-size:13px;flex:1;letter-spacing:-.015em}
+.rec .pv{font-size:12px;color:var(--gray);display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+
+/* 기록 작성 컴포저 */
+.composer-bg{position:fixed;inset:0;background:rgba(11,13,18,.55);backdrop-filter:blur(5px);z-index:110;display:none;align-items:center;justify-content:center;padding:20px}
+.composer-bg.on{display:flex;animation:vf .2s ease}
+.composer{background:#fff;border-radius:20px;max-width:640px;width:100%;max-height:90vh;overflow-y:auto;box-shadow:var(--sh-lg)}
+.cp-top{padding:22px 28px 16px;border-bottom:1px solid var(--hair);position:relative}
+.cp-top .cap{font-size:10px;font-weight:800;letter-spacing:.16em;color:var(--green);font-family:'Space Grotesk',sans-serif;margin-bottom:6px}
+.cp-top h3{font-size:17px;font-weight:800;letter-spacing:-.02em;line-height:1.4;padding-right:40px}
+.cp-top .m{font-size:11.5px;color:var(--gray2);margin-top:4px}
+.cp-body{padding:20px 28px 26px}
+.cp-step{margin-bottom:18px}
+.cp-step .st{display:flex;align-items:center;gap:8px;margin-bottom:7px}
+.cp-step .no{width:21px;height:21px;border-radius:7px;background:var(--green);color:#fff;font-size:11px;font-weight:800;display:flex;align-items:center;justify-content:center}
+.cp-step .tt{font-size:12.5px;font-weight:800}
+.cp-step .hint{font-size:11px;color:var(--gray)}
+.cp-step textarea{
+  width:100%;min-height:78px;border:1.5px solid var(--hair);border-radius:11px;padding:12px 14px;
+  font-size:13px;line-height:1.7;resize:vertical;transition:border-color .15s;
+}
+.cp-step textarea:focus{border-color:var(--green)}
+.cp-foot{display:flex;justify-content:space-between;align-items:center;padding-top:6px}
+.cp-foot .time{font-size:11.5px;color:var(--gray)}
+
+/* ═══ 리포트 ═══ */
+.rp-grid{display:grid;grid-template-columns:1fr 1fr;gap:18px;margin-bottom:22px}
+.bar-row{display:flex;align-items:center;gap:10px;font-size:12px;margin-bottom:9px}
+.bar-row .lb{width:82px;color:var(--gray);font-weight:600;flex-shrink:0;font-size:11.5px}
+.bar-tr{flex:1;height:18px;background:var(--bg);border-radius:6px;overflow:hidden}
+.bar-fl{height:100%;border-radius:6px;background:var(--blue);min-width:2px;transition:width .5s ease;display:flex;align-items:center;justify-content:flex-end;padding-right:7px;color:#fff;font-size:9.5px;font-weight:800}
+.doc-preview{
+  background:#fff;border:1px solid var(--hair);border-radius:16px;padding:36px 42px;box-shadow:var(--sh);
+  max-width:680px;margin:0 auto;
+}
+.doc-preview .dp-cap{font-family:'Space Grotesk',sans-serif;font-size:9.5px;font-weight:600;letter-spacing:.24em;color:var(--green);margin-bottom:8px}
+.doc-preview h2{font-size:23px;font-weight:800;letter-spacing:-.03em;border-bottom:2.5px solid var(--ink);padding-bottom:14px;margin-bottom:6px}
+.doc-preview .dp-sub{font-size:12px;color:var(--gray);margin-bottom:20px}
+.doc-preview .dp-stat{display:flex;gap:0;border:1px solid var(--hair);border-radius:12px;overflow:hidden;margin-bottom:24px}
+.doc-preview .dp-stat div{flex:1;padding:13px;text-align:center;border-right:1px solid var(--hair)}
+.doc-preview .dp-stat div:last-child{border:none}
+.doc-preview .dp-stat .n{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:19px;color:var(--green)}
+.doc-preview .dp-stat .l{font-size:10px;color:var(--gray)}
+.dp-rec{border-bottom:1px dashed var(--hair);padding:16px 0}
+.dp-rec:last-of-type{border:none}
+.dp-rec .rh{display:flex;gap:9px;align-items:center;margin-bottom:8px}
+.dp-rec .wk{font-size:10px;font-weight:800;color:var(--green);font-family:'Space Grotesk',sans-serif}
+.dp-rec .tt{font-weight:800;font-size:13.5px;letter-spacing:-.015em}
+.dp-rec .fld{font-size:12px;color:#3A4150;line-height:1.7;margin-bottom:6px;padding-left:14px;position:relative}
+.dp-rec .fld::before{content:attr(data-l);position:absolute;left:0;top:0;font-size:10px;font-weight:800;color:var(--gray2)}
+.dp-rec .fld{padding-left:0;padding-top:16px}
+.dp-rec .fld::before{font-family:'Space Grotesk',sans-serif;letter-spacing:.1em}
+
+/* 토스트 */
+.toast{position:fixed;bottom:26px;left:50%;transform:translate(-50%,16px);background:var(--black);color:#fff;font-size:13px;font-weight:600;border-radius:999px;padding:13px 24px;z-index:400;opacity:0;pointer-events:none;transition:all .3s cubic-bezier(.2,.7,.3,1);box-shadow:var(--sh-lg);max-width:90vw;text-align:center}
+.toast.on{opacity:1;transform:translate(-50%,0)}
+
+@media print{
+  .sidebar,.topbar,.no-print,.toast{display:none!important}
+  body{background:#fff}
+  .content{padding:0}
+  .doc-preview{border:none;box-shadow:none;max-width:100%}
+}
+@media (max-width:900px){
+  .sidebar{width:64px}
+  .sb-logo{font-size:0;padding:20px 0;text-align:center}
+  .sb-logo::before{content:"NE";font-size:15px;color:#fff}
+  .sb-item span:not(.ic){display:none}
+  .sb-item{justify-content:center}
+  .sb-user .nm,.sb-user .pl{display:none}
+  .pf-cols,.rp-grid{grid-template-columns:1fr}
+  .stat-row{grid-template-columns:1fr 1fr}
+  .reader{width:100%}
+}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ═══ 사이드바 ═══ -->
+  <aside class="sidebar">
+    <div class="sb-logo en">NE TIMES<em>.</em></div>
+    <nav class="sb-nav">
+      <button class="sb-item on" data-view="lib"><span class="ic">📚</span><span>라이브러리</span></button>
+      <button class="sb-item" data-view="pf"><span class="ic">🗂️</span><span>내 포트폴리오</span><span class="cnt" id="navRecCnt">2</span></button>
+      <button class="sb-item" data-view="rp"><span class="ic">📊</span><span>읽기 리포트</span></button>
+      <button class="sb-item" onclick="toast('이번 주 신문(1081호) 지면 보기로 이동합니다 (데모)')"><span class="ic">🗞️</span><span>이번 주 신문</span></button>
+      <button class="sb-item" onclick="toast('화상영어 수업실로 이동합니다 (데모)')"><span class="ic">💬</span><span>화상영어</span></button>
+    </nav>
+    <div class="sb-user">
+      <div class="avatar">민</div>
+      <div><div class="nm">김민준</div><div class="pl">12개월 구독 · Times</div></div>
+    </div>
+  </aside>
+
+  <!-- ═══ 메인 ═══ -->
+  <div class="main">
+    <div class="topbar">
+      <h1 id="topTitle">라이브러리</h1>
+      <div class="search no-print">🔎<input id="searchInput" placeholder="기사 제목 검색 (예: fika, camera, BTS)"></div>
+      <span class="plan-badge no-print">전체 아카이브 열람 중</span>
+    </div>
+
+    <div class="content">
+
+      <!-- ══════════ VIEW: 라이브러리 ══════════ -->
+      <section class="view on" id="view-lib">
+        <div class="weekly" onclick="openReader('1081')">
+          <div>
+            <div class="wk-tag">THIS WEEK — NO.1081 · 2026.07.06</div>
+            <div class="wk-title">Sagrada Familia Reaches Historic Milestone</div>
+            <div class="wk-meta">Read and Learn · LEVEL 3 · 에디터의 이어 읽기 3편 포함</div>
+          </div>
+          <span class="wk-go">읽기 →</span>
+        </div>
+
+        <div class="sec-h">
+          <h2>아카이브 둘러보기 <span class="sub" id="gridCount"></span></h2>
+          <span class="sub">2005년 창간호(9호) ~ 1081호 · 데모는 실기사 6건 기준</span>
+        </div>
+        <div class="filters no-print">
+          <button class="fchip on" data-f="lv" data-v="all">전체 난이도</button>
+          <button class="fchip" data-f="lv" data-v="1">LV 1</button>
+          <button class="fchip" data-f="lv" data-v="2">LV 2</button>
+          <button class="fchip" data-f="lv" data-v="3">LV 3</button>
+          <span class="fsep"></span>
+          <button class="fchip on g" data-f="sec" data-v="all">전체 섹션</button>
+          <button class="fchip g" data-f="sec" data-v="Science">Science</button>
+          <button class="fchip g" data-f="sec" data-v="Lifestyle">Lifestyle</button>
+          <button class="fchip g" data-f="sec" data-v="Ent.">Sports &amp; Ent.</button>
+          <button class="fchip g" data-f="sec" data-v="News">Headlines</button>
+          <button class="fchip g" data-f="sec" data-v="Nation">Nation</button>
+          <button class="fchip g" data-f="sec" data-v="Culture">Read &amp; Learn</button>
+          <span class="fsep"></span>
+          <button class="fchip" data-f="scrap" data-v="1">⭐ 스크랩만</button>
+        </div>
+        <div class="grid" id="articleGrid"></div>
+      </section>
+
+      <!-- ══════════ VIEW: 포트폴리오 ══════════ -->
+      <section class="view" id="view-pf">
+        <div class="pf-head">
+          <div class="cap">ENGLISH PORTFOLIO — 2026-1학기</div>
+          <h2>진로 계열을 선택하면, 이번 주 기사가 바뀝니다</h2>
+          <div class="tracks" id="trackChips"></div>
+        </div>
+
+        <div class="stat-row" id="pfStats"></div>
+
+        <div class="pf-cols">
+          <div class="pf-card">
+            <h3>이번 주 진로 기사 <span class="n en" id="wkLabel">WEEK 14</span></h3>
+            <div id="weeklyArticle"></div>
+            <div style="margin-top:14px;display:flex;gap:9px">
+              <button class="btn btn-green" style="flex:1" id="btnCompose">✍️ 이 기사로 기록 작성</button>
+              <button class="btn btn-line" onclick="toast('이 기사의 Discussion Question이 화상수업 토론 주제로 예약되었습니다 (데모)')">토론 예약</button>
+            </div>
+          </div>
+          <div class="pf-card">
+            <h3>나의 기록</h3>
+            <div id="recList"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ══════════ VIEW: 리포트 ══════════ -->
+      <section class="view" id="view-rp">
+        <div class="stat-row" id="rpStats"></div>
+        <div class="rp-grid">
+          <div class="pf-card">
+            <h3>섹션별 읽기 분포</h3>
+            <div id="secBars"></div>
+            <div style="font-size:11.5px;color:var(--gray);margin-top:12px" id="secInsight"></div>
+          </div>
+          <div class="pf-card">
+            <h3>이번 학기 활동</h3>
+            <div id="actList" style="font-size:13px"></div>
+          </div>
+        </div>
+        <div class="sec-h">
+          <h2>학기말 포트폴리오 미리보기</h2>
+          <button class="btn btn-blue no-print" onclick="window.print()">🖨 PDF로 저장 / 인쇄</button>
+        </div>
+        <div class="doc-preview" id="docPreview"></div>
+      </section>
+
+    </div>
+  </div>
+</div>
+
+<!-- ═══ 리더 ═══ -->
+<div class="reader-bg" id="readerBg" onclick="closeReader()"></div>
+<aside class="reader" id="reader"></aside>
+
+<!-- ═══ 기록 컴포저 ═══ -->
+<div class="composer-bg" id="composerBg">
+  <div class="composer" id="composerBox"></div>
+</div>
+
+<div class="toast" id="toast"></div>
+
+<script>
+/* ═══════════ 데이터 (실제 기사 기반) ═══════════ */
+const ARTICLES = {
+ "1081":{title:"Sagrada Familia Reaches Historic Milestone",lv:3,sec:"Culture",secLabel:"READ AND LEARN",issue:"1081호",date:"2026.07.06",em:"⛪",band:"linear-gradient(135deg,#F1EAFC,#DFD0F6)",
+  url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=37090",
+  sumKo:"144년의 공사 끝에 바르셀로나 사그라다 파밀리아 성당의 주요 구조물이 완공되었습니다. 마지막으로 설치된 '예수 그리스도의 탑'(172.5m)으로 세계에서 가장 높은 교회가 되었으며, 완공 기념식에는 교황과 스페인 왕실이 참석했습니다. 가우디 사후 미완이던 설계가 세대를 이어 완성된 과정과 지연 요인을 다룹니다.",
+  sumEn:"After 144 years of construction, the main structure of the Sagrada Família has finally been completed.",
+  vocab:[["milestone","중요한 단계"],["construction","건설"],["setback","차질"],["endure","지속되다"],["inauguration","준공식"],["influential","영향력 있는"]],
+  dq:"What famous structure do you want to see in person? Why?",tracks:["art"]},
+ "1078":{title:"Fika Shows Balance in Swedish Life",lv:2,sec:"Lifestyle",secLabel:"LIFESTYLE",issue:"1078호",date:"2026.06.15",em:"☕",band:"linear-gradient(135deg,#FFF0DB,#FFDFB4)",
+  url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36889",
+  sumKo:"스웨덴의 커피 휴식 문화 '피카(fika)'를 다룹니다. 단순한 간식 시간이 아니라 속도를 늦추고 사람들과 연결되는 문화적 관습으로, 많은 직장이 하루 두 번 피카 시간을 두고 있습니다. 17세기 커피 전래에서 시작된 유래와, 효율보다 균형을 중시하는 스웨덴적 가치를 설명합니다.",
+  sumEn:"In Sweden, a daily coffee-break ritual called \"fika\" encourages pausing to be present in the moment.",
+  vocab:[["ritual","의식"],["emphasize","강조하다"],["interaction","상호작용"],["hospitality","환대"],["identity","정체성"],["efficiency","효율성"]],
+  dq:"What snack would you choose if you could participate in fika?",tracks:["society"]},
+ "1069":{title:"BTS Reunites for Historic Comeback Concert",lv:2,sec:"Ent.",secLabel:"SPORTS & ENTERTAINMENT",issue:"1069호",date:"2026.04.13",em:"🎤",band:"linear-gradient(135deg,#FFE4EC,#FFC9DB)",
+  url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36502",
+  sumKo:"BTS가 군 복무를 마치고 광화문 광장에서 재결합 콘서트를 열었습니다. 현장 10만여 명, 전 세계 1,840만 명이 시청했으며, 국악을 접목한 새 앨범과 조선시대 군복에서 영감을 받은 무대 의상 등 한국적 유산을 담았습니다. 이후 82회 규모의 월드투어가 예고되어 있습니다.",
+  sumEn:"BTS held their long-awaited comeback concert, their first performance together after military service.",
+  vocab:[["reunite","재결합하다"],["mandatory","의무적인"],["atmosphere","분위기"],["heritage","유산"],["outfit","의상"],["recognition","인정"]],
+  dq:"Why do you think BTS has such a strong global influence?",tracks:["media"]},
+ "1036":{title:"Advanced Camera Captures New Details of Our Universe",lv:3,sec:"Science",secLabel:"SCIENCE",issue:"1036호",date:"2025.08.04",em:"🔭",band:"linear-gradient(135deg,#E4EDFF,#C9DAFF)",
+  url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=34934",
+  sumKo:"칠레 베라 루빈 천문대의 LSST 카메라가 촬영한 초정밀 우주 이미지를 다룹니다. 3,200메가픽셀 센서로 매일 밤 1,000장의 사진을 찍어 10년간 약 200억 개 은하를 기록하는 것이 목표이며, 암흑 에너지·암흑 물질·소행성 연구에 활용됩니다. 사진 한 장의 용량이 최대 20테라바이트에 달합니다.",
+  sumEn:"A new state-of-the-art camera gives an unprecedented look at distant galaxies and cosmic structures.",
+  vocab:[["unprecedented","전례없는"],["observatory","천문대"],["investigate","조사하다"],["resolution","해상도"],["asteroid","소행성"],["collaboration","협력"]],
+  dq:"What celestial objects do you want to see in space? Why?",tracks:["science"]},
+ "36881":{title:"Homeplus Crisis Temporarily Shuts 37 Stores",lv:2,sec:"News",secLabel:"HEADLINES NEWS",issue:"1078호",date:"2026.06.15",em:"🛒",band:"linear-gradient(135deg,#FDEEF4,#FBD6E4)",
+  url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36881",
+  sumKo:"홈플러스 위기로 37개 매장이 일시 휴업한 사안을 다룬 헤드라인 기사입니다. 본문 요약은 원문에서 확인할 수 있습니다.",
+  sumEn:null,vocab:null,dq:null,tracks:["business"]},
+ "36882":{title:"Mime Festival Brings Joy to Chuncheon",lv:1,sec:"Nation",secLabel:"NATION",issue:"1078호",date:"2026.06.15",em:"🎭",band:"linear-gradient(135deg,#E0F3E8,#C2E8D2)",
+  url:"https://www.netimes.co.kr/pages/times/reading.asp?seq=36882",
+  sumKo:"춘천 마임 축제를 다룬 LEVEL 1 국내 소식 기사입니다. 본문 요약은 원문에서 확인할 수 있습니다.",
+  sumEn:null,vocab:null,dq:null,tracks:["art"]}
+};
+const TRACKS = [
+ {id:"medical",nm:"의약",art:null},
+ {id:"science",nm:"자연과학·공학",art:"1036"},
+ {id:"business",nm:"경제·경영",art:"36881"},
+ {id:"society",nm:"사회·문화",art:"1078"},
+ {id:"art",nm:"건축·예술",art:"1081"},
+ {id:"media",nm:"엔터·미디어",art:"1069"},
+];
+
+/* ═══════════ 상태 (세션 메모리) ═══════════ */
+const state = {
+ read:new Set(["1036","1078"]),
+ scrap:new Set(["1036"]),
+ words:new Set(["unprecedented","observatory","ritual"]),
+ track:"science",
+ filters:{lv:"all",sec:"all",scrap:false,q:""},
+ records:[
+  {week:"W09",art:"1078",s:"Fika is a Swedish coffee-break ritual that emphasizes slowing down and connecting with others.",o:"쉬는 시간을 '문화'로 만든 게 인상적이었다. 효율보다 관계를 택한 사회의 모습.",c:"문화가 제도(직장 규칙)로 자리 잡는 과정이 사회학 탐구 주제가 될 수 있겠다."},
+  {week:"W11",art:"1036",s:"The LSST Camera will photograph the sky every night and catalog about 20 billion galaxies over ten years.",o:"사진 한 장이 20테라바이트라는 게 놀라웠다. 천문학이 데이터의 문제가 되고 있다.",c:"천문 데이터 처리 역량이 곧 연구 역량 — 프로그래밍 공부의 이유가 생겼다."},
+ ],
+ streak:6, weekNo:14,
+};
+
+/* ═══════════ 유틸 ═══════════ */
+const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
+let toastT;
+function toast(m){const t=$('#toast');t.textContent=m;t.classList.add('on');clearTimeout(toastT);toastT=setTimeout(()=>t.classList.remove('on'),2700)}
+function lvChip(a){return `<span class="lv l${a.lv}">LEVEL ${a.lv}</span><span class="lv sec">${a.secLabel}</span>`}
+
+/* ═══════════ 뷰 전환 ═══════════ */
+const TITLES={lib:"라이브러리",pf:"내 포트폴리오",rp:"읽기 리포트"};
+$$('.sb-item[data-view]').forEach(b=>b.addEventListener('click',()=>{
+ $$('.sb-item').forEach(x=>x.classList.remove('on'));b.classList.add('on');
+ $$('.view').forEach(v=>v.classList.remove('on'));
+ const v=b.dataset.view;$('#view-'+v).classList.add('on');$('#topTitle').textContent=TITLES[v];
+ if(v==='pf')renderPF(); if(v==='rp')renderRP();
+ window.scrollTo({top:0});
+}));
+
+/* ═══════════ 라이브러리 렌더 ═══════════ */
+function renderGrid(){
+ const f=state.filters, g=$('#articleGrid');
+ const list=Object.entries(ARTICLES).filter(([id,a])=>{
+  if(f.lv!=='all'&&a.lv!=+f.lv)return false;
+  if(f.sec!=='all'&&a.sec!==f.sec)return false;
+  if(f.scrap&&!state.scrap.has(id))return false;
+  if(f.q&&!a.title.toLowerCase().includes(f.q))return false;
+  return true;
+ });
+ $('#gridCount').textContent=`— ${list.length}편`;
+ g.innerHTML=list.length?list.map(([id,a])=>`
+  <div class="acard" onclick="openReader('${id}')">
+    <div class="band" style="background:${a.band}">${a.em}
+      ${state.read.has(id)?'<span class="read-mark">✓ 읽음</span>':''}
+      <button class="scrap-star ${state.scrap.has(id)?'on':''}" onclick="event.stopPropagation();toggleScrap('${id}')">${state.scrap.has(id)?'★':'☆'}</button>
+    </div>
+    <div class="bd">
+      <div class="meta">${lvChip(a)}</div>
+      <h3>${a.title}</h3>
+      <div class="dt en">${a.issue} · ${a.date}</div>
+    </div>
+  </div>`).join('')
+ :'<div class="empty" style="grid-column:1/-1">조건에 맞는 기사가 없습니다. 필터를 조정해보세요.</div>';
+}
+function toggleScrap(id){
+ if(state.scrap.has(id)){state.scrap.delete(id);toast('스크랩이 해제되었습니다')}
+ else{state.scrap.add(id);toast('내 서재에 스크랩되었습니다 ⭐')}
+ renderGrid();
+}
+$$('.fchip').forEach(c=>c.addEventListener('click',()=>{
+ const f=c.dataset.f;
+ if(f==='scrap'){state.filters.scrap=!state.filters.scrap;c.classList.toggle('on');renderGrid();return}
+ $$(`.fchip[data-f="${f}"]`).forEach(x=>x.classList.remove('on'));c.classList.add('on');
+ state.filters[f]=c.dataset.v;renderGrid();
+}));
+$('#searchInput').addEventListener('input',e=>{state.filters.q=e.target.value.trim().toLowerCase();renderGrid()});
+
+/* ═══════════ 리더 ═══════════ */
+function openReader(id){
+ const a=ARTICLES[id];if(!a)return;
+ state.read.add(id);
+ const hasFull=!!a.sumEn;
+ $('#reader').innerHTML=`
+  <div class="rd-top">
+    <button class="rd-close" onclick="closeReader()">✕</button>
+    <div class="rd-meta">${lvChip(a)}</div>
+    <div class="rd-title">${a.title}</div>
+    <div class="rd-issue en">NE TIMES ${a.issue} · ${a.date}</div>
+  </div>
+  <div class="rd-body">
+    <div class="rd-sec">Summary</div>
+    <div class="rd-sum-ko">${a.sumKo}</div>
+    ${a.sumEn?`<div class="rd-sum-en">${a.sumEn}</div>`:''}
+    ${a.vocab?`<div class="rd-sec">Key Vocabulary <span style="letter-spacing:0;text-transform:none;font-weight:500">— 클릭하면 내 단어장에 저장</span></div>
+    <div class="rd-vocab">${a.vocab.map(v=>`<button class="vchip ${state.words.has(v[0])?'saved':''}" onclick="saveWord('${v[0]}',this)"><b>${v[0]}</b> ${v[1]}</button>`).join('')}</div>`:''}
+    ${a.dq?`<div class="rd-sec">Discussion Question</div>
+    <div class="rd-dq"><span class="cap">화상수업 토론 주제로 연결됩니다</span>💬 ${a.dq}</div>`:''}
+    <div class="rd-note">${hasFull?'전체 본문·음원·해석·단어장 전체는 원문 페이지에서 제공됩니다.':'이 기사의 상세 요약은 원문 페이지에서 확인할 수 있습니다.'}</div>
+  </div>
+  <div class="rd-foot no-print">
+    <a class="btn btn-blue" href="${a.url}" target="_blank" rel="noopener">원문 전체 읽기 ↗</a>
+    <button class="btn btn-green" onclick="openComposer('${id}')">✍️ 기록 작성</button>
+    <button class="btn btn-line" onclick="toggleScrap('${id}');openReader('${id}')">${state.scrap.has(id)?'★ 스크랩됨':'☆ 스크랩'}</button>
+  </div>`;
+ $('#readerBg').classList.add('on');$('#reader').classList.add('on');
+ document.body.style.overflow='hidden';
+ renderGrid();
+}
+function closeReader(){$('#readerBg').classList.remove('on');$('#reader').classList.remove('on');document.body.style.overflow=''}
+function saveWord(w,el){
+ if(state.words.has(w)){state.words.delete(w);el.classList.remove('saved');toast(`'${w}' 단어장에서 제거됨`)}
+ else{state.words.add(w);el.classList.add('saved');toast(`'${w}' 내 단어장에 저장됨 (${state.words.size}개)`)}
+}
+document.addEventListener('keydown',e=>{if(e.key==='Escape'){closeReader();closeComposer()}});
+
+/* ═══════════ 포트폴리오 ═══════════ */
+function renderPF(){
+ // 트랙 칩
+ $('#trackChips').innerHTML=TRACKS.map(t=>`<button class="tchip ${state.track===t.id?'on':''}" onclick="setTrack('${t.id}')">${t.nm}</button>`).join('');
+ // 이번 주 기사
+ const tr=TRACKS.find(t=>t.id===state.track), a=tr.art?ARTICLES[tr.art]:null;
+ $('#weeklyArticle').innerHTML=a?`
+  <div class="wk-article" onclick="openReader('${tr.art}')">
+    <span class="em">${a.em}</span>
+    <div><div class="t">${a.title}</div><div class="m en">${a.issue} · ${a.secLabel} · LEVEL ${a.lv}</div></div>
+    <span class="go">→</span>
+  </div>`
+ :`<div class="empty">이 계열의 이번 주 큐레이션은 준비 중입니다.<br>다른 계열을 선택하거나 라이브러리에서 직접 골라보세요.</div>`;
+ $('#btnCompose').style.display=a?'':'none';
+ $('#btnCompose').onclick=()=>openComposer(tr.art);
+ // 통계
+ $('#pfStats').innerHTML=`
+  <div class="stat hi"><div class="n">${state.records.length}<small>개</small></div><div class="l">완성한 기록</div></div>
+  <div class="stat"><div class="n">${state.read.size}<small>편</small></div><div class="l">읽은 기사</div></div>
+  <div class="stat"><div class="n">${state.words.size}<small>개</small></div><div class="l">저장 단어</div></div>
+  <div class="stat"><div class="n">🔥 ${state.streak}<small>주</small></div><div class="l">연속 기록</div></div>`;
+ // 기록 리스트
+ $('#recList').innerHTML=state.records.length?[...state.records].reverse().map(r=>{
+  const a=ARTICLES[r.art];
+  return `<div class="rec" onclick="openReader('${r.art}')">
+    <div class="rc-top"><span class="wk">${r.week}</span><span class="tt">${a.title}</span></div>
+    <div class="pv">"${r.o}"</div>
+  </div>`}).join('')
+ :'<div class="empty">아직 기록이 없습니다. 이번 주 기사로 첫 기록을 남겨보세요.</div>';
+ $('#navRecCnt').textContent=state.records.length;
+}
+function setTrack(id){state.track=id;renderPF();const t=TRACKS.find(x=>x.id===id);toast(`진로 계열: ${t.nm} — 주간 큐레이션이 변경되었습니다`)}
+
+/* ═══════════ 기록 컴포저 ═══════════ */
+function openComposer(id){
+ closeReader();
+ const a=ARTICLES[id];if(!a)return;
+ $('#composerBox').innerHTML=`
+  <div class="cp-top">
+    <button class="rd-close" style="top:20px" onclick="closeComposer()">✕</button>
+    <div class="cp-cap cap en">WEEK ${state.weekNo} RECORD · 예상 10분 · 자동 저장</div>
+    <h3>${a.title}</h3>
+    <div class="m en">NE TIMES ${a.issue} · ${a.secLabel} · LEVEL ${a.lv}</div>
+  </div>
+  <div class="cp-body">
+    <div class="cp-step">
+      <div class="st"><span class="no">1</span><span class="tt">Summary</span><span class="hint">— 기사를 영어 2~3문장으로</span></div>
+      <textarea id="cpS" placeholder="${a.sumEn?a.sumEn.slice(0,60)+'… 를 참고해 나만의 문장으로':'기사 내용을 영어로 요약해보세요'}"></textarea>
+    </div>
+    <div class="cp-step">
+      <div class="st"><span class="no">2</span><span class="tt">My Opinion</span><span class="hint">— 나의 생각 (영어 또는 우리말)</span></div>
+      <textarea id="cpO" placeholder="기사를 읽고 든 생각, 궁금해진 점을 적어보세요"></textarea>
+    </div>
+    <div class="cp-step">
+      <div class="st"><span class="no">3</span><span class="tt">Career Link</span><span class="hint">— 내 진로와의 연결점</span></div>
+      <textarea id="cpC" placeholder="${a.dq?'힌트 — Discussion Question: '+a.dq:'이 이슈가 내 진로와 어떻게 닿아 있는지 적어보세요'}"></textarea>
+    </div>
+    <div class="cp-foot">
+      <span class="time">✓ 자동 저장 중 · 저장 시 포트폴리오와 리포트에 즉시 반영됩니다</span>
+      <button class="btn btn-green" onclick="saveRecord('${id}')">기록 완료</button>
+    </div>
+  </div>`;
+ $('#composerBg').classList.add('on');document.body.style.overflow='hidden';
+ setTimeout(()=>$('#cpS').focus(),100);
+}
+function closeComposer(){$('#composerBg').classList.remove('on');document.body.style.overflow=''}
+$('#composerBg').addEventListener('click',e=>{if(e.target.id==='composerBg')closeComposer()});
+function saveRecord(id){
+ const s=$('#cpS').value.trim(),o=$('#cpO').value.trim(),c=$('#cpC').value.trim();
+ if((s+o+c).length<15){toast('세 칸 중 최소 한 칸을 15자 이상 작성해주세요');return}
+ state.records.push({week:'W'+String(state.weekNo).padStart(2,'0'),art:id,s:s||'—',o:o||'—',c:c||'—'});
+ state.read.add(id); state.streak++; state.weekNo++;
+ closeComposer();renderPF();
+ toast(`Week 기록 완료 — 이번 학기 ${state.records.length}번째 · 🔥 ${state.streak}주 연속!`);
+}
+
+/* ═══════════ 리포트 ═══════════ */
+function renderRP(){
+ $('#rpStats').innerHTML=`
+  <div class="stat"><div class="n">${state.read.size}<small>편</small></div><div class="l">읽은 기사</div></div>
+  <div class="stat"><div class="n">${state.records.length}<small>개</small></div><div class="l">작성한 기록</div></div>
+  <div class="stat"><div class="n">${state.words.size}<small>개</small></div><div class="l">저장 단어</div></div>
+  <div class="stat"><div class="n">${state.scrap.size}<small>편</small></div><div class="l">스크랩</div></div>`;
+ // 섹션 분포 (읽은 기사 기준 실계산)
+ const cnt={};[...state.read].forEach(id=>{const s=ARTICLES[id].secLabel;cnt[s]=(cnt[s]||0)+1});
+ const max=Math.max(...Object.values(cnt),1);
+ const colors=['#3B5BFF','#0E9A62','#E8862A','#7048C8','#E5477A','#F0B429'];
+ $('#secBars').innerHTML=Object.entries(cnt).sort((a,b)=>b[1]-a[1]).map(([s,n],i)=>`
+  <div class="bar-row"><span class="lb">${s}</span><div class="bar-tr"><div class="bar-fl" style="width:${n/max*100}%;background:${colors[i%colors.length]}">${n}</div></div></div>`).join('')
+  ||'<div class="empty">아직 읽은 기사가 없습니다</div>';
+ const top=Object.entries(cnt).sort((a,b)=>b[1]-a[1])[0];
+ $('#secInsight').textContent=top?`💡 ${top[0]} 섹션을 가장 많이 읽고 있어요. LEVEL 3 기사에 도전해볼 시점입니다.`:'';
+ // 활동 로그
+ $('#actList').innerHTML=[
+  ...[...state.records].reverse().map(r=>`<div style="padding:8px 0;border-bottom:1px dashed var(--hair)">✍️ <b>${r.week}</b> 기록 완료 — ${ARTICLES[r.art].title}</div>`),
+  ...[...state.scrap].map(id=>`<div style="padding:8px 0;border-bottom:1px dashed var(--hair)">⭐ 스크랩 — ${ARTICLES[id].title}</div>`)
+ ].join('')||'<div class="empty">활동 내역이 없습니다</div>';
+ // 학기말 리포트 문서
+ $('#docPreview').innerHTML=`
+  <div class="dp-cap en">SEMESTER PORTFOLIO — 2026.1</div>
+  <h2>영어 탐구 포트폴리오</h2>
+  <div class="dp-sub">${TRACKS.find(t=>t.id===state.track).nm} 계열 · 김민준 · NE Times · 생성일 2026.07.08</div>
+  <div class="dp-stat">
+    <div><div class="n">${state.read.size}</div><div class="l">읽은 기사</div></div>
+    <div><div class="n">${state.records.length}</div><div class="l">완성 기록</div></div>
+    <div><div class="n">${state.words.size}</div><div class="l">누적 어휘</div></div>
+    <div><div class="n">${state.streak}주</div><div class="l">연속 기록</div></div>
+  </div>
+  ${state.records.map(r=>{const a=ARTICLES[r.art];return `
+  <div class="dp-rec">
+    <div class="rh"><span class="wk">${r.week}</span><span class="tt">${a.title}</span><span class="lv l${a.lv}" style="margin-left:auto">LV${a.lv}</span></div>
+    <div class="fld" data-l="SUMMARY">${r.s}</div>
+    <div class="fld" data-l="OPINION">${r.o}</div>
+    <div class="fld" data-l="CAREER LINK">${r.c}</div>
+  </div>`}).join('')}
+  <div style="font-size:10px;color:var(--gray2);margin-top:20px;border-top:1px solid var(--hair);padding-top:12px">
+    본 문서는 학생 활동의 소재·근거 자료이며, 학교생활기록부 기재 자료가 아닙니다. · NE Times English Portfolio
+  </div>`;
+}
+
+/* 초기 렌더 */
+renderGrid();renderPF();renderRP();
+<\/script>
+</body>
+</html>
+
+</script>
+
+
+<script>
+function getDoc(id){
+  return document.getElementById(id).textContent.replace(/<\\\/script>/g,'</scr'+'ipt>');
+}
+const frames=[document.getElementById('fr0'),document.getElementById('fr1'),document.getElementById('fr2')];
+const loaded=[false,false,false];
+function loadFrame(i){
+  if(loaded[i])return;
+  frames[i].srcdoc=getDoc('doc'+i);
+  loaded[i]=true;
+}
+function goPage(i){
+  loadFrame(i);
+  frames.forEach((f,k)=>f.classList.toggle('on',k===i));
+  document.querySelectorAll('.sw-tab').forEach((t,k)=>t.classList.toggle('on',k===i));
+}
+window.goPage=goPage;
+// 첫 페이지 즉시 로드, 나머지는 유휴 시간에 미리 로드
+loadFrame(0);
+frames[0].addEventListener('load',()=>document.getElementById('loading').classList.add('off'),{once:true});
+setTimeout(()=>{loadFrame(1);loadFrame(2)},1200);
+</script>
+</body>
+</html>
