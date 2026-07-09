@@ -3,226 +3,997 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NE Times 수행평가랩 · 개발 배경 및 목적</title>
+<title>NE Times 수행평가랩 — 프로젝트 브리프 & 기사 라이브러리</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nunito:wght@600;700;800;900&family=Inter:wght@500;600;700;800&display=swap" rel="stylesheet">
 <style>
-@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&family=Nunito:wght@600;700;800&family=Inter:wght@500;600;700&display=swap');
 :root{
-  --ink:#2b2440; --cream:#FFF6E8; --card:#FFFFFF;
-  --orange:#F5A623; --orange-deep:#E8901A;
-  --purple:#6C4AB6; --purple-deep:#54388f;
-  --green:#4CAF6D; --gray:#B7AFC4; --gray-bg:#F1ECF7;
-  --red:#e15b5b; --beginning:#4A90D9;
+  --ink:#1E1640;
+  --bg:#FDFAF4;
+  --card:#FFFFFF;
+  --orange:#F5A623;
+  --orange-d:#D98B10;
+  --orange-lt:#FFF3D4;
+  --purple:#6C4AB6;
+  --purple-d:#4B2E8A;
+  --purple-lt:#EDE7F6;
+  --green:#3AAF6D;
+  --green-lt:#E8F7EE;
+  --blue:#3A82D8;
+  --blue-lt:#E8F2FD;
+  --red:#E05252;
+  --red-lt:#FDE8E8;
+  --gray:#9A92B2;
+  --gray-bg:#F3F0FA;
+  --gray-lt:#F8F6FF;
+  --border:#E8E2F4;
+  --sh:0 2px 12px rgba(108,74,182,.08);
+  --sh2:0 8px 32px rgba(108,74,182,.14);
 }
-*{box-sizing:border-box;}
-body{margin:0;background:var(--cream);font-family:'Noto Sans KR',sans-serif;color:var(--ink);line-height:1.6;}
-.wrap{max-width:880px;margin:0 auto;padding:0 20px 60px;}
-.hero{background:linear-gradient(135deg,var(--orange),var(--purple));color:white;padding:56px 24px 44px;text-align:center;}
-.hero .kicker{font-family:'Nunito';font-weight:800;font-size:13px;letter-spacing:1px;text-transform:uppercase;opacity:.85;}
-.hero h1{font-size:30px;margin:10px 0 8px;font-weight:900;}
-.hero p{font-size:15px;opacity:.95;max-width:560px;margin:0 auto;}
-.hero .meta{margin-top:18px;font-size:12.5px;opacity:.8;font-family:'Nunito';}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);font-family:'Noto Sans KR',sans-serif;color:var(--ink);line-height:1.6;min-height:100vh;}
+button,input,select,textarea{font-family:inherit;}
+button{cursor:pointer;border:none;}
+a{text-decoration:none;}
 
-.section{background:var(--card);border-radius:20px;padding:32px 30px;margin-top:-28px;position:relative;box-shadow:0 12px 30px rgba(108,74,182,0.12);margin-bottom:24px;}
-.section:first-of-type{margin-top:-28px;}
-.section h2{font-size:20px;margin:0 0 6px;display:flex;align-items:center;gap:8px;}
-.section .num{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9px;background:var(--purple);color:white;font-family:'Nunito';font-weight:800;font-size:14px;flex:0 0 28px;}
-.section .lead{color:#7d7590;font-size:13.5px;margin:0 0 20px;}
+/* ── LAYOUT TABS ── */
+.app-tabs{position:sticky;top:0;z-index:200;background:rgba(253,250,244,.96);backdrop-filter:blur(14px);border-bottom:1px solid var(--border);display:flex;justify-content:center;gap:4px;padding:10px 16px;}
+.app-tab{font-family:'Nunito';font-weight:800;font-size:13.5px;padding:9px 22px;border-radius:22px;color:var(--gray);background:transparent;transition:.18s;cursor:pointer;border:2px solid transparent;}
+.app-tab:hover{color:var(--purple-d);background:var(--purple-lt);}
+.app-tab.on{color:var(--purple-d);background:var(--purple-lt);border-color:rgba(108,74,182,.25);}
+.app-tab.on-lab{color:white;background:linear-gradient(135deg,var(--orange),var(--purple));border-color:transparent;}
 
-.card-box{background:var(--gray-bg);border-radius:14px;padding:16px 18px;margin-bottom:12px;}
-.card-box b{color:var(--purple-deep);}
-.card-box.warn{background:#FFF3E0;border:1px dashed var(--orange-deep);}
+/* ── SCREENS ── */
+.screen{display:none;}
+.screen.on{display:block;}
 
-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:8px;}
-th{background:var(--purple);color:white;font-family:'Nunito';font-weight:700;padding:10px 12px;text-align:left;font-size:12px;}
-td{padding:10px 12px;border-bottom:1px solid var(--gray-bg);vertical-align:top;}
-tr:last-child td{border-bottom:none;}
-tr:nth-child(even) td{background:#FBF8FF;}
+/* ════════════════════════════
+   BRIEF (개발배경) SCREEN
+════════════════════════════ */
+.brief-hero{background:linear-gradient(135deg,var(--orange) 0%,#B047C8 55%,var(--purple-d) 100%);padding:56px 24px 80px;text-align:center;position:relative;overflow:hidden;}
+.brief-hero::after{content:'';position:absolute;inset:0;background:radial-gradient(ellipse at 70% 50%,rgba(255,255,255,.1),transparent 60%);pointer-events:none;}
+.brief-hero .kicker{font-family:'Nunito';font-weight:800;font-size:12px;letter-spacing:2px;text-transform:uppercase;color:rgba(255,255,255,.75);margin-bottom:12px;}
+.brief-hero h1{font-family:'Nunito';font-weight:900;font-size:clamp(22px,4vw,32px);color:#fff;margin-bottom:10px;line-height:1.2;}
+.brief-hero p{font-size:14.5px;color:rgba(255,255,255,.85);max-width:520px;margin:0 auto 16px;line-height:1.7;}
+.brief-hero .meta{font-family:'Nunito';font-size:12px;color:rgba(255,255,255,.6);}
 
-.pill-row{display:flex;flex-wrap:wrap;gap:8px;margin:10px 0;}
-.pill{background:var(--gray-bg);color:var(--purple-deep);font-family:'Nunito';font-weight:700;font-size:12px;padding:5px 12px;border-radius:20px;}
+.brief-wrap{max-width:860px;margin:0 auto;padding:0 20px 60px;}
+.brief-section{background:var(--card);border-radius:20px;padding:28px 26px;margin-top:-40px;position:relative;box-shadow:var(--sh2);margin-bottom:20px;}
+.brief-section + .brief-section{margin-top:0;}
+.bs-h2{font-size:18px;font-weight:900;margin-bottom:4px;display:flex;align-items:center;gap:10px;}
+.bs-num{width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,var(--orange),var(--purple));color:white;font-family:'Nunito';font-weight:900;font-size:13px;display:flex;align-items:center;justify-content:center;flex-shrink:0;}
+.bs-lead{color:#7D75A0;font-size:13.5px;margin-bottom:18px;line-height:1.6;}
 
-ul.clean{margin:8px 0;padding-left:0;list-style:none;}
-ul.clean li{padding:8px 0 8px 26px;position:relative;border-bottom:1px solid var(--gray-bg);font-size:13.5px;}
-ul.clean li:last-child{border-bottom:none;}
-ul.clean li::before{content:'●';position:absolute;left:4px;top:9px;color:var(--orange-deep);font-size:8px;}
+.info-box{background:var(--gray-lt);border-radius:14px;padding:14px 16px;margin-bottom:10px;border:1px solid var(--border);font-size:13.5px;line-height:1.75;}
+.info-box b{color:var(--purple-d);}
+.info-box.warn{background:var(--orange-lt);border:1px dashed var(--orange-d);}
+.info-box.warn b{color:var(--orange-d);}
 
-ol.steps{margin:8px 0;padding-left:0;list-style:none;counter-reset:step;}
-ol.steps li{counter-increment:step;padding:10px 0 10px 40px;position:relative;font-size:13.5px;border-bottom:1px solid var(--gray-bg);}
-ol.steps li:last-child{border-bottom:none;}
-ol.steps li::before{content:counter(step);position:absolute;left:0;top:8px;width:24px;height:24px;background:var(--purple);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito';font-weight:800;font-size:12px;}
-
-.link-list{margin:8px 0;padding-left:0;list-style:none;}
-.link-list li{padding:9px 0;border-bottom:1px solid var(--gray-bg);font-size:13px;}
-.link-list li:last-child{border-bottom:none;}
-.link-list .tag2{display:inline-block;font-family:'Nunito';font-weight:800;font-size:10px;color:white;background:var(--beginning);padding:2px 8px;border-radius:6px;margin-right:8px;}
-.link-list .tag2.kice{background:var(--green);}
-.link-list .tag2.etc{background:var(--gray);}
-.link-list a{color:var(--purple-deep);word-break:break-all;font-family:'Inter',sans-serif;font-size:12px;}
-.link-list .desc{color:#7d7590;font-size:12px;margin-top:2px;}
+table.brief-tbl{width:100%;border-collapse:collapse;font-size:12.5px;margin-top:6px;}
+.brief-tbl th{background:var(--purple-d);color:white;font-family:'Nunito';font-weight:700;padding:10px 12px;text-align:left;font-size:11.5px;}
+.brief-tbl td{padding:9px 12px;border-bottom:1px solid var(--gray-bg);vertical-align:top;font-size:12.5px;}
+.brief-tbl tr:last-child td{border-bottom:none;}
+.brief-tbl tr:nth-child(even) td{background:var(--gray-lt);}
 
 .premise-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
-.premise-card{background:var(--gray-bg);border-radius:12px;padding:14px 16px;}
-.premise-card .pn{font-family:'Nunito';font-weight:800;font-size:11px;color:var(--purple-deep);margin-bottom:4px;}
-.premise-card p{margin:0;font-size:13px;}
+@media(max-width:600px){.premise-grid{grid-template-columns:1fr;}}
+.premise-card{background:var(--gray-lt);border-radius:12px;padding:14px 16px;border:1px solid var(--border);}
+.pn{font-family:'Nunito';font-weight:800;font-size:11px;color:var(--purple-d);margin-bottom:5px;letter-spacing:.5px;text-transform:uppercase;}
+.premise-card p{font-size:13px;line-height:1.6;}
+.premise-card b{color:var(--purple-d);}
 
-.future-card{border:2px solid var(--gray-bg);border-radius:14px;padding:16px 18px;margin-bottom:12px;}
-.future-card h3{margin:0 0 6px;font-size:14.5px;color:var(--purple-deep);}
-.future-card p{margin:0;font-size:13px;color:#4a4358;}
-.badge-new{display:inline-block;background:var(--orange);color:white;font-family:'Nunito';font-weight:800;font-size:10px;padding:2px 8px;border-radius:6px;margin-left:6px;vertical-align:middle;}
+.dev-card{border:1.5px solid var(--border);border-radius:14px;padding:16px 18px;margin-bottom:12px;transition:.18s;}
+.dev-card:hover{border-color:rgba(108,74,182,.3);box-shadow:var(--sh);}
+.dev-card h3{font-size:14px;font-weight:800;color:var(--purple-d);margin-bottom:6px;display:flex;align-items:center;gap:8px;}
+.dev-card p{font-size:13px;color:#4A4362;line-height:1.7;}
+.dev-card code{background:var(--gray-lt);color:var(--purple-d);padding:1px 7px;border-radius:5px;font-family:'Inter',monospace;font-size:11.5px;border:1px solid var(--border);}
+.badge-new{display:inline-block;background:var(--orange);color:white;font-family:'Nunito';font-weight:800;font-size:9.5px;padding:1px 7px;border-radius:5px;margin-left:6px;letter-spacing:.3px;}
 
-footer{text-align:center;padding:30px 0 10px;color:#a89fc0;font-size:12px;font-family:'Nunito';}
-code{background:var(--gray-bg);color:var(--purple-deep);padding:1px 6px;border-radius:5px;font-family:'Inter',monospace;font-size:12px;}
-@media (max-width:600px){ .premise-grid{grid-template-columns:1fr;} .hero h1{font-size:24px;} }
+ol.steps-list{list-style:none;counter-reset:step;margin-top:8px;}
+ol.steps-list li{counter-increment:step;padding:10px 0 10px 42px;position:relative;font-size:13.5px;border-bottom:1px solid var(--gray-bg);line-height:1.7;}
+ol.steps-list li:last-child{border-bottom:none;}
+ol.steps-list li::before{content:counter(step);position:absolute;left:0;top:9px;width:26px;height:26px;background:var(--purple);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Nunito';font-weight:800;font-size:12px;}
+
+ul.clean-list{list-style:none;margin-top:8px;}
+ul.clean-list li{padding:8px 0 8px 22px;position:relative;border-bottom:1px solid var(--gray-bg);font-size:13.5px;line-height:1.65;}
+ul.clean-list li:last-child{border-bottom:none;}
+ul.clean-list li::before{content:'';position:absolute;left:4px;top:16px;width:6px;height:6px;border-radius:50%;background:var(--orange);}
+
+.link-list-brief{list-style:none;margin-top:8px;}
+.link-list-brief li{padding:10px 0;border-bottom:1px solid var(--gray-bg);font-size:12.5px;line-height:1.6;}
+.link-list-brief li:last-child{border-bottom:none;}
+.link-tag{display:inline-block;font-family:'Nunito';font-weight:800;font-size:10px;color:white;padding:2px 8px;border-radius:6px;margin-right:7px;}
+.lt-article{background:var(--blue);}
+.lt-kice{background:var(--green);}
+.lt-etc{background:var(--gray);}
+.link-list-brief a{color:var(--purple-d);font-family:'Inter',sans-serif;font-size:11.5px;word-break:break-all;}
+.link-list-brief .ldesc{color:#7D75A0;font-size:12px;margin-top:2px;}
+
+/* ════════════════════════════
+   LAB (기사라이브러리) SCREEN
+════════════════════════════ */
+.lab-wrap{max-width:580px;margin:0 auto;padding:0 16px 60px;}
+
+/* 상단 헤더 */
+.lab-header{padding:28px 0 20px;text-align:center;}
+.lab-header-kicker{font-family:'Nunito';font-weight:800;font-size:11px;letter-spacing:2px;text-transform:uppercase;color:var(--orange-d);margin-bottom:8px;}
+.lab-header h2{font-family:'Nunito';font-weight:900;font-size:22px;color:var(--ink);margin-bottom:6px;}
+.lab-header p{font-size:13.5px;color:var(--gray);line-height:1.6;}
+
+/* 필터 패널 */
+.filter-panel{background:var(--card);border-radius:18px;padding:18px 20px;box-shadow:var(--sh);border:1px solid var(--border);margin-bottom:16px;}
+.filter-row{display:flex;gap:8px;margin-bottom:10px;}
+.filter-row:last-child{margin-bottom:0;}
+.filter-group{flex:1;min-width:0;}
+.filter-label{font-family:'Nunito';font-weight:800;font-size:10.5px;color:var(--gray);letter-spacing:.8px;text-transform:uppercase;margin-bottom:5px;}
+.filter-select{width:100%;border:1.5px solid var(--border);border-radius:10px;padding:8px 10px;font-family:'Noto Sans KR';font-size:13px;background:white;color:var(--ink);outline:none;transition:.15s;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='7' fill='none'%3E%3Cpath d='M1 1l5 5 5-5' stroke='%239A92B2' stroke-width='1.5' stroke-linecap='round'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 10px center;padding-right:28px;}
+.filter-select:focus{border-color:var(--purple);}
+
+/* 결과 */
+.result-bar{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px;}
+.result-count{font-family:'Nunito';font-weight:700;font-size:12px;color:var(--gray);}
+.portfolio-btn{font-family:'Nunito';font-weight:800;font-size:12px;color:var(--purple-d);background:var(--purple-lt);border:1px solid rgba(108,74,182,.2);padding:5px 13px;border-radius:20px;}
+.portfolio-btn:hover{background:var(--purple);color:white;}
+
+/* 책 그리드 */
+.book-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-bottom:14px;}
+.book-card{background:var(--card);border:1.5px solid var(--border);border-radius:16px;overflow:hidden;cursor:pointer;transition:.18s;box-shadow:var(--sh);}
+.book-card:hover{transform:translateY(-3px);box-shadow:var(--sh2);border-color:rgba(108,74,182,.3);}
+.book-cover{aspect-ratio:3/4;width:100%;display:flex;align-items:center;justify-content:center;font-size:44px;position:relative;overflow:hidden;}
+.book-cover img{width:100%;height:100%;object-fit:cover;}
+.cover-fallback{display:none;position:absolute;inset:0;align-items:center;justify-content:center;font-size:44px;}
+.cov0{background:linear-gradient(145deg,#FFE0A0,#F5A623);}
+.cov1{background:linear-gradient(145deg,#BBDDF8,#3A82D8);}
+.cov2{background:linear-gradient(145deg,#BBF0D4,#3AAF6D);}
+.cov3{background:linear-gradient(145deg,#E0D4F8,#6C4AB6);}
+.book-inner{padding:10px 12px 12px;}
+.book-code{font-family:'Nunito';font-weight:700;font-size:10px;color:var(--purple-d);margin-bottom:3px;}
+.book-title{font-family:'Nunito';font-weight:800;font-size:13px;line-height:1.3;margin-bottom:5px;color:var(--ink);}
+.book-meta{font-family:'Nunito';font-weight:700;font-size:10.5px;color:var(--gray);margin-bottom:6px;}
+.book-link{font-family:'Nunito';font-weight:700;font-size:10.5px;color:var(--purple-d);}
+.book-link:hover{text-decoration:underline;}
+
+.empty-box{background:var(--gray-lt);border:2px dashed var(--border);border-radius:16px;padding:22px;text-align:center;font-size:13.5px;color:var(--gray);line-height:1.65;}
+
+/* 범례 */
+.legend-panel{background:var(--purple-lt);border-radius:14px;padding:14px 16px;margin-top:8px;}
+.legend-title{font-family:'Nunito';font-weight:800;font-size:12px;color:var(--purple-d);margin-bottom:9px;}
+.legend-item{font-size:12.5px;padding:7px 8px;cursor:pointer;border-radius:8px;color:var(--ink);transition:.13s;line-height:1.5;}
+.legend-item:hover{background:rgba(108,74,182,.12);}
+.legend-arrow{font-weight:800;color:var(--purple-d);}
+
+/* ══════════════
+   PRACTICE SCREEN
+══════════════ */
+.prac-topbar{background:linear-gradient(135deg,var(--orange),var(--orange-d));padding:16px 20px 20px;color:white;}
+.prac-topbar h1{font-family:'Nunito';font-weight:800;font-size:16px;margin-bottom:3px;}
+.prac-topbar p{font-size:12px;opacity:.85;margin-bottom:1px;}
+.prac-topbar .pub{font-size:10.5px;opacity:.7;}
+.prac-body{max-width:580px;margin:0 auto;padding:18px 20px 40px;}
+.backline{display:flex;align-items:center;gap:7px;margin-bottom:12px;cursor:pointer;color:var(--purple-d);font-family:'Nunito';font-weight:700;font-size:13px;}
+.backline:hover{text-decoration:underline;}
+
+/* 탭바 */
+.tabbar{display:flex;gap:6px;margin-bottom:16px;}
+.tab{flex:1;text-align:center;padding:8px 4px;border-radius:12px;font-family:'Nunito';font-weight:700;font-size:12px;background:var(--gray-bg);color:var(--purple-d);cursor:pointer;transition:.15s;border:1.5px solid transparent;}
+.tab.active{background:var(--purple);color:white;border-color:var(--purple);}
+.tab.done::after{content:' ✓';}
+.tab:hover:not(.active){background:var(--purple-lt);}
+
+/* 그룹 */
+.group-block{margin-bottom:6px;}
+.group-title{font-family:'Nunito';font-weight:800;font-size:12.5px;color:var(--purple-d);margin:14px 0 8px;}
+
+/* 문장 카드 */
+.sent-card{background:var(--gray-lt);border:2px solid var(--border);border-left:5px solid var(--gray);border-radius:13px;padding:11px 13px;margin-bottom:9px;transition:background .2s,border-color .2s;}
+.sent-card.active{background:#FFF5D8;}
+.sent-card.org-beginning{border-left-color:var(--blue);}
+.sent-card.org-body{border-left-color:var(--orange-d);}
+.sent-card.org-pro{border-left-color:var(--green);}
+.sent-card.org-con{border-left-color:var(--red);}
+.sent-card.org-closing{border-left-color:var(--purple);}
+.sent-tag{display:inline-block;font-family:'Nunito';font-size:9.5px;font-weight:800;color:white;border-radius:6px;padding:2px 7px;margin-bottom:6px;}
+.tag-beginning{background:var(--blue);}
+.tag-body{background:var(--orange-d);}
+.tag-pro{background:var(--green);}
+.tag-con{background:var(--red);}
+.tag-closing{background:var(--purple);}
+.sent-q{font-family:'Nunito';font-weight:700;font-size:13.5px;color:var(--purple-d);margin-bottom:4px;}
+.sent-a{font-family:'Inter','Nunito',sans-serif;font-weight:600;font-size:13.5px;line-height:1.45;}
+.sent-ko{font-family:'Noto Sans KR';font-size:12px;color:var(--gray);margin-top:3px;line-height:1.45;}
+.sent-controls{display:flex;gap:7px;margin-top:9px;}
+.mini-btn{flex:1;border:2px solid var(--purple);background:white;color:var(--purple-d);border-radius:9px;padding:6px 4px;font-family:'Noto Sans KR';font-size:12px;font-weight:700;cursor:pointer;transition:.13s;}
+.mini-btn.done{background:var(--green);border-color:var(--green);color:white;}
+.mini-btn.recording{background:var(--red);border-color:var(--red);color:white;}
+.mini-btn:hover:not(.done):not(.recording){background:var(--purple-lt);}
+.mini-score{font-family:'Nunito';font-size:12px;margin-top:6px;color:var(--purple-d);}
+.mini-score .hint{font-size:10.5px;color:var(--gray);}
+audio{width:100%;margin-top:7px;border-radius:8px;}
+
+/* 자유입력 */
+.sent-num{font-family:'Nunito';font-weight:800;font-size:11px;color:var(--purple-d);margin-bottom:4px;}
+textarea{width:100%;border:2px solid var(--purple);border-radius:9px;padding:9px 11px;font-family:'Noto Sans KR';font-size:13.5px;resize:vertical;min-height:52px;outline:none;transition:.15s;}
+textarea:focus{border-color:var(--orange-d);box-shadow:0 0 0 3px rgba(245,166,35,.15);}
+
+/* 섹션 라벨 */
+.sec-label{font-family:'Nunito';font-weight:800;font-size:12px;color:var(--purple-d);margin:16px 0 8px;text-transform:uppercase;letter-spacing:.3px;display:flex;align-items:center;gap:7px;}
+.sec-label::before{content:'';width:4px;height:16px;background:linear-gradient(var(--orange),var(--purple));border-radius:2px;}
+
+/* 버튼들 */
+.icon-btn{border:none;border-radius:50%;width:56px;height:56px;background:var(--purple);color:white;font-size:22px;cursor:pointer;box-shadow:0 5px 16px rgba(108,74,182,.32);transition:.15s;}
+.icon-btn:hover{transform:scale(1.05);}
+.icon-btn.recording{background:var(--red);animation:pulse 1s infinite;}
+@keyframes pulse{0%,100%{box-shadow:0 0 0 0 rgba(224,82,82,.45);}50%{box-shadow:0 0 0 14px rgba(224,82,82,0);}}
+.row-center{display:flex;align-items:center;gap:12px;}
+.hint{font-size:12px;color:var(--gray);line-height:1.5;}
+.fallback-box{background:var(--orange-lt);border:1.5px dashed var(--orange-d);border-radius:10px;padding:10px 12px;font-size:12.5px;line-height:1.5;}
+
+/* 체크 아이템 */
+.check-item{display:flex;align-items:center;gap:10px;background:var(--gray-lt);border-radius:12px;padding:11px 13px;margin-top:10px;cursor:pointer;border:2px solid transparent;font-size:14px;font-weight:700;transition:.15s;}
+.check-item.checked{border-color:var(--green);background:var(--green-lt);}
+.checkbox{width:22px;height:22px;border-radius:7px;border:2px solid var(--purple);flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:13px;color:white;background:white;transition:.15s;}
+.check-item.checked .checkbox{background:var(--green);border-color:var(--green);}
+
+/* 내비 */
+.nav-row{display:flex;gap:9px;margin-top:18px;}
+.nav-btn{flex:1;border:none;border-radius:13px;padding:12px;font-family:'Noto Sans KR';font-weight:700;font-size:14.5px;cursor:pointer;transition:.15s;}
+.nav-back{flex:0 0 46px;background:var(--gray-bg);color:var(--purple-d);}
+.nav-back:hover{background:var(--purple-lt);}
+.nav-next{background:var(--purple);color:white;box-shadow:0 4px 14px rgba(108,74,182,.3);}
+.nav-next:hover:not(:disabled){filter:brightness(1.08);}
+.nav-next:disabled{background:#D8D1EC;color:#A89FC0;cursor:not-allowed;box-shadow:none;}
+
+/* 반복 도트 */
+.rep-dots{display:flex;gap:5px;margin:5px 0 9px;}
+.rep-dot{width:22px;height:22px;border-radius:50%;background:var(--gray-bg);border:2px solid var(--gray);display:flex;align-items:center;justify-content:center;font-family:'Nunito';font-weight:800;font-size:10.5px;color:var(--gray);transition:.15s;}
+.rep-dot.done{background:var(--green);border-color:var(--green);color:white;}
+.rep-dot.current{border-color:var(--purple);color:var(--purple-d);}
+.match-box{background:var(--blue-lt);border-radius:9px;padding:7px 10px;margin-top:7px;font-family:'Nunito';font-size:12.5px;color:var(--blue);}
+
+/* 코칭 */
+.subtitle-toggle{display:flex;align-items:center;gap:8px;font-family:'Nunito';font-weight:700;font-size:13px;color:var(--purple-d);cursor:pointer;margin:10px 0;}
+.tog-pill{width:38px;height:20px;border-radius:12px;background:var(--gray);position:relative;transition:background .2s;}
+.tog-pill.on{background:var(--purple);}
+.tog-knob{position:absolute;top:2px;left:2px;width:16px;height:16px;border-radius:50%;background:white;transition:left .2s;box-shadow:0 1px 3px rgba(0,0,0,.2);}
+.tog-pill.on .tog-knob{left:20px;}
+.script-box{background:var(--gray-lt);border-radius:12px;padding:13px 15px;font-family:'Nunito';font-weight:700;font-size:14px;line-height:1.6;margin-bottom:10px;border:1px solid var(--border);}
+.script-box.hidden-script{color:var(--gray);font-family:'Noto Sans KR';font-weight:400;text-align:center;font-size:13px;}
+.script-title{font-family:'Nunito';font-weight:800;font-size:12.5px;color:var(--purple-d);margin:4px 0 7px;}
+
+/* 그래픽 오거나이저 */
+.script-organized{margin-bottom:10px;}
+.script-line{display:flex;align-items:stretch;margin-bottom:7px;border-radius:10px;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.05);}
+.idx-box{flex:0 0 80px;display:flex;align-items:center;justify-content:center;text-align:center;color:white;font-family:'Nunito';font-weight:800;font-size:10.5px;padding:8px 4px;line-height:1.3;}
+.idx-beginning{background:var(--blue);}
+.idx-body{background:var(--orange-d);}
+.idx-pro{background:var(--green);}
+.idx-con{background:var(--red);}
+.idx-closing{background:var(--purple);}
+.txt-box{flex:1;background:var(--gray-lt);padding:9px 12px;display:flex;flex-direction:column;justify-content:center;gap:3px;}
+.en-line{font-family:'Inter','Nunito',sans-serif;font-weight:600;font-size:13.5px;line-height:1.4;}
+.ko-line{font-family:'Noto Sans KR';font-weight:400;font-size:11.5px;color:var(--gray);line-height:1.4;}
+
+/* 루브릭 */
+.rubric-item{background:var(--gray-lt);border-radius:13px;padding:12px 14px;margin-bottom:9px;border:1px solid var(--border);}
+.rubric-q{font-family:'Nunito';font-weight:800;font-size:13.5px;margin-bottom:8px;color:var(--ink);}
+.smiley-row{display:flex;gap:8px;}
+.smiley{flex:1;text-align:center;padding:8px 4px;border-radius:10px;border:2px solid var(--border);background:white;font-size:20px;cursor:pointer;transition:.15s;}
+.smiley:hover{border-color:var(--purple);}
+.smiley.sel{border-color:var(--purple);background:var(--purple-lt);}
+.done-msg{text-align:center;padding:18px 0 6px;}
+.done-msg b{color:var(--purple-d);}
+
+/* rating 버튼 */
+.rating-row{display:flex;gap:8px;}
+.rating-btn{flex:1;border-radius:11px;border:2px solid var(--purple);background:white;color:var(--purple-d);font-family:'Noto Sans KR';font-weight:700;font-size:13px;padding:9px 6px;cursor:pointer;transition:.15s;text-align:center;display:flex;align-items:center;justify-content:center;}
+.rating-btn.primary{background:var(--purple);color:white;border-color:var(--purple);}
+.rating-btn:hover{opacity:.88;}
+
+/* ══ PORTFOLIO ══ */
+.pf-list{display:flex;flex-direction:column;gap:10px;}
+.pf-card{border:1.5px solid var(--border);border-radius:14px;padding:13px 15px;background:var(--card);box-shadow:var(--sh);transition:.15s;}
+.pf-card:hover{border-color:rgba(108,74,182,.25);box-shadow:var(--sh2);}
+.pf-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:5px;}
+.pf-date{font-family:'Nunito';font-weight:800;font-size:11px;color:var(--green);}
+.pf-type{font-family:'Nunito';font-weight:700;font-size:11px;color:var(--purple-d);}
+.pf-title{font-family:'Inter','Nunito',sans-serif;font-weight:700;font-size:14px;margin-bottom:8px;color:var(--ink);}
+.pf-badges{display:flex;flex-wrap:wrap;gap:6px;}
+.pf-badge{font-size:10.5px;font-family:'Nunito';font-weight:700;background:var(--gray-lt);color:var(--purple-d);padding:3px 9px;border-radius:8px;border:1px solid var(--border);}
+
+/* ── TOAST ── */
+#toast{position:fixed;bottom:22px;left:50%;transform:translateX(-50%) translateY(12px);background:var(--ink);color:#fff;padding:9px 18px;border-radius:10px;font-size:13px;font-weight:700;opacity:0;transition:.25s;z-index:9999;pointer-events:none;max-width:90%;text-align:center;}
+#toast.on{opacity:1;transform:translateX(-50%) translateY(0);}
+
+@media(max-width:480px){
+  .book-grid{grid-template-columns:repeat(2,1fr);gap:10px;}
+  .brief-section{padding:22px 18px;}
+  .prac-body{padding:14px 16px 36px;}
+  .filter-row{flex-direction:column;}
+}
 </style>
 </head>
 <body>
 
-<div class="hero">
+<!-- ── 탭 바 ── -->
+<div class="app-tabs">
+  <button class="app-tab on" id="tab-brief" onclick="switchTab('brief')">📄 프로젝트 브리프</button>
+  <button class="app-tab" id="tab-lab" onclick="switchTab('lab')">🔎 기사 라이브러리</button>
+</div>
+
+<!-- ════════ BRIEF 화면 ════════ -->
+<div class="screen on" id="screen-brief">
+
+<div class="brief-hero">
   <div class="kicker">NE Times 수행평가랩 · Project Brief</div>
   <h1>화상영어 × 수행평가 스피킹랩</h1>
   <p>왜 이 POC를 만들었고, 무엇을 검증했으며, 다음에 무엇을 할 것인가</p>
   <div class="meta">디지털마케팅팀 커머스파트 · 이채영 · 2026.07.08 기준</div>
 </div>
 
-<div class="wrap">
+<div class="brief-wrap">
 
-  <div class="section">
-    <h2><span class="num">1</span> 왜 이 프로젝트를 시작했는가</h2>
-    <p class="lead">시장·정책·내부 데이터, 세 방향에서 같은 신호가 확인됐어요.</p>
-
-    <div class="card-box">
-      <b>시장 니즈</b> — 학부모들은 "영어를 잘하게" 보다 "다음 학령 단계에서 무너지지 않는 것"을 원해요. 유치·초등 저학년까지는 "흥미 형성"이 최우선이지만, 초등 고학년으로 갈수록 "원서 읽기만으로 중등 내신까지 이어질 수 있을지" 걱정하는 목소리로 바뀌고, 중등에서는 "초등 때 영어를 오래 했는데도 내신에서 흔들릴 수 있다"는 실제 불안으로 이어져요. 즉 학년이 올라갈수록 니즈가 "흥미"에서 "다음 단계 대비"로 명확히 이동해요.
-    </div>
-    <div class="card-box">
-      <b>교육정책 흐름</b> — 2026 교육감 공약 공통 키워드는 기초학력·맞춤형학습·AI디지털·서술형·수행평가. 대구처럼 IB교육을 전면에 내세운 지역이 아니어도, 세종·경기·광주 등 대부분의 지역이 탐구형 수업·토론·글쓰기·과정중심평가 같은 "IB적 방향성"을 이미 일부 반영하고 있어요. 2028 대입 개편과 맞물려 "문해력+서술형+수행평가"가 영어교육의 핵심으로 압축되는 흐름이라, 수능 자체보다 학교 내신·세특·수행평가·발표·쓰기 역량의 중요성이 더 커질 걸로 보여요.
-    </div>
-    <div class="card-box">
-      <b>내부 데이터 (권용훈 팀장, Times 사업)</b> — 신문:화상영어 매출 비율은 대략 4:6이고, 최근 3개월 실매출(1~3월)을 봐도 화상영어가 신문 매출과 맞먹거나 더 큰 사실상 핵심 매출원이에요. 화상영어 이용자의 70% 이상이 초등학생이고 그중 초2-4학년이 최다이며, 상품 이용 순위는 키즈 &gt; 주니어 &gt; 킨더 &gt; 타임즈 순. 그런데 실제 녹화 수업 영상을 리뷰해보니 초등 고학년 중 이미 free speech가 가능한 학생군이 상당수 확인됐어요 — 데이터만으로는 안 보이는 지점이었어요.
-    </div>
-    <div class="card-box warn">
-      <b>⚠️ 그래서 초5-6을 1차 타겟으로 잡은 이유</b> — 데이터상 다수는 초2-4지만, 초2-4에서 화상영어를 시작한 아이가 초5-6이 되며 "다음 콘텐츠가 없어 이탈"하는 구간이기도 해요. 이 서비스가 이탈 방어 + 상향 이용 역할을 할 수 있다는 가설이고, 동시에 실제 발화력을 갖춘 학생군에게 구조화된 수행평가 훈련을 제공할 수 있는 시점이라는 근거이기도 해요.
-    </div>
-    <div class="card-box">
-      <b>종합 시사점</b> — 학부모는 단순히 좋은 수업을 넘어, 지금의 학습이 다음 학년·다음 평가에서 어떤 성과로 이어지는지 눈으로 확인하고 싶어해요. 레벨테스트·학습 리포트·누적 학습 데이터 같은 "관리 가시성"에 대한 요구가 커지는 이유예요. NE능률 입장에서도 읽기·듣기·말하기·쓰기를 따로따로 보여주기보다, 초등부터 중등 내신·고등 수능까지 이어지는 하나의 성장 경로로 제시하는 게 지금 시장·정책 흐름과 가장 잘 맞아요.
-    </div>
+  <div class="brief-section">
+    <h2 class="bs-h2"><span class="bs-num">1</span>왜 이 프로젝트를 시작했는가</h2>
+    <p class="bs-lead">시장·정책·내부 데이터, 세 방향에서 같은 신호가 확인됐어요.</p>
+    <div class="info-box"><b>시장 니즈</b> — 학부모들은 "영어를 잘하게" 보다 "다음 학령 단계에서 무너지지 않는 것"을 원해요. 유치·초등 저학년까지는 "흥미 형성"이 최우선이지만, 초등 고학년으로 갈수록 "원서 읽기만으로 중등 내신까지 이어질 수 있을지" 걱정하는 목소리로 바뀌고, 중등에서는 "초등 때 영어를 오래 했는데도 내신에서 흔들릴 수 있다"는 실제 불안으로 이어져요.</div>
+    <div class="info-box"><b>교육정책 흐름</b> — 2026 교육감 공약 공통 키워드는 기초학력·맞춤형학습·AI디지털·서술형·수행평가. 2028 대입 개편과 맞물려 "문해력+서술형+수행평가"가 영어교육의 핵심으로 압축되는 흐름이라, 수능 자체보다 학교 내신·세특·수행평가·발표·쓰기 역량의 중요성이 더 커질 걸로 보여요.</div>
+    <div class="info-box"><b>내부 데이터 (권용훈 팀장, Times 사업)</b> — 신문:화상영어 매출 비율은 대략 4:6이고, 화상영어 이용자의 70% 이상이 초등학생이고 그중 초2–4학년이 최다. 상품 이용 순위는 키즈 > 주니어 > 킨더 > 타임즈 순. 실제 녹화 수업 영상을 리뷰해보니 초등 고학년 중 이미 free speech가 가능한 학생군이 상당수 확인됐어요.</div>
+    <div class="info-box warn"><b>⚠️ 초5–6을 1차 타겟으로 잡은 이유</b> — 초2–4에서 화상영어를 시작한 아이가 초5–6이 되며 "다음 콘텐츠가 없어 이탈"하는 구간이에요. 이 서비스가 이탈 방어 + 상향 이용 역할을 할 수 있다는 가설이고, 실제 발화력을 갖춘 학생군에게 구조화된 수행평가 훈련을 제공할 수 있는 시점이기도 해요.</div>
+    <div class="info-box"><b>종합 시사점</b> — 학부모는 지금의 학습이 다음 학년·다음 평가에서 어떤 성과로 이어지는지 눈으로 확인하고 싶어해요. NE능률 입장에서도 읽기·듣기·말하기·쓰기를 따로따로 보여주기보다, 초등부터 중등 내신·고등 수능까지 이어지는 하나의 성장 경로로 제시하는 게 지금 시장·정책 흐름과 가장 잘 맞아요.</div>
   </div>
 
-  <div class="section">
-    <h2><span class="num">2</span> 무엇을 만들었나 (목적)</h2>
-    <p class="lead">기존 NE Times 화상영어 자산에, 학교 수행평가 대비 스피킹 트레이닝을 얹는 컨셉 — "NE Times 수행평가랩".</p>
-    <ul class="clean">
+  <div class="brief-section">
+    <h2 class="bs-h2"><span class="bs-num">2</span>무엇을 만들었나 (목적)</h2>
+    <p class="bs-lead">기존 NE Times 화상영어 자산에, 학교 수행평가 대비 스피킹 트레이닝을 얹는 컨셉 — "NE Times 수행평가랩".</p>
+    <ul class="clean-list">
       <li>실제 NE Times 기사 4건 × 실제 수행평가 4개 유형을 1:1 매칭한 인터랙티브 POC 제작</li>
       <li>기사 요약 말하기 / 1분 스피치 / PPT 발표 / 인터뷰 대본 말하기 — 총 4개 트랙</li>
       <li>시스템이 단계별로 이끄는 task형 학습 구조 (문장별 3회 듣기·3회 말하기 반복)</li>
       <li>원어민 개입은 마지막 5분 코칭으로 최소화, 발음 매칭 엔진(참고용) 및 학습 포트폴리오까지 구현</li>
     </ul>
-    <p class="lead" style="margin-top:14px;">현재 단계의 목적은 완성도 있는 서비스 출시가 아니라, <b style="color:var(--ink);">"이 방향이 추가 개발할 가치가 있는가"</b>를 검증하는 것이에요.</p>
+    <p class="bs-lead" style="margin-top:14px;">현재 단계의 목적은 완성도 있는 서비스 출시가 아니라, <b style="color:var(--ink);">"이 방향이 추가 개발할 가치가 있는가"</b>를 검증하는 것이에요.</p>
   </div>
 
-  <div class="section">
-    <h2><span class="num">3</span> 참고 자료 — 제공해주신 파일</h2>
-    <table>
+  <div class="brief-section">
+    <h2 class="bs-h2"><span class="bs-num">3</span>참고 자료</h2>
+    <table class="brief-tbl">
       <tr><th>파일명</th><th>유형</th><th>핵심 내용</th></tr>
-      <tr><td>영어_사교육_시장_니즈_및_교육정책_변화_시사점.pdf</td><td>시장조사 리포트</td><td>학령별 학부모 니즈, 2026 교육감 공약 공통 키워드, 종합 시사점</td></tr>
+      <tr><td>영어_사교육_시장_니즈_및_교육정책_변화_시사점.pdf</td><td>시장조사</td><td>학령별 학부모 니즈, 2026 교육감 공약 키워드</td></tr>
       <tr><td>Appendix_지역별_교육감_정책.pdf</td><td>부속 자료</td><td>17개 시도 정책 키워드 및 영어교육 연결 포인트</td></tr>
-      <tr><td>기획안_화상영어수행평가스피킹커리큘럼.xlsx</td><td>내부 기획안</td><td>배경·기회·핵심설계·POC 요약·B2C→B2B 로드맵 (권용훈 팀장 인터뷰 데이터 포함)</td></tr>
-      <tr><td>Slack 대화 캡처 (권용훈 팀장)</td><td>내부 데이터</td><td>신문·화상 매출비율(4:6), 화상영어 연령분포, 주력 상품 순위</td></tr>
-      <tr><td>NE Times 사이트 화면 캡처 (다수)</td><td>제품 화면</td><td>단어학습 탭, 기사 읽기 화면, 온라인학습 프로그램 구조 확인용</td></tr>
-      <tr><td>학생평가지원포털 캡처 2건</td><td>실제 학교 자료</td><td>초5-6·중2 영어 수행평가 도구 카탈로그 화면 (난이도 캘리브레이션용)</td></tr>
-      <tr><td>네이버 AI브리핑 검색결과</td><td>외부 참고자료</td><td>중학교 영어 수행평가 유형 정리(쓰기/말하기/듣기/포트폴리오)</td></tr>
-      <tr><td>도서 카탈로그 UI 캡처</td><td>디자인 레퍼런스</td><td>기사 라이브러리 화면을 책 표지 그리드 스타일로 개편하는 데 참고</td></tr>
+      <tr><td>기획안_화상영어수행평가스피킹커리큘럼.xlsx</td><td>내부 기획안</td><td>배경·기회·핵심설계·POC 요약·B2C→B2B 로드맵</td></tr>
+      <tr><td>Slack 대화 캡처 (권용훈 팀장)</td><td>내부 데이터</td><td>신문·화상 매출비율(4:6), 화상영어 연령분포</td></tr>
+      <tr><td>NE Times 사이트 화면 캡처</td><td>제품 화면</td><td>단어학습 탭, 기사 읽기 화면, 온라인학습 구조</td></tr>
+      <tr><td>학생평가지원포털 캡처 2건</td><td>실제 학교</td><td>초5–6·중2 영어 수행평가 도구 카탈로그</td></tr>
+      <tr><td>네이버 AI브리핑 검색결과</td><td>외부 참고</td><td>중학교 영어 수행평가 유형 정리</td></tr>
+      <tr><td>도서 카탈로그 UI 캡처</td><td>디자인 레퍼런스</td><td>기사 라이브러리 UI 개편 참고용</td></tr>
     </table>
   </div>
 
-  <div class="section">
-    <h2><span class="num">4</span> 오늘 유형분석을 위해 방문한 페이지</h2>
-    <p class="lead">기사 4건의 실제 원문과, 학교 현장 수행평가 실물 자료를 확인하기 위해 방문한 곳들이에요.</p>
-    <ul class="link-list">
-      <li><span class="tag2">기사원문</span><a href="https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=37110" target="_blank">netimes.co.kr/.../weekjunior/reading.asp?seq=37110</a><div class="desc">Lee Sets Hit Streak Record (사건보도형 샘플 확보, 무료공개 기사라 전문 확인 가능)</div></li>
-      <li><span class="tag2">기사원문</span><a href="https://www.netimes.co.kr/pages/times/reading.asp?seq=34397" target="_blank">netimes.co.kr/.../times/reading.asp?seq=34397</a><div class="desc">Tom Cruise 관련 기사 — 난이도가 높아 검토 후 최종 미채택</div></li>
-      <li><span class="tag2">기사원문</span><a href="https://www.netimes.co.kr/pages/kids/reading.asp?seq=37099" target="_blank">netimes.co.kr/.../kids/reading.asp?seq=37099</a><div class="desc">Delivery Robots — 로그인 필요 페이지라 썸네일 이미지는 미확보</div></li>
-      <li><span class="tag2">기사원문</span><a href="https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=36912" target="_blank">netimes.co.kr/.../weekjunior/reading.asp?seq=36912</a><div class="desc">Busan Reaches One Million Tourists — 지난 호차라 로그인 없이는 접근 불가, 이미지 미확보</div></li>
-      <li><span class="tag2">기사원문</span><a href="https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=37114" target="_blank">netimes.co.kr/.../weekjunior/reading.asp?seq=37114</a><div class="desc">Malala Yousafzai — 이미지 확보 성공</div></li>
-      <li><span class="tag2">이미지소스</span><a href="https://www.netimes.co.kr/pages/weekjunior/index.asp?newsseq=136" target="_blank">netimes.co.kr/.../weekjunior/index.asp?newsseq=136</a><div class="desc">JUNIOR 136호 목차 — 이정후·Malala 실제 썸네일 이미지 URL을 여기서 발견</div></li>
-      <li><span class="tag2 kice">KICE</span><a href="https://stas.moe.go.kr/" target="_blank">stas.moe.go.kr</a> · <a href="https://stas.moe.go.kr/acvmt/acvmtStd/acvmtStdList:s1" target="_blank">acvmtStd/acvmtStdList:s1</a><div class="desc">학생평가지원포털 메인 및 성취기준(평가기준) 검색 페이지</div></li>
-      <li><span class="tag2 kice">KICE</span><a href="https://stas.moe.go.kr/assmt/assmtEvalTask/assmtEvalTaskList:s1:ASSMT_EVAL_TASK" target="_blank">assmtEvalTask/assmtEvalTaskList:s1:ASSMT_EVAL_TASK</a><div class="desc">수행평가 도구 목록 — 자바스크립트 동적 로딩이라 직접 크롤링은 안 되고, 사용자 캡처로 실제 내용 확인</div></li>
-      <li><span class="tag2 etc">기타</span>네이버 AI브리핑 검색 (중학교 영어 수행평가 유형)<div class="desc">쓰기/말하기/듣기/포트폴리오 4대 유형 및 채점 포인트 정리 자료 확보</div></li>
+  <div class="brief-section">
+    <h2 class="bs-h2"><span class="bs-num">4</span>오늘 방문한 페이지</h2>
+    <p class="bs-lead">기사 4건의 실제 원문과, 학교 현장 수행평가 실물 자료 확인용이에요.</p>
+    <ul class="link-list-brief">
+      <li><span class="link-tag lt-article">기사원문</span><a href="https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=37110" target="_blank">Lee Sets Hit Streak Record</a><div class="ldesc">무료공개 기사 — 전문 확인 가능</div></li>
+      <li><span class="link-tag lt-article">기사원문</span><a href="https://www.netimes.co.kr/pages/kids/reading.asp?seq=37099" target="_blank">Delivery Robots</a><div class="ldesc">로그인 필요 — 썸네일 미확보</div></li>
+      <li><span class="link-tag lt-article">기사원문</span><a href="https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=36912" target="_blank">Busan Reaches One Million Tourists</a><div class="ldesc">지난 호차, 로그인 없이 접근 불가</div></li>
+      <li><span class="link-tag lt-article">기사원문</span><a href="https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=37114" target="_blank">Malala Yousafzai</a><div class="ldesc">이미지 확보 성공</div></li>
+      <li><span class="link-tag lt-article">이미지</span><a href="https://www.netimes.co.kr/pages/weekjunior/index.asp?newsseq=136" target="_blank">JUNIOR 136호 목차</a><div class="ldesc">이정후·Malala 썸네일 URL 발견</div></li>
+      <li><span class="link-tag lt-kice">KICE</span><a href="https://stas.moe.go.kr/" target="_blank">stas.moe.go.kr</a> · <a href="https://stas.moe.go.kr/acvmt/acvmtStd/acvmtStdList:s1" target="_blank">성취기준 검색</a><div class="ldesc">학생평가지원포털 메인 및 성취기준 페이지</div></li>
+      <li><span class="link-tag lt-kice">KICE</span><a href="https://stas.moe.go.kr/assmt/assmtEvalTask/assmtEvalTaskList:s1:ASSMT_EVAL_TASK" target="_blank">수행평가 도구 목록</a><div class="ldesc">JS 동적 로딩 — 사용자 캡처로 확인</div></li>
+      <li><span class="link-tag lt-etc">기타</span>네이버 AI브리핑 (중학교 영어 수행평가 유형)<div class="ldesc">쓰기/말하기/듣기/포트폴리오 4대 유형 정리</div></li>
     </ul>
   </div>
 
-  <div class="section">
-    <h2><span class="num">5</span> POC 설계 전제조건</h2>
-    <p class="lead">지금까지의 대화에서 확정된, 앞으로도 지켜야 할 설계 원칙들이에요.</p>
+  <div class="brief-section">
+    <h2 class="bs-h2"><span class="bs-num">5</span>POC 설계 전제조건</h2>
+    <p class="bs-lead">지금까지의 대화에서 확정된, 앞으로도 지켜야 할 설계 원칙들이에요.</p>
     <div class="premise-grid">
-      <div class="premise-card"><div class="pn">전제 1</div><p>목표 요약문은 <b>압축버전</b>으로 확정 — 초5-6 학교 수행평가 분량·난이도 기준</p></div>
-      <div class="premise-card"><div class="pn">전제 2</div><p>실제 현장 최종결과물 유형별 best sample 정의는 <b>향후 계획으로 보류</b>, 지금은 POC 개발가치 검증이 우선</p></div>
-      <div class="premise-card"><div class="pn">전제 3</div><p><b>원어민 개입 최소화</b> — 기존 화상영어 세션 마지막 5분만 활용, 별도 콜 추가 없음</p></div>
-      <div class="premise-card"><div class="pn">전제 4</div><p><b>창의성은 평가 항목 아님</b> — 자유 표현은 활동의 일부일 뿐 채점 대상이 아님</p></div>
-      <div class="premise-card"><div class="pn">전제 5</div><p>난이도가 올라가도 원어민 노출은 <b>항상 1회 고정</b>, 자율연습 횟수만 늘림</p></div>
-      <div class="premise-card"><div class="pn">전제 6</div><p>회차 1~3, 문장별 <b>3회 듣기 + 3회 말하기</b>를 기본값으로 설정</p></div>
-      <div class="premise-card"><div class="pn">전제 7</div><p><b>기사 1건 = 수행평가 유형 1개</b> — 한 기사를 여러 유형에 중복 배정하지 않음</p></div>
-      <div class="premise-card"><div class="pn">전제 8</div><p>발음 매칭 점수는 <b>참고용</b> — 실제 발음정확도가 아닌 음성인식 기반 단어 일치도</p></div>
+      <div class="premise-card"><div class="pn">전제 1</div><p>목표 요약문은 <b>압축버전</b>으로 확정 — 초5–6 수행평가 분량·난이도 기준</p></div>
+      <div class="premise-card"><div class="pn">전제 2</div><p>현장 최종결과물 best sample 정의는 <b>향후 계획으로 보류</b></p></div>
+      <div class="premise-card"><div class="pn">전제 3</div><p><b>원어민 개입 최소화</b> — 기존 화상영어 세션 마지막 5분만 활용</p></div>
+      <div class="premise-card"><div class="pn">전제 4</div><p><b>창의성은 평가 항목 아님</b> — 자유 표현은 활동의 일부일 뿐</p></div>
+      <div class="premise-card"><div class="pn">전제 5</div><p>원어민 노출은 <b>항상 1회 고정</b>, 자율연습 횟수만 늘림</p></div>
+      <div class="premise-card"><div class="pn">전제 6</div><p>회차 1–3, 문장별 <b>3회 듣기 + 3회 말하기</b> 기본값</p></div>
+      <div class="premise-card"><div class="pn">전제 7</div><p><b>기사 1건 = 수행평가 유형 1개</b> — 중복 배정 없음</p></div>
+      <div class="premise-card"><div class="pn">전제 8</div><p>발음 매칭 점수는 <b>참고용</b> — 음성인식 기반 단어 일치도</p></div>
     </div>
   </div>
 
-  <div class="section">
-    <h2><span class="num">6</span> 후속 업무</h2>
-    <ol class="steps">
-      <li><b>수행평가 유형분석 지속</b> — 향후계획으로 미뤄둔 "현장 최종결과물 best sample" 정식 조사, 시도교육청별 실제 채점기준 확보</li>
-      <li><b>쓰기(Writing) 영역으로 확장</b><span class="badge-new">NEW</span> — 지금의 4트랙 프레임워크(장르↔유형 매칭, 3회 반복, 그래픽 오거나이저)를 서술형·에세이 등 쓰기 수행평가로 그대로 확장 가능</li>
-      <li><b>자사 ELT 교재 시리즈 연계 확장</b><span class="badge-new">NEW</span> — 콘텐츠 소스를 NE Times 기사뿐 아니라 <b>Speaking Stage</b>, <b>Write Right</b> 시리즈까지 넓혀 동일한 학습 구조를 적용</li>
-      <li><b>학습 포트폴리오 고도화</b> — 이번 POC에 추가한 학습기록 화면을 실제 데이터 연동 및 학부모 열람 기능으로 확장</li>
-      <li><b>B2C → B2B 확장 로드맵 실행</b> — 홈스쿨링 파일럿(8~12주) 운영 후 데이터 기반으로 학원·기관용 클래스 관리 기능으로 확장 (기획안 참고)</li>
+  <div class="brief-section">
+    <h2 class="bs-h2"><span class="bs-num">6</span>후속 업무</h2>
+    <ol class="steps-list">
+      <li><b>수행평가 유형분석 지속</b> — 시도교육청별 실제 채점기준 확보</li>
+      <li><b>쓰기(Writing) 영역으로 확장</b><span class="badge-new">NEW</span> — 4트랙 프레임워크를 서술형·에세이 수행평가로 확장</li>
+      <li><b>자사 ELT 교재 시리즈 연계</b><span class="badge-new">NEW</span> — Speaking Stage, Write Right 시리즈까지 동일 구조 적용</li>
+      <li><b>학습 포트폴리오 고도화</b> — 실제 데이터 연동 및 학부모 열람 기능 확장</li>
+      <li><b>B2C → B2B 확장 로드맵 실행</b> — 홈스쿨링 파일럿(8–12주) 후 클래스 관리 기능으로 확장</li>
     </ol>
   </div>
 
-  <div class="section">
-    <h2><span class="num">7</span> 오늘 버전까지의 주요 개발 이력 <span style="font-size:12px;color:#a89fc0;font-weight:600;">(IT 개발자 인수인계용)</span></h2>
-    <p class="lead">POC가 지금 형태에 이르기까지 거친 주요 결정과 수정 포인트예요. 이어서 설계하실 때 "왜 이렇게 되어 있는지"의 근거로 참고해주세요.</p>
-
-    <div class="future-card">
-      <h3>① 핵심 데이터 구조</h3>
-      <p>ARTICLES 배열의 각 기사는 <b>genre·line·type 3필드</b>로 정확히 1개 조합만 매칭되도록 설계(1기사=1유형 원칙). 각 세션(sessions[0~2])은 이전 세션 내용을 포함하는 <b>누적 배열</b>이며, 문장마다 organizer 필드(beginning/body/pro/con/closing)로 그래픽 오거나이저 색상이 결정돼요.</p>
-    </div>
-    <div class="future-card">
-      <h3>② 학습 진행 단위를 "세션당 1회"에서 "문장당 3회"로 재설계</h3>
-      <p>초기엔 세션 전체를 3번 반복(repDone[3])하는 구조였지만, 문장 단위로 각각 듣기 3회·말하기 3회를 채우는 itemProgress 배열 구조로 전면 교체했어요. 동시에 "지난 시간 복습" / "오늘 배울 문장"을 그룹블록으로 명확히 분리했어요 — 이어붙여 재생하지 않는 게 핵심 요구사항이었어요.</p>
-    </div>
-    <div class="future-card">
-      <h3>③ 발견 및 수정된 버그 2건</h3>
-      <p><b>(a)</b> "학습 시작" 버튼이 반응 없던 문제 — <code>state.screen</code>을 practice로 전환하는 코드가 누락되어 있었어요. 화면 분기 로직 수정 시 상태값 갱신 여부를 꼭 확인해주세요.<br>
-      <b>(b)</b> 자유입력(개인 답변) 값이 회차 이동 시 사라지던 문제 — 세션 전환마다 practice 객체를 초기화하는데 자유텍스트도 같이 날아갔어요. articleId+문장idx를 키로 하는 별도 저장소(freeAnswers)로 분리해서 세션 전환과 무관하게 유지되도록 수정했어요.</p>
-    </div>
-    <div class="future-card">
-      <h3>④ TTS(음성재생) 안정화</h3>
-      <p>크롬에서 <code>speechSynthesis.cancel()</code> 직후 곧바로 <code>speak()</code>를 호출하면 소리가 아예 안 나는 레이스컨디션이 있어서, 취소와 재생 사이에 120ms 지연을 넣었어요. 보이스를 명시하지 않으면 엉뚱한 보이스가 잡힐 수 있어 en-US 보이스를 직접 선택하도록 했고, onend가 안 불릴 경우를 대비해 타임아웃 안전장치도 넣었어요. 화면 전환 시엔 항상 재생 큐를 취소하도록 처리했어요.</p>
-    </div>
-    <div class="future-card">
-      <h3>⑤ 발음 매칭 엔진 — 반드시 "참고용" 라벨 유지할 것</h3>
-      <p>webkitSpeechRecognition으로 실시간 전사한 뒤 목표 문장과 단어 단위 일치율(%)만 계산하는 방식이에요. <b>실제 음소 단위 발음 평가가 아니에요</b> — UI 문구에서 이 구분을 절대 빼지 마세요. 미지원 브라우저(Safari 등)는 자리표시자만 노출돼요.</p>
-    </div>
-    <div class="future-card">
-      <h3>⑥ UI는 2단계로 개편됨</h3>
-      <p>① "장르·유형별 개별 카드+드롭다운" → ② "3개 필터 선택 시 동적 결과" → ③ "책 표지 스타일 이미지 그리드 카탈로그(3:4 비율)" 순으로 발전했어요. 실제 이미지가 확보된 기사(이정후·Malala)만 &lt;img&gt;로 렌더링하고, 실패 시 아이콘으로 자동 폴백되도록 onerror 처리를 해뒀어요.</p>
-    </div>
-    <div class="future-card">
-      <h3>⑦ 콘텐츠 규칙: 인터뷰형(kind:'qa')은 자유입력을 지양</h3>
-      <p>Malala 인터뷰의 마지막 질문이 원래 자유 서술형이었는데, "인터뷰 대본은 정해진 클로징 패턴이 있다"는 피드백으로 "Thank you.../My pleasure." 고정 교환으로 바꿨어요. 즉 인터뷰형 트랙은 원칙적으로 완전 자유 응답을 넣지 않는 방향으로 확정됐어요 (PPT형은 개인화 슬라이드 1장 정도의 자유입력은 허용).</p>
-    </div>
-    <div class="future-card">
-      <h3>⑧ 알려진 리소스 제약 — 개발 착수 전 반드시 해결 필요</h3>
-      <p><b>이미지</b>: 로그인 필요 페이지는 서버사이드에서 이미지 URL을 못 가져와요(Busan·Delivery Robots). 무료 공개 기사와 그 목차 페이지에 노출된 관련기사 썸네일만 비로그인으로 확보 가능했어요 → 정식 개발 시 NE Times 이미지 CDN에 대한 인증된 접근 경로가 필요해요.<br>
-      <b>폰트</b>: DengXian은 마이크로소프트 전용 라이선스 폰트라 무료 웹폰트로 쓸 수 없어요(임베딩 제한 명시) → Noto Sans KR + Inter + Nunito 조합으로 대체했어요.<br>
-      <b>음성인식</b>: webkitSpeechRecognition은 Chrome 계열에서만 동작해요.</p>
-    </div>
-    <div class="future-card">
-      <h3>⑨ 학습 포트폴리오</h3>
-      <p>코칭 rubric 4개 항목이 모두 체크되는 시점에 자동으로 기록 1건이 로깅돼요(학습일·기사명·유형·난이도·장르·신문라인·호수·발행일). 데모용 샘플 기록 2건이 기본 포함돼 있어요 — 실서비스 연동 시 이 시드 데이터는 제거해야 해요.</p>
-    </div>
+  <div class="brief-section">
+    <h2 class="bs-h2"><span class="bs-num">7</span>주요 개발 이력 <span style="font-size:12px;color:var(--gray);font-weight:600;">(IT 개발자 인수인계용)</span></h2>
+    <p class="bs-lead">POC가 지금 형태에 이르기까지 거친 주요 결정과 수정 포인트예요.</p>
+    <div class="dev-card"><h3>① 핵심 데이터 구조</h3><p>ARTICLES 배열의 각 기사는 <b>genre·line·type 3필드</b>로 정확히 1개 조합만 매칭 (1기사=1유형 원칙). 각 세션은 이전 세션 내용을 포함하는 <b>누적 배열</b>이며, 문장마다 organizer 필드로 그래픽 오거나이저 색상이 결정돼요.</p></div>
+    <div class="dev-card"><h3>② 학습 진행 단위 재설계</h3><p>세션 전체 3회 반복에서 → 문장 단위 각각 듣기 3회·말하기 3회를 채우는 itemProgress 배열 구조로 전면 교체. "지난 시간 복습" / "오늘 배울 문장"을 그룹블록으로 명확히 분리했어요.</p></div>
+    <div class="dev-card"><h3>③ 발견 및 수정된 버그 2건</h3><p><b>(a)</b> "학습 시작" 버튼 미반응 — <code>state.screen</code>을 practice로 전환하는 코드 누락. 화면 분기 로직 수정 시 상태값 갱신 여부 필수 확인.<br><b>(b)</b> 자유입력 값이 회차 이동 시 삭제 — articleId+문장idx 키로 별도 저장소(freeAnswers)로 분리 해결.</p></div>
+    <div class="dev-card"><h3>④ TTS 안정화</h3><p><code>speechSynthesis.cancel()</code> 직후 <code>speak()</code> 호출 시 소리 미출력 레이스컨디션 → 120ms 지연 삽입. en-US 보이스 직접 선택, onend 미발동 대비 타임아웃 안전장치, 화면 전환 시 재생 큐 취소 처리.</p></div>
+    <div class="dev-card"><h3>⑤ 발음 매칭 엔진 — "참고용" 라벨 유지 필수</h3><p>webkitSpeechRecognition으로 실시간 전사 후 단어 단위 일치율(%)만 계산. <b>실제 음소 단위 발음 평가가 아니에요</b> — UI 문구에서 이 구분을 절대 제거하지 마세요.</p></div>
+    <div class="dev-card"><h3>⑥ UI 개편 이력</h3><p>"장르·유형별 개별 카드+드롭다운" → "3개 필터 동적 결과" → "책 표지 스타일 이미지 그리드(3:4 비율)" 순으로 발전. 실제 이미지 확보 기사만 &lt;img&gt; 렌더링, 실패 시 아이콘으로 자동 폴백(onerror 처리).</p></div>
+    <div class="dev-card"><h3>⑦ 콘텐츠 규칙: 인터뷰형(kind:'qa') 자유입력 지양</h3><p>Malala 인터뷰 마지막 질문이 원래 자유 서술형이었으나, "Thank you.../My pleasure." 고정 교환으로 변경 확정. 인터뷰형 트랙은 원칙적으로 완전 자유 응답을 넣지 않음.</p></div>
+    <div class="dev-card"><h3>⑧ 알려진 리소스 제약</h3><p><b>이미지</b>: 로그인 필요 페이지는 이미지 URL 미확보 → 정식 개발 시 NE Times 이미지 CDN 인증 접근 경로 필요.<br><b>폰트</b>: DengXian은 마이크로소프트 전용 라이선스 → Noto Sans KR + Inter + Nunito 조합으로 대체.<br><b>음성인식</b>: webkitSpeechRecognition은 Chrome 계열에서만 동작.</p></div>
+    <div class="dev-card"><h3>⑨ 학습 포트폴리오</h3><p>코칭 rubric 4개 항목이 모두 체크되는 시점에 기록 1건이 자동 로깅돼요. 데모용 샘플 기록 2건이 기본 포함됩니다 — 실서비스 연동 시 이 시드 데이터는 반드시 제거해야 해요.</p></div>
   </div>
 
-  <footer>NE Times 수행평가랩 · 내부 공유용 프로젝트 브리프</footer>
+</div><!-- brief-wrap -->
+</div><!-- screen-brief -->
+
+<!-- ════════ LAB 화면 ════════ -->
+<div class="screen" id="screen-lab">
+  <div id="lab-app"></div>
 </div>
 
+<div id="toast"></div>
+
+<script>
+/* ── TAB SWITCHING ── */
+function switchTab(id){
+  document.querySelectorAll('.app-tab').forEach(function(t){t.classList.remove('on','on-lab');});
+  document.querySelectorAll('.screen').forEach(function(s){s.classList.remove('on');});
+  document.getElementById('screen-'+id).classList.add('on');
+  var t = document.getElementById('tab-'+id);
+  t.classList.add(id==='lab'?'on-lab':'on');
+  if(id==='lab') render();
+  window.scrollTo(0,0);
+}
+
+function gToast(msg){
+  var t=document.getElementById('toast');
+  t.textContent=msg; t.classList.add('on');
+  clearTimeout(t._t);
+  t._t=setTimeout(function(){t.classList.remove('on');},2600);
+}
+
+/* ════════════════════════════
+   DATA
+════════════════════════════ */
+var GENRES = ['찬반토론형','사건보도형','장소·통계형','인물전기형'];
+var TYPES  = ['기사요약 말하기','1분 스피치','PPT 발표','인터뷰 대본 말하기'];
+var LINES  = ['KIDS','JUNIOR','KINDER','TIMES'];
+
+var ARTICLES = [
+  {
+    id:0, icon:'📰', issueLabel:'NE Times KIDS', dateLabel:'-', levelLabel:'Lv.3',
+    title:'Delivery Robots', genre:'찬반토론형', type:'기사요약 말하기', line:'KIDS',
+    url:'https://www.netimes.co.kr/pages/kids/reading.asp?seq=37099',
+    urlNote:'실제 기사 링크 (로그인 필요)',
+    kind:'lines',
+    sessions:[
+      [{tag:'Beginning',organizer:'beginning',text:'This article talks about delivery robots.',ko:'이 기사는 배달 로봇에 대한 이야기예요.'},
+       {tag:'Beginning',organizer:'beginning',text:'The question is, should people use delivery robots?',ko:'질문은, 사람들이 배달 로봇을 사용해야 할까요?'}],
+      [{tag:'Beginning',organizer:'beginning',text:'This article talks about delivery robots.',ko:'이 기사는 배달 로봇에 대한 이야기예요.'},
+       {tag:'Beginning',organizer:'beginning',text:'The question is, should people use delivery robots?',ko:'질문은, 사람들이 배달 로봇을 사용해야 할까요?'},
+       {tag:'Body · 찬성',organizer:'pro',text:"Some people, like Sue and Dave, think it's good because robots work hard and save money.",ko:'Sue와 Dave 같은 사람들은 로봇이 열심히 일하고 돈을 절약해줘서 좋다고 생각해요.'}],
+      [{tag:'Beginning',organizer:'beginning',text:'This article talks about delivery robots.',ko:'이 기사는 배달 로봇에 대한 이야기예요.'},
+       {tag:'Beginning',organizer:'beginning',text:'The question is, should people use delivery robots?',ko:'질문은, 사람들이 배달 로봇을 사용해야 할까요?'},
+       {tag:'Body · 찬성',organizer:'pro',text:"Some people, like Sue and Dave, think it's good because robots work hard and save money.",ko:'Sue와 Dave 같은 사람들은 로봇이 열심히 일하고 돈을 절약해줘서 좋다고 생각해요.'},
+       {tag:'Body · 반대',organizer:'con',text:"But others, like Steve and Ellen, think it's bad because robots can cause accidents and take away jobs.",ko:'하지만 Steve와 Ellen 같은 사람들은 로봇이 사고를 일으키고 일자리를 빼앗을 수 있어서 나쁘다고 생각해요.'}]
+    ],
+    rubricExtra:'찬성과 반대 의견이 잘 구분됐나요?'
+  },
+  {
+    id:1, icon:'🎤', issueLabel:'NE Times JUNIOR 136호', dateLabel:'2026.07.06', levelLabel:'LEVEL 1',
+    title:'Lee Sets Hit Streak Record', genre:'사건보도형', type:'1분 스피치', line:'JUNIOR',
+    img:'https://upfile.neungyule.com/upload_admin/2026/07/136_p06.jpg',
+    url:'https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=37110',
+    urlNote:'실제 기사 링크 (로그인 필요)',
+    kind:'lines',
+    sessions:[
+      [{tag:'Beginning',organizer:'beginning',text:'Breaking news! Lee Jung-hoo just broke a big record.',ko:'속보입니다! 이정후 선수가 대기록을 세웠습니다.'},
+       {tag:'Body',organizer:'body',text:'On June 10th, he got a hit in his 18th game in a row.',ko:'6월 10일, 그는 18경기 연속 안타를 기록했습니다.'}],
+      [{tag:'Beginning',organizer:'beginning',text:'Breaking news! Lee Jung-hoo just broke a big record.',ko:'속보입니다! 이정후 선수가 대기록을 세웠습니다.'},
+       {tag:'Body',organizer:'body',text:'On June 10th, he got a hit in his 18th game in a row.',ko:'6월 10일, 그는 18경기 연속 안타를 기록했습니다.'},
+       {tag:'Body',organizer:'body',text:"That's the new Korean record in MLB, breaking the old 16-game record.",ko:'이는 기존 16경기 기록을 넘어선 MLB 한국인 신기록입니다.'},
+       {tag:'Body',organizer:'body',text:'He started this streak on May 14th, playing for the San Francisco Giants.',ko:'그는 샌프란시스코 자이언츠 소속으로 5월 14일부터 이 기록 행진을 시작했습니다.'}],
+      [{tag:'Beginning',organizer:'beginning',text:'Breaking news! Lee Jung-hoo just broke a big record.',ko:'속보입니다! 이정후 선수가 대기록을 세웠습니다.'},
+       {tag:'Body',organizer:'body',text:'On June 10th, he got a hit in his 18th game in a row.',ko:'6월 10일, 그는 18경기 연속 안타를 기록했습니다.'},
+       {tag:'Body',organizer:'body',text:"That's the new Korean record in MLB, breaking the old 16-game record.",ko:'이는 기존 16경기 기록을 넘어선 MLB 한국인 신기록입니다.'},
+       {tag:'Body',organizer:'body',text:'He started this streak on May 14th, playing for the San Francisco Giants.',ko:'그는 샌프란시스코 자이언츠 소속으로 5월 14일부터 이 기록 행진을 시작했습니다.'},
+       {tag:'Closing',organizer:'closing',text:'I think breaking records shows how hard athletes work.',ko:'저는 기록을 깨는 것이 선수들이 얼마나 열심히 노력하는지를 보여준다고 생각해요.'}]
+    ],
+    rubricExtra:'1분 안에 마무리했나요?'
+  },
+  {
+    id:2, icon:'📊', issueLabel:'NE Times JUNIOR 133호', dateLabel:'2026.06.15', levelLabel:'LEVEL 2',
+    title:'Busan Reaches One Million Tourists', genre:'장소·통계형', type:'PPT 발표', line:'JUNIOR',
+    url:'https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=36912',
+    urlNote:'실제 기사 링크 (로그인 필요)',
+    kind:'slides',
+    sessions:[
+      [{num:1,tag:'Beginning',organizer:'beginning',text:'Busan is one of the most popular travel cities in Korea.',ko:'부산은 한국에서 가장 인기 있는 여행 도시 중 하나예요.'},
+       {num:2,tag:'Body',organizer:'body',text:"In early 2026, about 1 million tourists visited Busan. That's a new record!",ko:'2026년 초, 약 100만 명의 관광객이 부산을 방문했어요.'}],
+      [{num:1,tag:'Beginning',organizer:'beginning',text:'Busan is one of the most popular travel cities in Korea.',ko:'부산은 한국에서 가장 인기 있는 여행 도시 중 하나예요.'},
+       {num:2,tag:'Body',organizer:'body',text:"In early 2026, about 1 million tourists visited Busan. That's a new record!",ko:'2026년 초, 약 100만 명의 관광객이 부산을 방문했어요.'},
+       {num:3,tag:'Body',organizer:'body',text:'Many tourists come by cruise ship, and that number is growing fast.',ko:'많은 관광객이 크루즈를 타고 오는데, 그 수가 빠르게 늘고 있어요.'},
+       {num:4,tag:'Body',organizer:'body',freeInput:true,placeholder:'This reminds me of a trip I took to ___.'}],
+      [{num:1,tag:'Beginning',organizer:'beginning',text:'Busan is one of the most popular travel cities in Korea.',ko:'부산은 한국에서 가장 인기 있는 여행 도시 중 하나예요.'},
+       {num:2,tag:'Body',organizer:'body',text:"In early 2026, about 1 million tourists visited Busan. That's a new record!",ko:'2026년 초, 약 100만 명의 관광객이 부산을 방문했어요.'},
+       {num:3,tag:'Body',organizer:'body',text:'Many tourists come by cruise ship, and that number is growing fast.',ko:'많은 관광객이 크루즈를 타고 오는데, 그 수가 빠르게 늘고 있어요.'},
+       {num:4,tag:'Body',organizer:'body',freeInput:true,placeholder:'This reminds me of a trip I took to ___.'},
+       {num:5,tag:'Closing',organizer:'closing',text:'I think Busan will become even more popular in the future.',ko:'저는 부산이 앞으로 더 인기 있어질 거라고 생각해요.'}]
+    ],
+    rubricExtra:'슬라이드 순서에 맞게 설명했나요?'
+  },
+  {
+    id:3, icon:'🎙️', issueLabel:'NE Times JUNIOR 136호', dateLabel:'2026.07.06', levelLabel:'LEVEL 3',
+    title:'Malala Yousafzai', genre:'인물전기형', type:'인터뷰 대본 말하기', line:'JUNIOR',
+    img:'https://upfile.neungyule.com/upload_admin/2026/07/136_p10.jpg',
+    url:'https://www.netimes.co.kr/pages/weekjunior/reading.asp?seq=37114',
+    urlNote:'실제 기사 링크 (로그인 필요)',
+    kind:'qa',
+    sessions:[
+      [{tag:'Beginning',organizer:'beginning',q:"Malala, why did you speak out for girls' education?",a:'Because I believe every child should be able to go to school.',ko:'말랄라, 왜 여성 교육을 위해 목소리를 냈나요? — 저는 모든 아이가 학교에 갈 수 있어야 한다고 믿기 때문이에요.'},
+       {tag:'Body',organizer:'body',q:'What happened to you in 2012?',a:'A gunman attacked me on a bus, but I survived.',ko:'2012년에 무슨 일이 있었나요? — 버스에서 총격범의 공격을 받았지만 저는 살아남았어요.'}],
+      [{tag:'Beginning',organizer:'beginning',q:"Malala, why did you speak out for girls' education?",a:'Because I believe every child should be able to go to school.',ko:'말랄라, 왜 여성 교육을 위해 목소리를 냈나요? — 저는 모든 아이가 학교에 갈 수 있어야 한다고 믿기 때문이에요.'},
+       {tag:'Body',organizer:'body',q:'What happened to you in 2012?',a:'A gunman attacked me on a bus, but I survived.',ko:'2012년에 무슨 일이 있었나요? — 버스에서 총격범의 공격을 받았지만 저는 살아남았어요.'},
+       {tag:'Body',organizer:'body',q:'What did you achieve in 2014?',a:'I won the Nobel Peace Prize when I was only 17.',ko:'2014년에 무엇을 이루었나요? — 저는 겨우 17살에 노벨평화상을 받았어요.'}],
+      [{tag:'Beginning',organizer:'beginning',q:"Malala, why did you speak out for girls' education?",a:'Because I believe every child should be able to go to school.',ko:'말랄라, 왜 여성 교육을 위해 목소리를 냈나요? — 저는 모든 아이가 학교에 갈 수 있어야 한다고 믿기 때문이에요.'},
+       {tag:'Body',organizer:'body',q:'What happened to you in 2012?',a:'A gunman attacked me on a bus, but I survived.',ko:'2012년에 무슨 일이 있었나요? — 버스에서 총격범의 공격을 받았지만 저는 살아남았어요.'},
+       {tag:'Body',organizer:'body',q:'What did you achieve in 2014?',a:'I won the Nobel Peace Prize when I was only 17.',ko:'2014년에 무엇을 이루었나요? — 저는 겨우 17살에 노벨평화상을 받았어요.'},
+       {tag:'Closing',organizer:'closing',q:'Thank you so much for talking with us today.',a:'Thank you for having me. It was my pleasure.',ko:'오늘 이야기 나눠주셔서 정말 감사합니다. — 초대해주셔서 감사해요. 저야말로 즐거웠습니다.'}]
+    ],
+    rubricExtra:'질문에 자연스럽게 답했나요?'
+  }
+];
+
+/* ── STATE ── */
+var state = { screen:'library', articleId:null, session:1 };
+var filterState = { genre:'찬반토론형', line:'KIDS', type:'기사요약 말하기' };
+var practice = {};
+var rubricSel = {};
+var coachingRec = {};
+var freeAnswers = {};
+var portfolio = [
+  {studyDate:'2026.07.05',title:'Delivery Robots',type:'기사요약 말하기',level:'Lv.3',genre:'찬반토론형',line:'KIDS',issueLabel:'NE Times KIDS',pubDate:'-'},
+  {studyDate:'2026.07.06',title:'Lee Sets Hit Streak Record',type:'1분 스피치',level:'LEVEL 1',genre:'사건보도형',line:'JUNIOR',issueLabel:'NE Times JUNIOR 136호',pubDate:'2026.07.06'}
+];
+
+function todayStr(){var d=new Date();return d.getFullYear()+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+String(d.getDate()).padStart(2,'0');}
+
+/* ── PRACTICE RESET ── */
+function resetPractice(){
+  practice={itemProgress:[],finalRecordingState:'idle',finalAudioURL:null,finalMediaRecorder:null,finalAudioChunks:[]};
+}
+function ensureItemProgress(items){
+  if(!practice.itemProgress) practice.itemProgress=[];
+  items.forEach(function(_,i){
+    if(!practice.itemProgress[i]) practice.itemProgress[i]={listen:0,speak:0,score:null,audioURL:null,recording:false,micError:false,mediaRecorder:null,_recognizer:null};
+  });
+}
+
+/* ── HELPERS ── */
+function supportsRecognition(){return !!(window.SpeechRecognition||window.webkitSpeechRecognition);}
+function itemTargetText(it){return it.text||(it.q?(it.q+'. '+(it.a||'')):'');}
+function getFreeAnswer(aId,idx){return(freeAnswers[aId]&&freeAnswers[aId][idx])||'';}
+function setFreeAnswer(aId,idx,val){if(!freeAnswers[aId])freeAnswers[aId]={};freeAnswers[aId][idx]=val;}
+function matchScore(target,transcript){
+  var norm=function(s){return(s||'').toLowerCase().replace(/[^a-z0-9\s']/g,'').split(/\s+/).filter(Boolean);};
+  var t=norm(target),r=norm(transcript);
+  if(!t.length) return 0;
+  var matched=0,pool=r.slice();
+  t.forEach(function(w){var idx=pool.indexOf(w);if(idx>-1){matched++;pool.splice(idx,1);}});
+  return Math.round(matched/t.length*100);
+}
+
+/* ── TTS ── */
+var cachedVoices=[];
+function loadVoices(){try{cachedVoices=window.speechSynthesis.getVoices()||[];}catch(e){}}
+loadVoices();
+try{if(window.speechSynthesis)window.speechSynthesis.onvoiceschanged=loadVoices;}catch(e){}
+function pickEnglishVoice(){
+  if(!cachedVoices.length) loadVoices();
+  return cachedVoices.find(function(v){return v.lang==='en-US';})||cachedVoices.find(function(v){return v.lang&&v.lang.toLowerCase().startsWith('en');})||null;
+}
+function cancelSpeech(){try{if(window.speechSynthesis)window.speechSynthesis.cancel();}catch(e){}}
+function speakOne(text,onend){
+  var synth=window.speechSynthesis;
+  if(!synth){if(onend)onend();return;}
+  try{synth.cancel();}catch(e){}
+  setTimeout(function(){
+    try{
+      var u=new SpeechSynthesisUtterance(text);
+      u.lang='en-US';u.rate=0.9;
+      var v=pickEnglishVoice();if(v)u.voice=v;
+      var done=false;
+      var finish=function(){if(done)return;done=true;if(onend)onend();};
+      u.onend=finish;u.onerror=finish;
+      synth.speak(u);
+      setTimeout(function(){if(!done&&!synth.speaking)finish();},Math.max(2500,text.length*90));
+    }catch(e){if(onend)onend();}
+  },120);
+}
+var playToken=0,modelPlaying=false;
+function playSequence(texts,onProgress,onDone){
+  var synth=window.speechSynthesis;
+  var myToken=++playToken;
+  if(!synth){if(onDone)onDone();return;}
+  try{synth.cancel();}catch(e){}
+  var i=0;
+  function step(){
+    if(myToken!==playToken)return;
+    if(i>=texts.length){if(onDone)onDone();return;}
+    if(onProgress)onProgress(i);
+    setTimeout(function(){
+      if(myToken!==playToken)return;
+      try{
+        var u=new SpeechSynthesisUtterance(texts[i]);
+        u.lang='en-US';u.rate=0.9;
+        var v=pickEnglishVoice();if(v)u.voice=v;
+        var done=false;
+        var finish=function(){if(done)return;done=true;if(myToken===playToken){i++;step();}};
+        u.onend=finish;u.onerror=finish;
+        synth.speak(u);
+        setTimeout(function(){if(!done&&!synth.speaking&&myToken===playToken)finish();},Math.max(2500,texts[i].length*90));
+      }catch(e){if(myToken===playToken){i++;step();}}
+    },120);
+  }
+  step();
+}
+function stopSequence(){playToken++;cancelSpeech();}
+
+/* ══════════════════════════
+   RENDER
+══════════════════════════ */
+function render(){
+  var app=document.getElementById('lab-app');
+  if(!app)return;
+  if(state.screen==='library'){app.innerHTML=renderLibrary();return;}
+  if(state.screen==='portfolio'){app.innerHTML=renderPortfolio();return;}
+  app.innerHTML=renderPractice(ARTICLES[state.articleId]);
+}
+
+/* ── LIBRARY ── */
+function renderLibrary(){
+  var matches=findMatches();
+  var booksHTML=matches.length
+    ?('<div class="book-grid">'+matches.map(renderBookCard).join('')+'</div>')
+    :('<div class="empty-box">🔍 이 조합에 맞는 기사가 아직 없어요.<br>아래 연결된 조합을 참고해보세요.</div>');
+  return '<div class="lab-wrap">'
+    +'<div class="lab-header"><div class="lab-header-kicker">NE Times 수행평가랩</div><h2>🔎 오늘의 학습 조건 선택</h2><p>조건에 맞는 기사가 자동으로 나와요</p></div>'
+    +'<div class="filter-panel">'
+    +'<div class="filter-row"><div class="filter-group"><div class="filter-label">1. 기사 장르</div><select class="filter-select" onchange="onFilterChange(\'genre\',this.value)">'
+    +GENRES.map(function(g){return '<option value="'+g+'"'+(g===filterState.genre?' selected':'')+'>'+g+'</option>';}).join('')
+    +'</select></div></div>'
+    +'<div class="filter-row">'
+    +'<div class="filter-group"><div class="filter-label">2. 신문 난이도</div><select class="filter-select" onchange="onFilterChange(\'line\',this.value)">'
+    +LINES.map(function(l){return '<option value="'+l+'"'+(l===filterState.line?' selected':'')+'>'+l+'</option>';}).join('')
+    +'</select></div>'
+    +'<div class="filter-group"><div class="filter-label">3. 수행과제 유형</div><select class="filter-select" onchange="onFilterChange(\'type\',this.value)">'
+    +TYPES.map(function(t){return '<option value="'+t+'"'+(t===filterState.type?' selected':'')+'>'+t+'</option>';}).join('')
+    +'</select></div>'
+    +'</div></div>'
+    +'<div class="result-bar"><div class="result-count">검색결과 '+matches.length+'건</div><button class="portfolio-btn" onclick="goPortfolio()">📋 내 학습 기록</button></div>'
+    +booksHTML
+    +'<div class="legend-panel"><div class="legend-title">💡 지금 데모에서 실제로 연결된 조합</div>'
+    +ARTICLES.map(function(a){return '<div class="legend-item" onclick="applyPreset('+a.id+')">'+a.icon+' <b>'+a.genre+'</b> · '+a.line+' · '+a.type+' <span class="legend-arrow">→ '+a.title+'</span></div>';}).join('')
+    +'</div></div>';
+}
+
+function renderBookCard(a){
+  var coverInner=a.img
+    ?('<img src="'+a.img+'" alt="'+a.title+'" onerror="this.style.display=\'none\';this.nextElementSibling.style.display=\'flex\';"><span class="cover-fallback">'+a.icon+'</span>')
+    :a.icon;
+  return '<div class="book-card" onclick="startArticleById('+a.id+')">'
+    +'<div class="book-cover cov'+a.id+'">'+coverInner+'</div>'
+    +'<div class="book-inner">'
+    +'<div class="book-code">'+a.line+'-'+String(a.id+1).padStart(2,'0')+'</div>'
+    +'<div class="book-title">'+a.title+'</div>'
+    +'<div class="book-meta">'+a.levelLabel+' · '+a.dateLabel+'</div>'
+    +'<a class="book-link" href="'+a.url+'" target="_blank" rel="noopener" onclick="event.stopPropagation()">원문 보기 ↗</a>'
+    +'</div></div>';
+}
+
+function onFilterChange(key,value){filterState[key]=value;render();}
+function applyPreset(id){var a=ARTICLES[id];filterState={genre:a.genre,line:a.line,type:a.type};render();}
+function findMatches(){return ARTICLES.filter(function(a){return a.genre===filterState.genre&&a.line===filterState.line&&a.type===filterState.type;});}
+function startArticleById(id){
+  var a=ARTICLES[id];
+  cancelSpeech();
+  delete coachingRec[a.id];delete rubricSel[a.id];freeAnswers[a.id]={};
+  state.screen='practice';state.articleId=a.id;state.session=1;resetPractice();
+  render();
+}
+function goPortfolio(){state.screen='portfolio';render();}
+function backToLibraryFromPortfolio(){state.screen='library';render();}
+function backToLibrary(){stopSequence();modelPlaying=false;state.screen='library';render();}
+function goSession(n){stopSequence();modelPlaying=false;state.session=n;resetPractice();render();}
+
+/* ── PORTFOLIO ── */
+function renderPortfolio(){
+  return '<div class="lab-wrap">'
+    +'<div class="lab-header"><div class="lab-header-kicker">학습 기록</div><h2>📋 내 학습 포트폴리오</h2><p>지금까지 완료한 학습을 확인해요</p></div>'
+    +'<div style="margin-bottom:14px;"><button class="portfolio-btn" onclick="backToLibraryFromPortfolio()">← 라이브러리로</button></div>'
+    +(portfolio.length?renderPortfolioList():'<div class="empty-box">아직 완료한 학습 기록이 없어요.</div>')
+    +'<div class="hint" style="margin-top:12px;">* 데모 편의를 위한 샘플 기록 2건이 포함돼 있어요.</div>'
+    +'</div>';
+}
+function renderPortfolioList(){
+  return '<div class="pf-list">'+portfolio.slice().reverse().map(function(p){
+    var stripped=p.issueLabel.replace('NE Times','').replace(p.line,'').trim()||'-';
+    return '<div class="pf-card"><div class="pf-top"><span class="pf-date">✅ '+p.studyDate+' 완료</span><span class="pf-type">'+p.type+'</span></div>'
+      +'<div class="pf-title">'+p.title+'</div>'
+      +'<div class="pf-badges"><span class="pf-badge">'+p.line+'</span><span class="pf-badge">'+stripped+'</span><span class="pf-badge">발행일 '+p.pubDate+'</span><span class="pf-badge">'+p.level+'</span><span class="pf-badge">'+p.genre+'</span></div>'
+      +'</div>';
+  }).join('')+'</div>';
+}
+
+/* ── PRACTICE ── */
+function renderPractice(a){
+  var sessLabel=state.session==='coaching'?'원어민 코칭':state.session+'회차';
+  return '<div class="prac-topbar"><h1>'+a.icon+' '+a.title+'</h1><p>'+a.type+' · '+sessLabel+'</p><p class="pub">'+a.issueLabel+' · '+a.dateLabel+' · '+a.levelLabel+'</p></div>'
+    +'<div class="prac-body">'
+    +'<div class="backline" onclick="backToLibrary()">← 라이브러리로</div>'
+    +'<div class="tabbar">'
+    +[1,2,3].map(function(n){return '<div class="tab'+(state.session===n?' active':'')+(typeof state.session==='number'&&state.session>n?' done':'')+'" onclick="goSession('+n+')">'+n+'회차</div>';}).join('')
+    +'<div class="tab'+(state.session==='coaching'?' active':'')+'" onclick="goSession(\'coaching\')">코칭</div>'
+    +'</div>'
+    +(state.session==='coaching'?renderCoaching(a):renderSession(a))
+    +'</div>';
+}
+
+function renderSession(a){
+  var items=a.sessions[state.session-1];
+  ensureItemProgress(items);
+  var prevCount=state.session>1?a.sessions[state.session-2].length:0;
+  var reviewItems=items.slice(0,prevCount);
+  var newItems=items.slice(prevCount);
+  var allSentenceDone=items.every(function(it,i){return it.freeInput?true:(practice.itemProgress[i].listen>=3&&practice.itemProgress[i].speak>=3);});
+  var allFreeFilled=items.every(function(it,i){return !it.freeInput||getFreeAnswer(state.articleId,i).trim().length>0;});
+  var finalOk=state.session!==3||practice.finalRecordingState==='recorded';
+  var nextEnabled=allSentenceDone&&allFreeFilled&&finalOk;
+  return (reviewItems.length?'<div class="group-block"><div class="group-title">📖 지난 시간 복습</div>'+reviewItems.map(function(it,i){return renderItemCard(a,i,it);}).join('')+'</div>':'')
+    +'<div class="group-block"><div class="group-title">✨ 오늘 배울 문장</div>'+newItems.map(function(it,i){return renderItemCard(a,prevCount+i,it);}).join('')+'</div>'
+    +(state.session===3?renderFinalRecordBlock(a):'')
+    +'<div class="nav-row">'
+    +(state.session>1?'<button class="nav-btn nav-back" onclick="goSession('+(state.session-1)+')">←</button>':'')
+    +'<button class="nav-btn nav-next"'+(nextEnabled?'':' disabled')+' onclick="nextFromSession()">'+(state.session===3?'원어민 코칭으로':'다음 회차')+'</button>'
+    +'</div>';
+}
+function nextFromSession(){if(state.session===3)goSession('coaching');else goSession(state.session+1);}
+
+function renderItemCard(a,idx,it){
+  var p=practice.itemProgress[idx];
+  var orgClass='sent-card org-'+(it.organizer||'body');
+  var tagClass='sent-tag tag-'+(it.organizer||'body');
+  if(it.freeInput){
+    var val=getFreeAnswer(state.articleId,idx);
+    var label=a.kind==='qa'?('<div class="sent-q">Q. '+it.q+'</div>'):(a.kind==='slides'?('<div class="sent-num">Slide '+it.num+'</div>'):'');
+    return '<div class="'+orgClass+'" id="sent-'+idx+'"><span class="'+tagClass+'">'+it.tag+'</span>'+label
+      +'<textarea placeholder="'+it.placeholder+'" oninput="onFreeInput('+idx+',this.value)">'+val+'</textarea></div>';
+  }
+  var prefix=a.kind==='slides'?('<div class="sent-num">Slide '+it.num+'</div>'):a.kind==='qa'?('<div class="sent-q">Q. '+it.q+'</div>'):'';
+  var mainLine=a.kind==='qa'?('<div class="sent-a">A. '+it.a+'</div>'):('<div class="sent-a">'+it.text+'</div>');
+  var koLine=it.ko?('<div class="sent-ko">'+it.ko+'</div>'):'';
+  var listenDone=p.listen>=3,speakDone=p.speak>=3;
+  var scoreLine=p.score!==null
+    ?('<div class="mini-score">🎯 매칭 '+p.score+'% <span class="hint">(참고용 — 실제 발음정확도 아님)</span></div>')
+    :(p.speak>0&&!supportsRecognition()?'<div class="mini-score hint">🔧 발음 매칭 엔진 자리 (Chrome 권장)</div>':'');
+  return '<div class="'+orgClass+'" id="sent-'+idx+'">'
+    +'<span class="'+tagClass+'">'+it.tag+'</span>'
+    +prefix+mainLine+koLine
+    +'<div class="sent-controls">'
+    +'<button class="mini-btn'+(listenDone?' done':'')+'" onclick="listenItem('+idx+')">🔊 듣기 '+p.listen+'/3</button>'
+    +'<button class="mini-btn'+(speakDone?' done':'')+(p.recording?' recording':'')+'" onclick="toggleItemRec('+idx+')">'+(p.recording?'⏹':'🎤')+' 말하기 '+p.speak+'/3</button>'
+    +'</div>'
+    +scoreLine
+    +(p.audioURL?'<audio controls src="'+p.audioURL+'"></audio>':'')
+    +(p.micError?'<div class="hint">🎙️ 마이크 없이 완료 처리됐어요</div>':'')
+    +'</div>';
+}
+
+function refreshItemCard(a,idx,it){
+  var el=document.getElementById('sent-'+idx);
+  if(el)el.outerHTML=renderItemCard(a,idx,it);
+  refreshNextButton();
+}
+function refreshNextButton(){
+  var art=ARTICLES[state.articleId];
+  var items=art.sessions[state.session-1];
+  var allSD=items.every(function(it,i){return it.freeInput?true:(practice.itemProgress[i].listen>=3&&practice.itemProgress[i].speak>=3);});
+  var allFF=items.every(function(it,i){return !it.freeInput||getFreeAnswer(state.articleId,i).trim().length>0;});
+  var fOk=state.session!==3||practice.finalRecordingState==='recorded';
+  var btn=document.querySelector('.nav-next');
+  if(btn)btn.disabled=!(allSD&&allFF&&fOk);
+}
+function onFreeInput(idx,val){setFreeAnswer(state.articleId,idx,val);refreshNextButton();}
+
+/* ── LISTEN ── */
+function listenItem(idx){
+  var art=ARTICLES[state.articleId];
+  var items=art.sessions[state.session-1];
+  var it=items[idx];
+  var text=itemTargetText(it);if(!text)return;
+  document.querySelectorAll('.sent-card').forEach(function(el){el.classList.remove('active');});
+  var card=document.getElementById('sent-'+idx);if(card)card.classList.add('active');
+  speakOne(text,function(){
+    if(card)card.classList.remove('active');
+    var p=practice.itemProgress[idx];
+    p.listen=Math.min(3,p.listen+1);
+    refreshItemCard(art,idx,it);
+  });
+}
+
+/* ── SPEAK ── */
+function toggleItemRec(idx){var p=practice.itemProgress[idx];if(p.recording)stopItemRec(idx);else startItemRec(idx);}
+async function startItemRec(idx){
+  var art=ARTICLES[state.articleId];
+  var items=art.sessions[state.session-1];
+  var it=items[idx];
+  var p=practice.itemProgress[idx];
+  cancelSpeech();
+  try{
+    var stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    var mr=new MediaRecorder(stream);
+    var chunks=[];
+    mr.ondataavailable=function(e){chunks.push(e.data);};
+    mr.onstop=function(){
+      var blob=new Blob(chunks,{type:'audio/webm'});
+      p.audioURL=URL.createObjectURL(blob);
+      p.recording=false;p.speak=Math.min(3,p.speak+1);
+      stream.getTracks().forEach(function(t){t.stop();});
+      refreshItemCard(art,idx,it);
+    };
+    p.mediaRecorder=mr;p.recording=true;mr.start();
+    refreshItemCard(art,idx,it);
+    p.score=null;
+    if(supportsRecognition()){
+      try{
+        var SR=window.SpeechRecognition||window.webkitSpeechRecognition;
+        var rec=new SR();rec.lang='en-US';rec.interimResults=false;rec.maxAlternatives=1;
+        var finalT='';
+        rec.onresult=function(ev){for(var i=0;i<ev.results.length;i++)finalT+=ev.results[i][0].transcript+' ';};
+        rec.onend=function(){p.score=matchScore(itemTargetText(it),finalT);refreshItemCard(art,idx,it);};
+        p._recognizer=rec;rec.start();
+      }catch(e){}
+    }
+  }catch(e){p.micError=true;p.speak=Math.min(3,p.speak+1);refreshItemCard(art,idx,it);}
+}
+function stopItemRec(idx){
+  var p=practice.itemProgress[idx];
+  if(p.mediaRecorder)p.mediaRecorder.stop();
+  if(p._recognizer){try{p._recognizer.stop();}catch(e){}}
+}
+
+/* ── FINAL RECORD ── */
+function renderFinalRecordBlock(a){
+  var items=a.sessions[2];
+  return '<div class="sec-label">🎬 전체 요약 녹음 &amp; 저장하기</div>'
+    +'<p class="hint" style="margin-bottom:10px;">오늘 배운 전체 내용을 처음부터 끝까지 한 번에 녹음해서 저장해봐요.</p>'
+    +renderOrganizedScript(items,state.articleId,true)
+    +'<button class="portfolio-btn" id="modelBtn" style="margin-bottom:10px;" onclick="toggleFinalModel()">🔊 전체 모델 음성 듣기</button>'
+    +'<div id="finalRecordArea">'+renderFinalRecordArea()+'</div>';
+}
+function renderFinalRecordArea(){
+  if(practice.finalRecordingState==='idle')
+    return '<div class="row-center"><button class="icon-btn" onclick="startFinalRec()">🎤</button><div class="hint">전체 내용을 녹음해보세요</div></div>';
+  if(practice.finalRecordingState==='recording')
+    return '<div class="row-center"><button class="icon-btn recording" onclick="stopFinalRec()">⏹</button><div class="hint">녹음 중...</div></div>';
+  return '<audio controls src="'+practice.finalAudioURL+'"></audio>'
+    +'<div class="rating-row" style="margin-top:8px;">'
+    +'<button class="rating-btn" onclick="startFinalRec()">다시 녹음 🔁</button>'
+    +'<a class="rating-btn primary" href="'+practice.finalAudioURL+'" download="final_summary.webm">💾 다운로드</a>'
+    +'</div>';
+}
+async function startFinalRec(){
+  cancelSpeech();
+  try{
+    var stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    var mr=new MediaRecorder(stream);
+    practice.finalAudioChunks=[];
+    mr.ondataavailable=function(e){practice.finalAudioChunks.push(e.data);};
+    mr.onstop=function(){
+      var blob=new Blob(practice.finalAudioChunks,{type:'audio/webm'});
+      practice.finalAudioURL=URL.createObjectURL(blob);
+      practice.finalRecordingState='recorded';
+      stream.getTracks().forEach(function(t){t.stop();});
+      render();
+    };
+    practice.finalMediaRecorder=mr;mr.start();practice.finalRecordingState='recording';
+    document.getElementById('finalRecordArea').innerHTML=renderFinalRecordArea();
+  }catch(e){practice.finalRecordingState='recorded';practice.finalAudioURL='';render();}
+}
+function stopFinalRec(){if(practice.finalMediaRecorder)practice.finalMediaRecorder.stop();}
+
+/* ── COACHING ── */
+function renderCoaching(a){
+  if(!rubricSel[a.id])rubricSel[a.id]=[null,null,null,null];
+  if(!coachingRec[a.id])coachingRec[a.id]={recordingState:'idle',audioURL:null,mediaRecorder:null,audioChunks:[],subtitleOn:true,logged:false};
+  var cr=coachingRec[a.id];
+  var items=a.sessions[2];
+  var rubricQs=['말하려던 내용을 다 담았나요?','자신있고 또박또박한 목소리로 말했나요?','처음-중간-끝 순서가 자연스러웠나요?',a.rubricExtra];
+  var smileys=['💪','🙂','😄'];
+  var allDone=rubricSel[a.id].every(function(v){return v!==null;});
+  if(allDone&&!cr.logged){
+    cr.logged=true;
+    portfolio.push({studyDate:todayStr(),title:a.title,type:a.type,level:a.levelLabel,genre:a.genre,line:a.line,issueLabel:a.issueLabel,pubDate:a.dateLabel});
+  }
+  var rubricHTML=rubricQs.map(function(q,i){
+    return '<div class="rubric-item"><div class="rubric-q">'+(i+1)+'. '+q+'</div><div class="smiley-row">'
+      +smileys.map(function(s,si){return '<div class="smiley'+(rubricSel[a.id][i]===si?' sel':'')+'" onclick="selectRubric('+a.id+','+i+','+si+')">'+s+'</div>';}).join('')
+      +'</div></div>';
+  }).join('');
+  return '<div class="sec-label">마지막 5분 · 완성한 요약문 전체 녹음</div>'
+    +'<p class="hint" style="margin-bottom:10px;">전체 내용을 한 번에 녹음해보세요. 자막을 켜고 봐도 되고, 꺼서 외운 걸로 도전해도 좋아요.</p>'
+    +'<div class="subtitle-toggle" onclick="toggleSubtitle('+a.id+')">'
+    +'자막 '+(cr.subtitleOn?'ON':'OFF')
+    +'<span class="tog-pill'+(cr.subtitleOn?' on':'')+'"><span class="tog-knob"></span></span></div>'
+    +'<div class="script-title">📋 '+a.type+' · Best Sample</div>'
+    +(cr.subtitleOn?renderOrganizedScript(items,a.id,true):'<div class="script-box hidden-script">자막이 꺼져 있어요 🙈</div>')
+    +'<button class="portfolio-btn" id="modelBtn" style="margin:8px 0;" onclick="toggleFinalModel()">🔊 모델 음성으로 듣기</button>'
+    +'<div id="coachRecordArea">'+renderCoachRecordArea(a.id)+'</div>'
+    +'<div class="sec-label" style="margin-top:18px;">원어민 코칭 체크리스트</div>'
+    +'<p class="hint" style="margin-bottom:10px;">선생님은 위 녹음을 들으면서 아래 4가지만 간단히 체크해요. 창의성은 평가하지 않아요.</p>'
+    +rubricHTML
+    +(allDone?'<div class="done-msg">🎉 <b>코칭 완료!</b><br><span class="hint">'+a.title+' 학습이 끝났어요. 학습 기록에 저장됐어요!</span></div>':'')
+    +'<div class="nav-row"><button class="nav-btn nav-back" onclick="goSession(3)">←</button><button class="nav-btn nav-next" onclick="backToLibrary()">라이브러리로 돌아가기</button></div>';
+}
+function toggleSubtitle(id){coachingRec[id].subtitleOn=!coachingRec[id].subtitleOn;render();}
+function renderCoachRecordArea(id){
+  var cr=coachingRec[id];
+  if(cr.recordingState==='idle')return '<div class="row-center"><button class="icon-btn" onclick="startCoachRec('+id+')">🎤</button><div class="hint">전체 요약문을 녹음해보세요</div></div>';
+  if(cr.recordingState==='recording')return '<div class="row-center"><button class="icon-btn recording" onclick="stopCoachRec('+id+')">⏹</button><div class="hint">녹음 중...</div></div>';
+  return '<audio controls src="'+cr.audioURL+'"></audio><div class="hint">원어민 선생님이 들을 녹음이에요</div>';
+}
+async function startCoachRec(id){
+  cancelSpeech();
+  try{
+    var stream=await navigator.mediaDevices.getUserMedia({audio:true});
+    var mr=new MediaRecorder(stream);
+    coachingRec[id].audioChunks=[];
+    mr.ondataavailable=function(e){coachingRec[id].audioChunks.push(e.data);};
+    mr.onstop=function(){
+      var blob=new Blob(coachingRec[id].audioChunks,{type:'audio/webm'});
+      coachingRec[id].audioURL=URL.createObjectURL(blob);
+      coachingRec[id].recordingState='recorded';
+      stream.getTracks().forEach(function(t){t.stop();});
+      render();
+    };
+    coachingRec[id].mediaRecorder=mr;mr.start();coachingRec[id].recordingState='recording';
+    document.getElementById('coachRecordArea').innerHTML=renderCoachRecordArea(id);
+  }catch(e){
+    var box=document.getElementById('coachRecordArea');
+    if(box)box.innerHTML='<div class="fallback-box">🎙️ 마이크를 사용할 수 없어요. 자막을 보며 코칭해주세요.</div>';
+  }
+}
+function stopCoachRec(id){if(coachingRec[id].mediaRecorder)coachingRec[id].mediaRecorder.stop();}
+function selectRubric(id,i,si){rubricSel[id][i]=si;render();}
+
+/* ── ORGANIZED SCRIPT ── */
+function renderOrganizedScript(items,articleId,useFreeAnswers){
+  return '<div class="script-organized">'+items.map(function(it,idx){
+    var idxClass='idx-'+(it.organizer||'body');
+    var text,ko='';
+    if(it.freeInput){text=useFreeAnswers?(getFreeAnswer(articleId,idx)||'(자유 답변 아직 없음)'):'(자유 답변)';}
+    else{text=it.text||(it.q?(it.q+' — '+it.a):'');ko=it.ko||'';}
+    return '<div class="script-line"><div class="idx-box '+idxClass+'">'+it.tag+'</div>'
+      +'<div class="txt-box"><div class="en-line">'+text+'</div>'+(ko?('<div class="ko-line">'+ko+'</div>'):'')+'</div></div>';
+  }).join('')+'</div>';
+}
+
+/* ── FINAL MODEL ── */
+function toggleFinalModel(){
+  if(modelPlaying){stopSequence();modelPlaying=false;updateModelBtn();return;}
+  var art=ARTICLES[state.articleId];
+  var items=art.sessions[2];
+  var texts=items.filter(function(it){return !it.freeInput;}).map(itemTargetText);
+  modelPlaying=true;updateModelBtn();
+  playSequence(texts,null,function(){modelPlaying=false;updateModelBtn();});
+}
+function updateModelBtn(){
+  var btn=document.getElementById('modelBtn');
+  if(btn)btn.innerHTML=modelPlaying?'⏹ 정지':'🔊 모델 음성으로 듣기';
+}
+
+render();
+</script>
 </body>
 </html>
