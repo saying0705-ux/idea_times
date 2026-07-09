@@ -589,7 +589,42 @@ img{max-width:100%;}
 .art-sel-row-on{border-color:var(--t)!important;background:var(--ts)!important;box-shadow:0 0 0 3px rgba(0,196,180,.15);}
 .art-sel-chk-circle{width:22px;height:22px;border-radius:50%;border:2px solid var(--li);background:var(--wh);display:flex;align-items:center;justify-content:center;font-size:11px;font-weight:900;color:var(--t);flex-shrink:0;transition:.15s;}
 .art-sel-chk-circle.on{background:var(--t);border-color:var(--t);color:var(--n0);}
+
+/* ━━━ 단어장 리뷰 stage 3 ━━━ */
+.rv-section-title{font-size:12.5px;font-weight:800;color:var(--n1);margin-bottom:10px;display:flex;align-items:center;gap:7px;}
+.rv-miss-cnt{font-size:10.5px;font-weight:700;color:var(--ro,#E05252);background:#FEE2E2;padding:2px 8px;border-radius:10px;}
+.rv-script{background:var(--bg);border-radius:12px;padding:14px;display:flex;flex-direction:column;gap:8px;border:1px solid var(--li);}
+.rv-sent{padding-bottom:8px;border-bottom:1px solid var(--li);}
+.rv-sent:last-child{border-bottom:none;padding-bottom:0;}
+.rv-en{font-size:13.5px;font-weight:600;color:var(--n1);line-height:1.45;margin-bottom:3px;}
+.rv-ko{font-size:11.5px;color:var(--mu);line-height:1.45;}
+.rv-vocab-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;}
+@media(max-width:480px){.rv-vocab-grid{grid-template-columns:1fr;}}
+.rv-vcard{background:var(--bg);border:1.5px solid var(--li);border-radius:10px;padding:10px 12px;transition:.15s;}
+.rv-vcard-miss{border-color:#FECACA;background:#FFF5F5;}
+.rv-vc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:4px;}
+.rv-vc-word{font-size:13px;font-weight:700;color:var(--n1);}
+.rv-bm-btn{background:none;border:none;font-size:20px;cursor:pointer;color:var(--mu);padding:0;line-height:1;transition:.2s;}
+.rv-bm-btn.bm-on{color:#F59E0B;}
+.rv-bm-btn:hover{color:#F59E0B;transform:scale(1.15);}
+.rv-vc-mean{font-size:11.5px;font-weight:700;color:var(--t);margin-bottom:3px;}
+.rv-vc-ex{font-size:10.5px;color:var(--mu);line-height:1.5;font-style:italic;}
+.rv-wb-preview{background:linear-gradient(135deg,#FFF8E8,#FFF3D0);border:1.5px solid #F5E08A;border-radius:12px;padding:12px 14px;margin-top:12px;}
+.rv-wb-empty{background:var(--bg);border:1.5px dashed var(--li);border-radius:12px;padding:12px 14px;margin-top:12px;font-size:12px;color:var(--mu);text-align:center;}
+.rv-wb-title{font-size:12px;font-weight:800;color:#92400E;margin-bottom:8px;}
+.rv-wb-item{display:flex;align-items:center;gap:8px;padding:4px 0;border-bottom:1px solid rgba(245,224,138,.4);}
+.rv-wb-item:last-of-type{border-bottom:none;}
+.rv-wb-word{font-size:12.5px;font-weight:700;color:#1E1640;min-width:90px;}
+.rv-wb-mean{font-size:11px;color:#92400E;}
+.rv-wb-send-btn{width:100%;margin-top:10px;background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;border:none;border-radius:10px;padding:10px;font-size:13px;font-weight:800;cursor:pointer;}
+.btn-wb-result{width:100%;background:linear-gradient(135deg,#F59E0B,#D97706);color:#fff;border:none;border-radius:10px;padding:11px;font-size:13.5px;font-weight:800;cursor:pointer;display:flex;align-items:center;justify-content:center;gap:6px;}
+.rvi-bm{background:#FFF8E8!important;border-color:#F5E08A!important;}
+.rvi-bm-tag{display:inline-block;background:#F59E0B;color:#fff;font-size:9px;font-weight:800;padding:1px 6px;border-radius:5px;margin-left:5px;}
+@keyframes slideUp{from{transform:translateY(100%);opacity:0;}to{transform:translateY(0);opacity:1;}}
+
 </style>
+<!-- ResponsiveVoice TTS (Google 기반 자연스러운 음성) -->
+<script src="https://code.responsivevoice.org/responsivevoice.js?key=FREE"></script>
 </head>
 <body>
 
@@ -613,7 +648,6 @@ img{max-width:100%;}
         <button class="btn-cta-sub" onclick="document.getElementById('s-how').scrollIntoView({behavior:'smooth'})">어떻게 작동하나요?</button>
       </div>
       <div class="hero-stats">
-        <div class="hstat"><div class="hstat-v">12,000+</div><div class="hstat-l">연계 학원</div></div>
         <div class="hstat"><div class="hstat-v">Lexile</div><div class="hstat-l">레벨 기반 기사</div></div>
         <div class="hstat"><div class="hstat-v">AI채점</div><div class="hstat-l">즉시 피드백</div></div>
       </div>
@@ -860,6 +894,7 @@ img{max-width:100%;}
     <div class="an-sep"></div><div class="an-page" id="study-page-label">Listening Lab</div>
   </div>
   <div class="an-right">
+    <button class="btn-nav-sm" onclick="openTtsSettings()" title="원어민 TTS 설정" style="font-size:11px;">🎙️ TTS</button>
     <button class="btn-cs-float-sm btn-nav-sm" onclick="toggleCS()">💬</button>
     <button class="btn-nav-sm" onclick="gView('v-mypage')">← 마이페이지</button>
   </div>
@@ -1276,22 +1311,287 @@ var RP = {
 };
 
 /* ═══ TTS ═══ */
+/* ══════════════════════════════════════════════
+   NE Times LAB — TTS 엔진 v2
+   1순위: ElevenLabs API (원어민 수준)
+   2순위: Web Speech API Neural 최적화
+══════════════════════════════════════════════ */
+
+/* ─ ElevenLabs 설정 ─
+   무료 tier: 월 10,000 글자
+   API 키를 아래에 입력하면 즉시 원어민 수준 TTS 활성화
+   키 없이도 Web Speech 폴백으로 동작 */
+var EL_API_KEY  = '';   /* ElevenLabs API 키 (선택 - elevenlabs.io 무료 10K자/월) */
+var GCP_API_KEY = '';   /* Google Cloud TTS 키 (선택 - cloud.google.com 무료 100만자/월) */
+var GCP_VOICE   = 'en-US-Journey-F';  /* Journey: 최자연스러운 원어민 여성 보이스 */
+var EL_VOICE_ID = 'EXAVITQu4vr4xnSDxMaL'; /* Rachel - 자연스러운 미국 여성 원어민 */
+var EL_CACHE = {};             /* 오디오 캐시 (같은 문장 재요청 방지) */
+var EL_PLAYING = null;         /* 현재 재생 중인 Audio 객체 */
+
+/* ─ Web Speech 폴백 설정 ─ */
 var VXS = [];
-var SPD = 0.9;
-function loadVx() { VXS = window.speechSynthesis ? window.speechSynthesis.getVoices() : []; }
-if (window.speechSynthesis) { loadVx(); window.speechSynthesis.onvoiceschanged = loadVx; }
-setTimeout(loadVx, 500);
+var SPD = 0.85;
+
+function loadVx() {
+  VXS = window.speechSynthesis ? window.speechSynthesis.getVoices() : [];
+}
+if (window.speechSynthesis) {
+  loadVx();
+  window.speechSynthesis.onvoiceschanged = loadVx;
+}
+
+/* 최적 보이스 선택: Neural > Google US > Microsoft > 기본 en-US */
+function pickBestVoice() {
+  if (!VXS.length) loadVx();
+  /* 우선순위 패턴 배열 */
+  var prefs = [
+    /Google US English/i,
+    /Microsoft Aria/i,
+    /Microsoft Zira/i,
+    /en[-_]US.*neural/i,
+    /en[-_]US.*premium/i,
+    /en[-_]US.*enhanced/i,
+    /en[-_]US/i,
+    /en[-_]GB/i,
+    /en/i
+  ];
+  for (var i = 0; i < prefs.length; i++) {
+    var v = VXS.find(function(x){ return prefs[i].test(x.name + ' ' + x.lang); });
+    if (v) return v;
+  }
+  return null;
+}
+
+/* ─ 핵심 TTS 함수 ─ */
 function spk(text, rate, cb) {
+  if (EL_API_KEY) {
+    spkElevenLabs(text, rate, cb);          /* 1순위: ElevenLabs - 최고품질 */
+  } else if (GCP_API_KEY) {
+    spkGoogleCloud(text, cb);               /* 2순위: Google Cloud Neural2 */
+  } else if (typeof responsiveVoice !== 'undefined' && responsiveVoice.voiceSupport()) {
+    spkResponsiveVoice(text, rate, cb);     /* 3순위: ResponsiveVoice (Google 기반) */
+  } else {
+    spkWebSpeech(text, rate, cb);           /* 4순위: Web Speech 폴백 */
+  }
+}
+
+/* ElevenLabs TTS */
+function spkElevenLabs(text, rate, cb) {
+  stopSpk();
+  /* 캐시 확인 */
+  if (EL_CACHE[text]) {
+    playElAudio(EL_CACHE[text], cb);
+    return;
+  }
+  /* 로딩 표시 */
+  showTtsLoading(true);
+  fetch('https://api.elevenlabs.io/v1/text-to-speech/' + EL_VOICE_ID + '/stream', {
+    method: 'POST',
+    headers: {
+      'Accept': 'audio/mpeg',
+      'Content-Type': 'application/json',
+      'xi-api-key': EL_API_KEY
+    },
+    body: JSON.stringify({
+      text: text,
+      model_id: 'eleven_turbo_v2',
+      voice_settings: {
+        stability: 0.45,        /* 낮을수록 표현력↑ */
+        similarity_boost: 0.82, /* 원어민 특성 유지 */
+        style: 0.35,            /* 자연스러운 억양 */
+        use_speaker_boost: true
+      }
+    })
+  })
+  .then(function(res) {
+    if (!res.ok) throw new Error('EL API error: ' + res.status);
+    return res.blob();
+  })
+  .then(function(blob) {
+    var url = URL.createObjectURL(blob);
+    EL_CACHE[text] = url;
+    showTtsLoading(false);
+    playElAudio(url, cb);
+  })
+  .catch(function(err) {
+    showTtsLoading(false);
+    console.warn('ElevenLabs 실패, Web Speech 폴백:', err);
+    spkWebSpeech(text, rate, cb);
+  });
+}
+
+function playElAudio(url, cb) {
+  if (EL_PLAYING) { EL_PLAYING.pause(); EL_PLAYING = null; }
+  var audio = new Audio(url);
+  EL_PLAYING = audio;
+  audio.playbackRate = 1.0;
+  audio.onended = function() { EL_PLAYING = null; if (cb) cb(); };
+  audio.onerror  = function() { EL_PLAYING = null; if (cb) cb(); };
+  audio.play().catch(function(e) { if (cb) cb(); });
+}
+
+/* Google Cloud TTS - Neural2/Journey 보이스 (100만자/월 무료) */
+function spkGoogleCloud(text, cb) {
+  stopSpk();
+  if (EL_CACHE[text]) { playElAudio(EL_CACHE[text], cb); return; }
+  showTtsLoading(true);
+  var url = 'https://texttospeech.googleapis.com/v1/text:synthesize?key=' + GCP_API_KEY;
+  fetch(url, {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({
+      input: { text: text },
+      voice: {
+        languageCode: 'en-US',
+        name: GCP_VOICE,
+        ssmlGender: 'FEMALE'
+      },
+      audioConfig: {
+        audioEncoding: 'MP3',
+        speakingRate: 0.90,   /* 자연스러운 대화 속도 */
+        pitch: -1.0,          /* 약간 낮춰 더 자연스럽게 */
+        effectsProfileId: ['headphone-class-device']
+      }
+    })
+  })
+  .then(function(r){ if(!r.ok) throw new Error(r.status); return r.json(); })
+  .then(function(d){
+    if (!d.audioContent) throw new Error('no audio');
+    var blob = b64ToBlob(d.audioContent, 'audio/mp3');
+    var url2 = URL.createObjectURL(blob);
+    EL_CACHE[text] = url2;
+    showTtsLoading(false);
+    playElAudio(url2, cb);
+  })
+  .catch(function(err){
+    showTtsLoading(false);
+    console.warn('GCP TTS 실패, ResponsiveVoice 폴백:', err);
+    if (typeof responsiveVoice !== 'undefined') spkResponsiveVoice(text, null, cb);
+    else spkWebSpeech(text, null, cb);
+  });
+}
+
+function b64ToBlob(b64, mime) {
+  var byteChars = atob(b64);
+  var arr = new Uint8Array(byteChars.length);
+  for (var i = 0; i < byteChars.length; i++) arr[i] = byteChars.charCodeAt(i);
+  return new Blob([arr], { type: mime });
+}
+
+/* ResponsiveVoice - Google 기반 자연스러운 TTS, API 키 불필요 */
+function spkResponsiveVoice(text, rate, cb) {
+  stopSpk();
+  var voiceName = 'US English Female';  /* 자연스러운 미국 영어 여성 */
+  var params = {
+    rate: rate || 0.88,    /* 약간 느리게 - 더 명확하고 자연스럽게 */
+    pitch: 0.9,            /* 약간 낮게 */
+    volume: 1,
+    onend: cb || function(){}
+  };
+  try {
+    responsiveVoice.speak(text, voiceName, params);
+  } catch(e) {
+    spkWebSpeech(text, rate, cb);
+  }
+}
+
+/* Web Speech API 최적화 TTS */
+function spkWebSpeech(text, rate, cb) {
   if (!window.speechSynthesis) { if (cb) cb(); return; }
   window.speechSynthesis.cancel();
-  var u = new SpeechSynthesisUtterance(text);
-  var v = VXS.find(function(x) { return /en(-|_)?US/i.test(x.lang); }) || VXS.find(function(x) { return /en/i.test(x.lang); });
-  if (v) u.voice = v;
-  u.lang = 'en-US'; u.rate = rate || SPD; u.pitch = 1;
-  if (cb) u.onend = cb;
-  window.speechSynthesis.speak(u);
+  setTimeout(function() {
+    var u = new SpeechSynthesisUtterance(text);
+    var v = pickBestVoice();
+    if (v) u.voice = v;
+    u.lang  = 'en-US';
+    u.rate  = rate || SPD;    /* 0.85: 자연스러운 대화 속도 */
+    u.pitch = 0.95;           /* 0.95: 약간 낮춰 자연스러움 */
+    if (cb) { u.onend = cb; u.onerror = cb; }
+    /* 긴 문장 Chrome 짤림 방지 */
+    var safeTimer = setTimeout(function(){ if(cb) cb(); }, (text.length * 80) + 2000);
+    u.onend = function(){ clearTimeout(safeTimer); if(cb) cb(); };
+    window.speechSynthesis.speak(u);
+    /* Chrome resume workaround */
+    var resumeTimer = setInterval(function(){
+      if (!window.speechSynthesis.speaking) { clearInterval(resumeTimer); return; }
+      window.speechSynthesis.pause();
+      window.speechSynthesis.resume();
+    }, 10000);
+    u.onend = function(){ clearTimeout(safeTimer); clearInterval(resumeTimer); if(cb) cb(); };
+  }, 80);
 }
-function stopSpk() { if (window.speechSynthesis) window.speechSynthesis.cancel(); }
+
+/* 재생 중지 */
+function stopSpk() {
+  if (EL_PLAYING) { EL_PLAYING.pause(); EL_PLAYING = null; }
+  if (window.speechSynthesis) window.speechSynthesis.cancel();
+}
+
+/* 로딩 인디케이터 */
+function showTtsLoading(show) {
+  var btns = document.querySelectorAll('.btn-dict-play, .btn-tts-play');
+  btns.forEach(function(b) {
+    if (show) { b.dataset.origText = b.textContent; b.textContent = '⏳'; b.disabled = true; }
+    else { b.textContent = b.dataset.origText || '🔊 원어민 듣기'; b.disabled = false; }
+  });
+}
+
+/* ElevenLabs API 키 설정 UI */
+function openTtsSettings() {
+  var cur = EL_API_KEY;
+  var modal = document.createElement('div');
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(8,16,30,.75);z-index:9200;display:flex;align-items:center;justify-content:center;padding:20px;';
+  var box = document.createElement('div');
+  box.style.cssText = 'background:#fff;border-radius:18px;padding:24px;max-width:400px;width:100%;';
+  var title = document.createElement('div');
+  title.style.cssText = 'font-size:15px;font-weight:800;color:#1E1640;margin-bottom:6px;';
+  title.textContent = '🎙️ 원어민 TTS 설정';
+  var desc = document.createElement('div');
+  desc.style.cssText = 'font-size:12px;color:#7D75A0;margin-bottom:14px;line-height:1.65;';
+  desc.innerHTML = '아래 중 하나의 API 키를 입력하면 진짜 원어민 음성이 활성화됩니다.<br>'
+    + '· <a href="https://elevenlabs.io" target="_blank" style="color:#4F46E5;">ElevenLabs</a> — 월 10,000자 무료 (최고품질)<br>'
+    + '· <a href="https://cloud.google.com/text-to-speech" target="_blank" style="color:#4F46E5;">Google Cloud TTS</a> — 월 100만자 무료 (Neural2 원어민)<br>'
+    + '키 없어도 ResponsiveVoice로 자연스러운 음성 제공됩니다.';
+  var input = document.createElement('input');
+  input.type = 'text'; input.value = cur;
+  input.placeholder = 'sk_...';
+  input.style.cssText = 'width:100%;border:1.5px solid #E8E2F4;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:10px;outline:none;';
+  var row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:8px;';
+  var cancelBtn = document.createElement('button');
+  cancelBtn.textContent = '취소';
+  cancelBtn.style.cssText = 'flex:1;padding:10px;border:1px solid #E8E2F4;border-radius:9px;background:#fff;cursor:pointer;font-size:13px;font-weight:700;';
+  cancelBtn.addEventListener('click', function(){ modal.remove(); });
+  /* GCP 키 입력 */
+  var gcpLabel = document.createElement('div');
+  gcpLabel.style.cssText = 'font-size:11.5px;font-weight:700;color:#7D75A0;margin-bottom:4px;margin-top:8px;';
+  gcpLabel.textContent = 'Google Cloud TTS 키 (선택)';
+  box.appendChild(gcpLabel);
+  var gcpInput = document.createElement('input');
+  gcpInput.type = 'text'; gcpInput.value = GCP_API_KEY;
+  gcpInput.placeholder = 'AIza...';
+  gcpInput.style.cssText = 'width:100%;border:1.5px solid #E8E2F4;border-radius:10px;padding:10px 12px;font-size:13px;margin-bottom:10px;outline:none;';
+  box.appendChild(gcpInput);
+
+  var saveBtn = document.createElement('button');
+  saveBtn.textContent = '저장';
+  saveBtn.style.cssText = 'flex:2;padding:10px;border:none;border-radius:9px;background:#4F46E5;color:#fff;cursor:pointer;font-size:13px;font-weight:800;';
+  saveBtn.addEventListener('click', function(){
+    EL_API_KEY  = input.value.trim();
+    GCP_API_KEY = gcpInput.value.trim();
+    EL_CACHE = {};
+    modal.remove();
+    var active = EL_API_KEY ? 'ElevenLabs' : GCP_API_KEY ? 'Google Cloud TTS' : typeof responsiveVoice !== 'undefined' ? 'ResponsiveVoice' : 'Web Speech';
+    gToast('✅ TTS: ' + active + ' 활성화!');
+  });
+  row.appendChild(cancelBtn); row.appendChild(saveBtn);
+  box.appendChild(title); box.appendChild(desc); box.appendChild(input); box.appendChild(row);
+  modal.appendChild(box);
+  modal.addEventListener('click', function(e){ if(e.target===modal) modal.remove(); });
+  document.body.appendChild(modal);
+  input.focus();
+}
+
 
 /* ═══ TOAST ═══ */
 
@@ -1584,7 +1884,7 @@ function gStudy() { gView('v-study'); buildStudySelect(); }
 var LS = {};
 function resetLS(artId) {
   stopSpk(); cleanMic();
-  LS = { artId:artId, stage:0, playing:false, dictIdx:0, dictScores:[], miss:{}, shdIdx:0, shdScores:[], recog:null };
+  LS = { artId:artId, stage:0, playing:false, dictIdx:0, dictScores:[], miss:{}, shdIdx:0, shdScores:[], recog:null, bookmarks:[] };
 }
 
 function buildStudySelect() {
@@ -1619,7 +1919,7 @@ function backToSelect() { stopSpk(); cleanMic(); buildStudySelect(); }
 function renderStudyStage() {
   var dots = document.getElementById('study-dots');
   if (dots) {
-    dots.innerHTML = ['전체','끊어','받아','쉐도','리포트'].map(function(_, i) {
+    dots.innerHTML = ['전체','끊어','받아','리뷰','쉐도','리포트'].map(function(_, i) {
       var cls = i < LS.stage ? 'done' : i === LS.stage ? 'cur' : '';
       return '<div class="sdot ' + cls + '"></div>';
     }).join('');
@@ -1629,8 +1929,9 @@ function renderStudyStage() {
   if (LS.stage === 0) body.innerHTML = stageListen();
   else if (LS.stage === 1) body.innerHTML = stageSents();
   else if (LS.stage === 2) { body.innerHTML = stageDict(); setTimeout(initDict, 50); }
-  else if (LS.stage === 3) body.innerHTML = stageShd();
-  else body.innerHTML = stageResult();
+  else if (LS.stage === 3) body.innerHTML = stageDictReview();
+  else if (LS.stage === 4) body.innerHTML = stageShd();
+  else { body.innerHTML = stageResult(); setTimeout(function(){ var sb=document.getElementById('share-result-btn'); if(sb) sb.addEventListener('click',shareResult); },10); }
 }
 
 function nextStudyStage() { stopSpk(); cleanMic(); LS.stage++; renderStudyStage(); }
@@ -1799,7 +2100,7 @@ function stageShd() {
       :'<textarea class="dict-ta" id="shd-ta" rows="2" placeholder="문장을 그대로 입력..." style="min-height:54px;"></textarea><div style="text-align:right;margin-top:6px;"><button class="btn-sec" onclick="doShdTxt()">확인</button></div>')
     +'<div class="heard-box" id="heard-box"><div class="heard-lbl">🎤 이렇게 들렸어요</div><div id="heard-txt"></div><div id="heard-res"></div></div>'
     +'</div>'
-    +'<div class="study-btm"><button class="btn-sec" onclick="LS.stage=2;LS.dictIdx=0;renderStudyStage()">← 이전</button><div id="shd-next"></div></div>';
+    +'<div class="study-btm"><button class="btn-sec" onclick="LS.stage=3;renderStudyStage()">← 이전</button><div id="shd-next"></div></div>';
 }
 
 function spkShd() { var a=ARTS.find(function(x){return x.id===LS.artId;}); if(a) spk(a.sents[LS.shdIdx].en, SPD); }
@@ -1812,17 +2113,132 @@ function cleanMic() {
 
 function toggleMic() {
   var btn = document.getElementById('mic-btn');
-  var st = document.getElementById('mic-st');
+  var st  = document.getElementById('mic-st');
+  /* 이미 녹음 중이면 중단 */
   if (LS.recog) { LS.recog.stop(); return; }
-  var SR = window.SpeechRecognition||window.webkitSpeechRecognition;
+
+  var SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  if (!SR) { showShdFallback(); return; }
+
+  var gotResult = false;
   LS.recog = new SR();
-  LS.recog.lang='en-US'; LS.recog.interimResults=false; LS.recog.maxAlternatives=1;
-  btn.classList.add('rec'); btn.textContent='⏺';
-  if (st) st.textContent='듣고 있어요...';
-  LS.recog.onresult = function(e){ gradeShd(e.results[0][0].transcript); };
-  LS.recog.onerror = function(){ if(st) st.textContent='다시 시도해 주세요'; cleanMic(); };
-  LS.recog.onend = function(){ cleanMic(); };
-  try{ LS.recog.start(); }catch(e){ cleanMic(); }
+  LS.recog.lang = 'en-US';
+  LS.recog.interimResults = false;
+  LS.recog.maxAlternatives = 1;
+
+  btn.classList.add('rec'); btn.textContent = '⏺';
+  if (st) st.textContent = '듣고 있어요...';
+
+  /* 5초 타임아웃 안전장치 */
+  var shdTimer = setTimeout(function() {
+    if (!gotResult) { if (LS.recog) LS.recog.stop(); showShdFallback(); }
+  }, 5000);
+
+  LS.recog.onresult = function(e) {
+    gotResult = true;
+    clearTimeout(shdTimer);
+    gradeShd(e.results[0][0].transcript);
+  };
+
+  LS.recog.onerror = function(err) {
+    clearTimeout(shdTimer);
+    cleanMic();
+    if (!gotResult) showShdFallback();
+  };
+
+  LS.recog.onend = function() {
+    clearTimeout(shdTimer);
+    cleanMic();
+    /* 결과가 없으면(허가 거부·빈 발화) 폴백 */
+    if (!gotResult) showShdFallback();
+  };
+
+  try { LS.recog.start(); }
+  catch(e) { clearTimeout(shdTimer); cleanMic(); showShdFallback(); }
+}
+
+/* 마이크 불가 시 텍스트 입력 폴백 표시 */
+function showShdFallback() {
+  var a  = ARTS.find(function(x){ return x.id === LS.artId; });
+  var st = document.getElementById('mic-st');
+  var mb = document.getElementById('mic-btn');
+  if (mb) mb.style.display = 'none';
+  if (st) st.style.display = 'none';
+
+  /* 이미 폴백 있으면 중복 방지 */
+  if (document.getElementById('shd-fallback')) return;
+
+  var fb = document.createElement('div');
+  fb.id = 'shd-fallback';
+  fb.style.cssText = 'margin-top:10px;';
+
+  var info = document.createElement('div');
+  info.style.cssText = 'font-size:12px;color:var(--mu);text-align:center;margin-bottom:8px;';
+  info.textContent = '🎙️ 마이크를 사용할 수 없어요. 직접 따라 써보세요!';
+  fb.appendChild(info);
+
+  var ta = document.createElement('textarea');
+  ta.id  = 'shd-ta-fb';
+  ta.className = 'dict-ta';
+  ta.rows = 2;
+  ta.placeholder = '들리는 문장을 그대로 입력해 주세요...';
+  ta.style.minHeight = '54px';
+  fb.appendChild(ta);
+
+  var row = document.createElement('div');
+  row.style.cssText = 'display:flex;gap:8px;margin-top:7px;justify-content:flex-end;';
+
+  /* 건너뛰기 버튼 - 못 따라 해도 다음으로 진행 가능 */
+  var skipBtn = document.createElement('button');
+  skipBtn.className = 'btn-sec';
+  skipBtn.textContent = '건너뛰기 →';
+  skipBtn.addEventListener('click', function() {
+    var s = a ? a.sents[LS.shdIdx] : null;
+    LS.shdScores.push(0);
+    showShdResult('(건너뜀)', 0, s ? s.en : '');
+    afterShdGrade();
+  });
+
+  var okBtn = document.createElement('button');
+  okBtn.className = 'btn-prim';
+  okBtn.textContent = '확인';
+  okBtn.addEventListener('click', function() {
+    var val = ta.value.trim();
+    if (!val) { gradeShd(''); }
+    else { gradeShd(val); }
+  });
+
+  row.appendChild(skipBtn);
+  row.appendChild(okBtn);
+  fb.appendChild(row);
+
+  /* stage-card 안에 삽입 */
+  var card = document.querySelector('#study-body .stage-card');
+  if (card) card.appendChild(fb);
+}
+
+/* gradeShd 이후 공통 처리 - shd-next 버튼 표시 */
+function afterShdGrade() {
+  var a  = ARTS.find(function(x){ return x.id === LS.artId; });
+  var sn = document.getElementById('shd-next');
+  if (!sn) return;
+  if (LS.shdIdx < a.sents.length - 1) {
+    sn.innerHTML = '<button class="btn-prim" onclick="nextShdSen()">다음 문장 →</button>';
+  } else {
+    sn.innerHTML = '<button class="btn-prim" onclick="nextStudyStage()">성적표 보기 🎉</button>';
+  }
+}
+
+function showShdResult(heard, acc, target) {
+  var cls = acc>=85?'rb-good':acc>=55?'rb-mid':'rb-bad';
+  var hb = document.getElementById('heard-box');
+  if (hb) hb.className = 'heard-box show';
+  var ht = document.getElementById('heard-txt');
+  if (ht) ht.textContent = '"' + heard + '"';
+  var hr = document.getElementById('heard-res');
+  if (hr) hr.innerHTML = '<div class="result-box show ' + cls + '" style="margin-top:8px;"><div class="rb-top"><div class="rb-msg">발음 정확도</div><div class="rb-pct">' + acc + '%</div></div></div>';
+  var ms = document.getElementById('mic-st');
+  if (ms) ms.textContent = acc >= 85 ? '훌륭해요! 👏' : '수고했어요!';
 }
 
 function doShdTxt() {
@@ -1842,14 +2258,7 @@ function gradeShd(heard) {
   var hr = document.getElementById('heard-res');
   if(hr) hr.innerHTML='<div class="result-box show '+cls+'" style="margin-top:8px;"><div class="rb-top"><div class="rb-msg">발음 정확도</div><div class="rb-pct">'+res.acc+'%</div></div><div class="diff-wrap">'+res.diff+'</div></div>';
   var ms = document.getElementById('mic-st'); if(ms) ms.textContent=res.acc>=85?'훌륭해요! 👏':'다시 한 번!';
-  var sn = document.getElementById('shd-next');
-  if (sn) {
-    if (LS.shdIdx < a.sents.length-1) {
-      sn.innerHTML='<button class="btn-prim" onclick="nextShdSen()">다음 문장 →</button>';
-    } else {
-      sn.innerHTML='<button class="btn-prim" onclick="nextStudyStage()">성적표 보기 🎉</button>';
-    }
-  }
+  afterShdGrade();
 }
 
 function nextShdSen() {
@@ -1866,13 +2275,171 @@ function nextShdSen() {
   var sn = document.getElementById('shd-next'); if(sn) sn.innerHTML='';
 }
 
+
+/* STAGE 3 - 받아쓰기 완료 리뷰 */
+function stageDictReview() {
+  var a = ARTS.find(function(x){ return x.id === LS.artId; });
+  var missArr = Object.keys(LS.miss);
+  var html = [];
+  html.push('<div class="stage-card">');
+  html.push('<div class="rv-section-title">&#128196; 전체 지문 확인</div>');
+  html.push('<div class="rv-script">');
+  a.sents.forEach(function(s) {
+    html.push('<div class="rv-sent"><div class="rv-en">' + s.en + '</div><div class="rv-ko">' + s.ko + '</div></div>');
+  });
+  html.push('</div>');
+  html.push('<div class="rv-section-title" style="margin-top:16px;">&#128273; 핵심 어휘 <span class="rv-miss-cnt">&#10060; ' + missArr.length + '개 틀림</span></div>');
+  html.push('<div class="rv-vocab-grid">');
+  a.vocab.forEach(function(v) {
+    var bm = LS.bookmarks.indexOf(v.word) > -1;
+    var isMiss = missArr.indexOf(v.word) > -1 || !v.ok;
+    var safeName = v.word.replace(/&/g,'&amp;').replace(/"/g,'&quot;');
+    html.push('<div class="rv-vcard' + (isMiss?' rv-vcard-miss':'') + '">');
+    html.push('<div class="rv-vc-top">');
+    html.push('<div class="rv-vc-word">' + (isMiss?'&#10060; ':'&#9989; ') + v.word + '</div>');
+    html.push('<button class="rv-bm-btn' + (bm?' bm-on':'') + '" data-word="' + safeName + '" onclick="toggleBookmarkThis(this)" title="단어장 저장">' + (bm?'&#9733;':'&#9734;') + '</button>');
+    html.push('</div>');
+    html.push('<div class="rv-vc-mean">' + v.mean + '</div>');
+    html.push('<div class="rv-vc-ex">' + v.ex + '</div>');
+    html.push('</div>');
+  });
+  html.push('</div>');
+  if (LS.bookmarks.length > 0) {
+    html.push('<div class="rv-wb-preview">');
+    html.push('<div class="rv-wb-title">&#128218; 내 단어장 (' + LS.bookmarks.length + '개)</div>');
+    LS.bookmarks.forEach(function(w) {
+      var vo = a.vocab.find(function(v){ return v.word === w; });
+      html.push('<div class="rv-wb-item"><span class="rv-wb-word">' + w + '</span>' + (vo?'<span class="rv-wb-mean">'+vo.mean+'</span>':'') + '</div>');
+    });
+    html.push('<button class="rv-wb-send-btn" onclick="openSendWordbook()">&#128241; 내 폰으로 보내기</button>');
+    html.push('</div>');
+  } else {
+    html.push('<div class="rv-wb-empty">&#9734; 모르는 단어 옆 별표를 누르면 단어장에 저장돼요</div>');
+  }
+  html.push('</div>');
+  return html.join('') + '<div class="study-btm"><button class="btn-sec" onclick="LS.stage=2;LS.dictIdx=0;renderStudyStage()">← 다시 받아쓰기</button><button class="btn-prim" onclick="nextStudyStage()">쉐도잉 시작 →</button></div>';
+}
+
+function toggleBookmarkThis(btn) { toggleBookmark(btn.dataset.word, btn); }
+
+function toggleBookmark(word, btn) {
+  var idx = LS.bookmarks.indexOf(word);
+  if (idx > -1) {
+    LS.bookmarks.splice(idx, 1);
+    btn.textContent = '☆'; btn.classList.remove('bm-on');
+    gToast('단어장에서 제거했어요');
+  } else {
+    LS.bookmarks.push(word);
+    btn.textContent = '★'; btn.classList.add('bm-on');
+    gToast('★ 단어장에 저장했어요!');
+  }
+  refreshWbPreview();
+}
+
+function refreshWbPreview() {
+  var a = ARTS.find(function(x){ return x.id === LS.artId; });
+  var container = document.querySelector('.rv-wb-preview, .rv-wb-empty');
+  if (!container) return;
+  var newHtml;
+  if (LS.bookmarks.length > 0) {
+    var rows = LS.bookmarks.map(function(w) {
+      var vo = a ? a.vocab.find(function(v){ return v.word === w; }) : null;
+      return '<div class="rv-wb-item"><span class="rv-wb-word">' + w + '</span>' + (vo?'<span class="rv-wb-mean">'+vo.mean+'</span>':'') + '</div>';
+    }).join('');
+    newHtml = '<div class="rv-wb-preview"><div class="rv-wb-title">&#128218; 내 단어장 (' + LS.bookmarks.length + '개)</div>' + rows + '<button class="rv-wb-send-btn" onclick="openSendWordbook()">&#128241; 내 폰으로 보내기</button></div>';
+  } else {
+    newHtml = '<div class="rv-wb-empty">&#9734; 모르는 단어 옆 별표를 누르면 단어장에 저장돼요</div>';
+  }
+  container.outerHTML = newHtml;
+}
+
+function openSendWordbook() {
+  var a = ARTS.find(function(x){ return x.id === LS.artId; });
+  if (LS.bookmarks.length === 0) { gToast('저장된 단어가 없어요'); return; }
+  var lines = ['[NE Times LAB] 📚 내 단어장 — ' + (a?a.title:''), ''];
+  LS.bookmarks.forEach(function(w, i) {
+    var vo = a ? a.vocab.find(function(v){ return v.word === w; }) : null;
+    lines.push((i+1) + '. ' + w + (vo?' : '+vo.mean:''));
+    if (vo) lines.push('   ex) ' + vo.ex);
+  });
+  lines.push('', '✨ NE Times LAB으로 학습했어요!');
+  var msg = lines.join('\n');
+  var modal = document.createElement('div');
+  modal.id = 'wb-send-modal';
+  modal.style.cssText = 'position:fixed;inset:0;background:rgba(8,16,30,.75);z-index:9100;display:flex;align-items:flex-end;justify-content:center;';
+  var box = document.createElement('div');
+  box.style.cssText = 'background:#fff;border-radius:20px 20px 0 0;padding:24px 20px 32px;width:100%;max-width:480px;animation:slideUp .25s ease;';
+  var hdr = document.createElement('div');
+  hdr.style.cssText = 'display:flex;justify-content:space-between;align-items:center;margin-bottom:18px;';
+  hdr.innerHTML = '<div style="font-size:15px;font-weight:800;color:#1E1640;">📱 단어장 내 폰으로 보내기</div>';
+  var closeBtn = document.createElement('button');
+  closeBtn.textContent = '✕';
+  closeBtn.style.cssText = 'border:none;background:none;font-size:20px;cursor:pointer;color:#9A92B2;';
+  closeBtn.addEventListener('click', function(){ modal.remove(); });
+  hdr.appendChild(closeBtn);
+  box.appendChild(hdr);
+  var preview = document.createElement('div');
+  preview.style.cssText = 'background:#F8F6FF;border-radius:12px;padding:12px 14px;font-size:12px;color:#4A4362;line-height:1.8;margin-bottom:16px;max-height:160px;overflow-y:auto;white-space:pre-wrap;';
+  preview.textContent = msg;
+  box.appendChild(preview);
+  var btnWrap = document.createElement('div');
+  btnWrap.style.cssText = 'display:flex;flex-direction:column;gap:9px;';
+  var kakaoBtn = document.createElement('button');
+  kakaoBtn.style.cssText = 'background:#FEE500;color:#3C1E1B;border:none;border-radius:12px;padding:12px;font-size:13.5px;font-weight:800;cursor:pointer;';
+  kakaoBtn.textContent = '💬 카카오톡으로 보내기';
+  kakaoBtn.addEventListener('click', function(){ sendKakaoMsg(msg); });
+  btnWrap.appendChild(kakaoBtn);
+  var smsLink = document.createElement('a');
+  smsLink.href = 'sms:?body=' + encodeURIComponent(msg);
+  smsLink.style.cssText = 'display:block;background:#1E1640;color:#fff;border-radius:12px;padding:12px;font-size:13.5px;font-weight:800;text-align:center;text-decoration:none;';
+  smsLink.textContent = '📱 문자(SMS)로 보내기';
+  btnWrap.appendChild(smsLink);
+  var copyBtn = document.createElement('button');
+  copyBtn.style.cssText = 'background:#F3F0FA;color:#6C4AB6;border:none;border-radius:12px;padding:12px;font-size:13.5px;font-weight:700;cursor:pointer;';
+  copyBtn.textContent = '📋 복사하기';
+  copyBtn.addEventListener('click', function(){
+    navigator.clipboard.writeText(msg).then(function(){ gToast('📋 복사됐어요! 카카오에 붙여넣기 하세요'); }).catch(function(){});
+  });
+  btnWrap.appendChild(copyBtn);
+  box.appendChild(btnWrap);
+  modal.appendChild(box);
+  modal.addEventListener('click', function(e){ if(e.target===modal) modal.remove(); });
+  document.body.appendChild(modal);
+}
+
+function sendKakaoMsg(msg) {
+  if (navigator.share) {
+    navigator.share({ title:'[NE Times LAB] 내 단어장', text:msg }).catch(function(){});
+  } else if (typeof Kakao !== 'undefined' && Kakao.isInitialized()) {
+    Kakao.Share.sendDefault({ objectType:'text', text:msg, link:{ mobileWebUrl:location.href } });
+  } else {
+    navigator.clipboard.writeText(msg).then(function(){ gToast('📋 복사됐어요! 카카오톡에 붙여넣기 해주세요'); }).catch(function(){});
+  }
+}
+
+function shareResult() {
+  var a = ARTS.find(function(x){return x.id===LS.artId;});
+  var dAvg = LS.dictScores.length ? Math.round(LS.dictScores.reduce(function(s,b){return s+b;},0)/LS.dictScores.length) : 0;
+  var sAvg = LS.shdScores.length ? Math.round(LS.shdScores.reduce(function(s,b){return s+b;},0)/LS.shdScores.length) : 0;
+  var overall = Math.round(dAvg*0.6+(sAvg||dAvg)*0.4);
+  var msg = '[NE Times LAB] 학습 완료!\n기사: '+(a?a.title:'')+'\n받아쓰기: '+dAvg+'%  쉐도잉: '+(sAvg||'–')+'%  종합: '+overall+'%\n✨ NE Times LAB으로 학습했어요!';
+  if (navigator.share) { navigator.share({title:'[NE Times LAB] 학습 결과',text:msg}).catch(function(){}); }
+  else { navigator.clipboard.writeText(msg).then(function(){ gToast('결과가 복사됐어요! 선생님께 붙여넣기 해주세요'); }).catch(function(){}); }
+}
+
+
 /* STAGE 4 - 성적표 (고도화) */
 function stageResult() {
   var a = ARTS.find(function(x){return x.id===LS.artId;});
   var dAvg = LS.dictScores.length ? Math.round(LS.dictScores.reduce(function(a,b){return a+b;},0)/LS.dictScores.length) : 0;
   var sAvg = LS.shdScores.length ? Math.round(LS.shdScores.reduce(function(a,b){return a+b;},0)/LS.shdScores.length) : 0;
-  return buildReportCard(a, {dict:dAvg, shd:sAvg, missedWords:Object.keys(LS.miss)}, true)
-    + '<div class="study-btm"><button class="btn-sec" onclick="buildStudySelect()">다른 기사</button><button class="btn-prim" onclick="gView(\'v-mypage\')">마이페이지 →</button></div>';
+  var bmCount = LS.bookmarks.length;
+  var wbBtn = bmCount > 0 ? '<button class="btn-wb-result" onclick="openSendWordbook()">📚 내 단어장 ' + bmCount + '개 보내기 📱</button>' : '';
+  return buildReportCard(a, {dict:dAvg, shd:sAvg, missedWords:Object.keys(LS.miss), bookmarks:LS.bookmarks}, true)
+    + '<div class="study-btm" style="flex-direction:column;gap:8px;">'
+    + wbBtn
+    + '<div style="display:flex;gap:8px;width:100%;"><button class="btn-sec" style="flex:1;" id="share-result-btn">📤 결과 공유</button><button class="btn-sec" style="flex:1;" onclick="backToSelect()">다른 기사</button><button class="btn-prim" style="flex:2;" onclick="gView(\'v-mypage\')">마이페이지 →</button></div>'
+    + '</div>';
 }
 
 /* ═══ 성적표 빌더 ═══ */
@@ -1888,10 +2455,12 @@ function buildReportCard(a, scores, showUpsell) {
   var lvGrade = a.lv==='kids'?'초등 3–4학년':a.lv==='junior'?'초등 5–6학년':'중학교 1–2학년';
   var lvDesc = a.lv==='kids'?'현재 KIDS 수준 완독 가능':a.lv==='junior'?'JUNIOR 기사 청해 가능 수준':'NE Times 원문 수준 도달';
 
+  var bmList = scores.bookmarks || [];
   var vocabItems = a.vocab.map(function(v) {
     var isErr = missedWords.indexOf(v.word) > -1 || !v.ok;
-    return '<div class="rc-vocab-item">'
-      +'<div class="rvi-word'+(isErr?'':' rvi-ok')+'">'+(isErr?'❌':'✅')+' '+v.word+'</div>'
+    var isBm  = bmList.indexOf(v.word) > -1;
+    return '<div class="rc-vocab-item' + (isBm?' rvi-bm':'') + '">'
+      +'<div class="rvi-word'+(isErr?'':' rvi-ok')+'">'+(isErr?'❌':'✅')+' '+v.word+(isBm?' <span class="rvi-bm-tag">★ 단어장</span>':'')+'</div>'
       +'<div><div class="rvi-meaning">'+v.mean+'</div><div class="rvi-example">'+v.ex+'</div></div>'
       +'</div>';
   }).join('');
